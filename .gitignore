@@ -1,0 +1,19 @@
+# Ignore a bunch of stuff so that we can simply copy our I7 directory into the repository
+# copied from https://github.com/i7/counterfeit-monkey/blob/master/.gitignore
+*~
+.vscode
+*.blurb
+*Build
+*.DS_Store
+*.glk*
+*.iFiction
+*Index
+*manifest.plist
+*Release
+*Reserved
+*.rtf
+*.skein
+*.tiff
+*Settings.plist
+*Inform\ Map.eps
+nocturne.materials/Icon*
