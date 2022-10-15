@@ -1,5 +1,13 @@
 "The Hitchhiker's Guide to the Galaxy"
 
+[
+TODO: Commands
+- [ ] Who am I
+- [ ] What is the object of the game
+- [ ] Don't panic
+- [ ] Address carrying capacity & size (see gown)
+]
+
 [======================================]
 
 Volume 1 - Setup
@@ -8,7 +16,7 @@ The story headline is "Infocom interactive fiction - a science fiction story[lin
 
 After printing the banner text when not requesting the story file version, say "[line break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
 
-Use American dialect and the serial comma.
+Use American dialect and the serial comma and scoring.
 
 Book 1 - Actions
 
@@ -78,6 +86,7 @@ Check calling with:
 		try calling the topic understood instead.
 
 [Diagnosing]
+[HITCHHIKER'S will give you a brief medical report of your physical condition.]
 
 Diagnosing is an action applying to nothing. Understand "diagnose" as diagnosing.
 
@@ -88,6 +97,10 @@ Carry out diagnosing:
 		say "You feel weak.";
 	else:
 		say "You are in good health.";
+
+[TODO Footnote]
+[@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
+[Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
 
 [Getting Out Of, "get out of bed"]
 
@@ -111,7 +124,7 @@ Before doing anything other than examining to the hangover, say "[impossibles]" 
 Part 6 - Global Responses
 
 To say cant-reach-from-bed:
-	say "You can't reach it from the bed."
+	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
 
 To say dialling-tone:
 	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable."
@@ -122,14 +135,37 @@ To say impossibles:
 To say lurches:
 	say "[one of]It slips through your fumbling fingers and hits the carpet with a nerve-shattering bang[or]It dances by you like a thing possessed[or]You lunge for it, but the room spins nauseatingly away. The floor gives you a light tap on the forehead[or]You're certainly picking the tough tasks. The floor acts like a trampoline on an ice rink, or like something they've been working on for years at Disneyland[at random]."
 
+To say nice-day:
+	say "t's a bright morning, the sun is shining, the birds are
+singing, the meadows are blooming"
+
 To say random-yuks:
 	say "[one of]What a concept[or]Nice try[or]You can't be serious[or]Not bloody likely[at random]."
+
+To say tell-me-how:
+	say "You must tell me how to do that to [the noun]."
 
 To say two-trees:
 	say "Shouldn't you be taking more interest in events in the world around you? While you've got it...?"
 
 To say unimportant-thing:
 	say "That's not important; leave it alone."
+
+Part 7 - Testing
+
+[Walkthrough Tests]
+
+test house with "stand up / turn on light / get gown / wear gown / look in pocket / get all from gown / eat tablet / get screwdriver / get toothbrush / put screwdriver and toothbrush in thing".
+
+test bulldozer with "south / get mail / read mail / south / lie down / wait / wait / wait / wait / wait / wait".
+
+test pub with "south / west / examine shelf / buy sandwich / drink beer / drink beer / drink beer / east / give sandwich to dog / north / wait / wait / get device / examine device / press green button".
+
+[Other Tests]
+
+test hangover with "take phone / turn on light / open curtains / stand up / take toothbrush / take screwdriver / take phone / get gown / wear gown / look in pocket / eat tablet / take toothbrush / take screwdriver / take phone".
+
+test phone with "call ford with screwdriver / call ford with phone / call home / call police / take phone".
 
 [======================================]
 
@@ -154,7 +190,6 @@ Book 1 - Earth
 Part 1 - Bedroom
 
 [TODO bedroom globals]
-[TODO add bedroom exit check]
 
 The Bedroom is a dark room. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
 
@@ -163,6 +198,14 @@ The bedroom door is an open scenery door. It is south of the Bedroom. The printe
 Instead of going down from the Bedroom, try going south. Instead of going outside from the Bedroom, try going south. [reroute through door]
 
 Instead of opening or closing the bedroom door when the player is in the bed, say "[cant-reach-from-bed]".
+
+Before going from the bedroom when the player is hungover, say "You miss the doorway by a good eighteen inches. The wall jostles you rather rudely." instead.
+
+Report going from the bedroom:
+	if the bulldozer is observed:
+		say "You rush down the stairs in panic.";
+	else:
+		say "You make your way down to the front porch."
 
 Chapter 1 - Scenery
 
@@ -179,13 +222,20 @@ Before taking something when the player is in the bed:
 	if the noun is not in the bed:
 		say "[cant-reach-from-bed]" instead.
 
+Instead of opening or closing the bed, say "[tell-me-how]".
+
 [TODO Bedroom furnishings]
 
 [Curtains]
 
 Your curtains are scenery in the bedroom. Understand "your", "curtain", "shade", "shades" as your curtains.
 
-Instead of opening or searching your curtains when the player is in the bed, say "[cant-reach-from-bed]".
+Instead of opening or searching your curtains:
+	if the player is in the bed:
+		say "[cant-reach-from-bed]";
+	else:
+		now the bulldozer is observed;
+		say "As you part [the curtains] you see that i[nice-day], and a large yellow [bulldozer] is advancing on your home."
 
 [Light]
 
@@ -205,9 +255,9 @@ Instead of switching off the light:
 
 [Stuff under bed]
 
-The stuff under bed is scenery in the bedroom. The printed name is "it". Understand "soiled", "foreign", "book", "coin", "coins", "handkerchief", "handkerchiefs" as the stuff under bed.
+The stuff-under-bed is scenery in the bedroom. The printed name is "it". Understand "soiled", "foreign", "book", "coin", "coins", "handkerchief", "handkerchiefs" as the stuff-under-bed.
 
-Instead of doing anything to the stuff under bed, say "[unimportant-thing]".
+Instead of doing anything to the stuff-under-bed, say "[unimportant-thing]".
 
 [Water]
 
@@ -223,13 +273,9 @@ The pocket fluff is in the bedroom
 
 [Gown]
 
-The gown is in the bedroom. It is wearable. It is undescribed.
+Your gown is in the bedroom. "Your gown is here." It is a wearable openable undescribed container. Understand "my", "your", "dressing", "tatty", "faded", "battered", "pocket", "loop", "robe" as your gown. The carrying capacity is 14.
 
 [TODO sleeves]
-
-[Gift]
-
-The gift is in the bedroom
 
 [Phone]
 
@@ -254,7 +300,11 @@ Instead of taking the screwdriver when the player is hungover, say "[lurches]".
 
 [Tablet]
 
-The tablet is in the bedroom
+The tablet is in the bedroom. It is edible.
+
+[Thing]
+
+The gift is in the bedroom. Understand "thing" as the gift.
 
 [Toothbrush]
 
@@ -284,25 +334,25 @@ Chapter 1 - Items
 
 The roses are in the front garden.
 
-The bulldozer is in the front garden.
+The bulldozer is in the front garden. The bulldozer can be observed or unobserved. It is unobserved.
 
 [TODO bulldozer driver]
 
 [TODO Mr Prosser, digital watch]
 
-[TODO dog]
-
 [--------------------------------------]
 
 Part 4 - Back of House
 
-The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. It's a bright morning, the sun is shining, the birds are singing, the meadows are blooming, and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House".
+The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House".
 
 [--------------------------------------]
 
 Part 5 - Country Lane
 
 The Country Lane is south of the Front Garden. "The road runs from your home, to the north, toward the village Pub, to the west."
+
+[TODO dog]
 
 [--------------------------------------]
 
