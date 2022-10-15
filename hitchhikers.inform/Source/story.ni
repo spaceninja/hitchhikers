@@ -14,7 +14,13 @@ Book 1 - Actions
 
 Part 1 - Disable Some Standard Rules
 
+[Don't get out of bed for the player]
+
 The stand up before going rule does nothing.
+
+[Don't automatically open doors for the player]
+
+Instead of the player going through a closed door, say "The door is closed."
 
 Part 2 - New Actions
 
@@ -24,7 +30,96 @@ Getting out of is an action applying to one thing. Understand "get out of [somet
 
 Carry out getting out of something:
 	try exiting instead.
-	
+
+[Examining]
+
+Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
+
+[Diagnose]
+
+Diagnosing is an action applying to nothing. Understand "diagnose" as diagnosing.
+
+Carry out diagnosing:
+	if the player is hungover:
+		say "You have a big blinding throbber.";
+	else if the player is groggy:
+		say "You feel weak.";
+	else:
+		say "You are in good health.";
+
+[Respond to taking scenery]
+
+Instead of taking some scenery, say "[random-yuks]".
+
+[Phone calls]
+
+Calling is an action applying to one topic. Understand "call [text]" as calling.
+
+Calling with is an action applying to one topic and one thing. Understand "call [text] with [something]" as calling with. Understand "call [text] on [something]" as calling with.
+
+Understand the command "phone" as "call".
+
+Carry out calling:
+	if the player is in the bed:
+		say "[cant-reach-from-bed]";
+	else if the player is not in the bedroom:
+		say "There's no phone here!";
+	else if the player is hungover:
+		say "[lurches]";
+	else if the phone is handled:
+		say "The cable is down, remember?";
+	else if the topic understood includes "police" or the topic understood includes "cops":
+		now the phone is handled;
+		say "You explain your situation. The desk sergeant promises to send someone over soon, and says not to try anything crazy in the meantime, like lying down in front of the bulldozer. [dialling-tone]";
+	else if the topic understood matches "home":
+		say "Who do you think you are, E.T.?";
+	else:
+		say "You don't know the number."
+
+Before calling with:
+	if the second noun is not the phone:
+		say "You can't use [the second noun] as a phone." instead;
+	else:
+		try calling the topic understood instead.
+
+[Answer phone]
+
+Answering is an action applying to one thing. Understand "answer [something]" as answering.
+
+Carry out answering:
+	say "It is hardly likely that [the noun] is interested."
+
+Part 3 - Concepts
+
+[Hangover]
+
+The hangover is a backdrop. The hangover is everywhere. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover.
+
+After deciding the scope of the player while in darkness: place the hangover in scope. [so you can examine it with the lights off]
+
+Before examining the hangover, try diagnosing instead.
+
+Before doing anything other than examining to the hangover, say "[impossibles]" instead.
+
+Part 4 - Global Responses
+
+To say unimportant-thing:
+	say "That's not important; leave it alone."
+
+To say random-yuks:
+	say "[one of]What a concept[or]Nice try[or]You can't be serious[or]Not bloody likely[at random]."
+
+To say lurches:
+	say "[one of]It slips through your fumbling fingers and hits the carpet with a nerve-shattering bang[or]It dances by you like a thing possessed[or]You lunge for it, but the room spins nauseatingly away. The floor gives you a light tap on the forehead[or]You're certainly picking the tough tasks. The floor acts like a trampoline on an ice rink, or like something they've been working on for years at Disneyland[at random]."
+
+To say impossibles:
+	say "[one of]You have lost your mind[or]You are clearly insane[or]You appear to have gone barking mad[or]I'm not convinced you're allowed to be playing with this computer[or]Run out on the street and say that. See what happens[or]No, no, a thousand times no. Go boil an egg[at random]."
+
+To say dialling-tone:
+	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable."
+
+To say two-trees:
+	say "Shouldn't you be taking more interest in events in the world around you? While you've got it...?"
 
 [======================================]
 
@@ -48,11 +143,12 @@ Book 1 - Earth
 
 Part 1 - Bedroom
 
-The Bedroom is a dark room. "The bedroom is a mess. It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair with a tatty dressing gown slung over it, and a window with the curtains drawn. Near the exit leading south is a phone."
+[TODO bedroom globals]
+[TODO add bedroom exit check]
 
-Chapter 1 - Door
+The Bedroom is a dark room. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
 
-The bedroom door is an open scenery door. It is south of the Bedroom and north of the Front Porch.
+The bedroom door is an open scenery door. It is south of the Bedroom. The printed name is "door".
 
 [Because the door can only be in one direction, but we want to treat south, out, and down as all going to the porch, we need to redirect the player through the door]
 
@@ -60,67 +156,118 @@ Instead of going down from the Bedroom, try going south. Instead of going outsid
 
 Instead of going up from the Front Porch, try going north. Instead of going inside from the Front Porch, try going north.
 
-Chapter 2 - Scenery
+Instead of opening or closing the bedroom door when the player is in the bed, say "[cant-reach-from-bed]".
 
-The bed is an enterable scenery supporter in the Bedroom. The player is on the bed.
+Chapter 1 - Scenery
 
-The stuff-under-bed is scenery in the bedroom. "That's not important; leave it alone." Understand "book", "coin", "coins", "handkerchief", "handkerchiefs", "soiled", "foreign" as the stuff-under-bed.
+[Bed]
 
-Your curtains are scenery in the bedroom. Understand "your", "curtain", "shade", "shades" as your curtains.
+The bed is an enterable scenery container in the bedroom.
 
-[TODO sink]
-
-[TODO bedroom furnishings]
-
-Chapter 3 - Items
-
-The toothbrush is in the bedroom.
-
-The screwdriver is in the bedroom.
-
-The phone is in the bedroom.
-
-The gown is in the bedroom. It is wearable.
-
-[TODO sleeves]
-
-The gift is in the bedroom
-
-The pocket fluff is in the bedroom
-
-The tablet is in the bedroom
-
-Chapter 4 - Interactions
-
-[Prevent doing things from bed]
-
-Before taking something when the player is on the bed:
-	if the noun is not on the bed:
-		say "You can't reach it from the bed." instead.
-
-Instead of opening or searching your curtains when the player is on the bed, try taking your curtains.
-
-Instead of opening or closing the bedroom door when the player is on the bed, try taking the bedroom door.
-
-[Get out of bed message]
-
-After getting off the bed, say "Very difficult, but you manage it. The room is still spinning. It dips and sways a little."
-
-[Looking under the bed]
+After exiting from the bed when the player is hungover:
+		say "Very difficult, but you manage it. The room is still spinning. It dips and sways a little."
 
 Instead of looking under the bed, say "There's nothing there. Well, there are a few soiled handkerchiefs, a book you thought you'd lost, a couple of foreign coins, and something else which can't be fully described in a family game, but nothing you'd actually want."
 
-Instead of doing anything other than examining to the stuff-under-bed, try examining the stuff-under-bed.
+To say cant-reach-from-bed:
+	say "You can't reach it from the bed."
+
+Before taking something when the player is in the bed:
+	if the noun is not in the bed:
+		say "[cant-reach-from-bed]" instead.
+
+[Stuff under bed]
+
+The stuff-under-bed is scenery in the bedroom. The printed name is "it". Understand "soiled", "foreign", "book", "coin", "coins", "handkerchief", "handkerchiefs" as the stuff-under-bed.
+
+Instead of doing anything to the stuff-under-bed, say "[unimportant-thing]".
+
+[Curtains]
+
+Your curtains are scenery in the bedroom. Understand "your", "curtain", "shade", "shades" as your curtains.
+
+Instead of opening or searching your curtains when the player is in the bed, say "[cant-reach-from-bed]".
+
+[Light]
+
+The light is a scenery device in the bedroom. Understand "lights", "lamp" as the light.
+
+After deciding the scope of the player when the location is the bedroom:
+	place the light in scope.
+
+Instead of switching on the light:
+	now the light is lit;	
+	say "Good start to the day. Pity it's going to be the worst one of your life. The light is now on."
+
+Instead of switching off the light:
+	now the light is not lit.
+
+[Phone]
+
+The phone is scenery in the bedroom. The printed name is "telephone". Understand "telephone", "receiver" as the phone.
+
+Instead of taking the phone:
+	if the player is hungover:
+		say "[lurches]";
+	else if the phone is handled:
+		try calling "police";
+	else:
+		now the phone is handled;
+		say "You pick up the receiver. [dialling-tone][if the toothbrush is handled] [two-trees][end if]";
+
+Instead of answering the phone, say "It isn't ringing."
+
+[Water]
+
+The water is scenery in the bedroom.
+
+Instead of doing anything to the water, say "[unimportant-thing]".
+
+[TODO Sink]
+
+[TODO Bedroom furnishings]
+
+Chapter 2 - Items
+
+[Toothbrush]
+
+The toothbrush is in the bedroom.
+
+Instead of taking the toothbrush when the player is hungover, say "[lurches]".
+
+[Screwdriver]
+
+The screwdriver is in the bedroom.
+
+Instead of taking the screwdriver when the player is hungover, say "[lurches]".
+
+[Gown]
+
+The gown is in the bedroom. It is wearable. It is undescribed.
+
+[TODO sleeves]
+
+[Gift]
+
+The gift is in the bedroom
+
+[Fluff]
+
+The pocket fluff is in the bedroom
+
+[Tablet]
+
+The tablet is in the bedroom
 
 [--------------------------------------]
 
 Part 2 - Front Porch
 
-The Front Porch is down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north."
+The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north."
 
 Chapter 1 - Items
 
-The mail is in the front porch.
+The mail is in the front porch. The indefinite article is "some".
 
 [--------------------------------------]
 
@@ -183,6 +330,12 @@ The sandwich is in the pub.
 [======================================]
 
 Volume 2 - Actors
+
+A person can be hungover.
+A person can be groggy.
+
+[The player is hungover.]
+The player is in the bed.
 
 Part 1 - Ford
 
