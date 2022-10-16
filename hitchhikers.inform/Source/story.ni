@@ -1,24 +1,87 @@
 "The Hitchhiker's Guide to the Galaxy"
 
+The story headline is "Infocom interactive fiction - a science fiction story[line break]Copyright © 1984 by Infocom, Inc. All rights reserved.[line break]Inform 7 adaptation by Scott Vandehey".
+The story genre is "Science Fiction".
+The story creation year is 1984.
+
 [
 TODO: Commands
 - [ ] Who am I
 - [ ] What is the object of the game
 - [ ] Don't panic
+- [ ] Footnote
+[@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
+[Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
+
+- [ ] Better method for concepts like hangover than backdrops?
 - [ ] Address carrying capacity & size (see gown)
+- [ ] What is AWAITING-REPLY and I-REPLY?
+- [ ] IDROP
+- [ ] I-THING
+;"put interrupts on clock chain"
+<ENABLE <QUEUE I-HOUSEWRECK 20>>
+<ENABLE <QUEUE I-THING 21>>
+<ENABLE <QUEUE I-VOGONS 50>>
 ]
 
 [======================================]
 
 Volume 1 - Setup
 
-The story headline is "Infocom interactive fiction - a science fiction story[line break]Copyright © 1984 by Infocom, Inc. All rights reserved.[line break]Inform 7 adaptation by Scott Vandehey". The story genre is "Science Fiction". The story creation year is 1984.
+Use American dialect and the serial comma and scoring.
 
 After printing the banner text when not requesting the story file version, say "[line break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
 
-Use American dialect and the serial comma and scoring.
+[--------------------------------------]
 
-Book 1 - Actions
+Book 1 - Kinds
+
+A tool is a kind of thing.
+
+[--------------------------------------]
+
+Book 2 - Text Substitutions
+
+Part 1 - Random Responses
+
+To say impossibles:
+	say "[one of]You have lost your mind[or]You are clearly insane[or]You appear to have gone barking mad[or]I'm not convinced you're allowed to be playing with this computer[or]Run out on the street and say that. See what happens[or]No, no, a thousand times no. Go boil an egg[in random order]."
+
+To say lurches:
+	say "[one of]It slips through your fumbling fingers and hits the carpet with a nerve-shattering bang[or]It dances by you like a thing possessed[or]You lunge for it, but the room spins nauseatingly away. The floor gives you a light tap on the forehead[or]You're certainly picking the tough tasks. The floor acts like a trampoline on an ice rink, or like something they've been working on for years at Disneyland[in random order]."
+
+To say yuks:
+	say "[one of]What a concept[or]Nice try[or]You can't be serious[or]Not bloody likely[in random order]."
+
+Part 2 - Shared Responses
+
+To say cant-reach-from-bed:
+	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
+
+To say tell-me-how:
+	say "You must tell me how to do that to [the noun]."
+
+To say unimportant-thing:
+	say "That's not important; leave it alone."
+
+Part 3 - Shared Snippets
+
+To say dialling-tone:
+	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable".
+
+To say get-rid:
+	say "you've been trying to get rid of it for years".
+
+To say nice-day:
+	say "t's a bright morning, the sun is shining, the birds are
+singing, the meadows are blooming".
+
+To say two-trees:
+	say "[line break]Shouldn't you be taking more interest in events in the world around you? While you've got it...?"
+
+[--------------------------------------]
+
+Book 3 - Actions
 
 Part 1 - Disable Some Standard Rules
 
@@ -30,52 +93,34 @@ The stand up before going rule does nothing.
 
 Instead of the player going through a closed door, say "The door is closed."
 
-Part 2 - Understand Standard Actions in New Ways
+Part 2 - Update Standard Actions
 
 [Examining]
 
 Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
 
-Part 3 - Update Standard Actions
-
 [Taking]
 
 Check taking anything that is scenery:
-	say "[random-yuks]" instead.
+	say "[yuks]" instead.
 
-Part 4 - New Actions
+Part 3 - New Actions
 
-[Answering, "answer phone"]
+[Answering]
 
 Answering is an action applying to one thing. Understand "answer [something]" as answering.
 
 Carry out answering:
 	say "It is hardly likely that [the noun] is interested."
 
-[Calling, "call police"]
+[Calling]
 
-Calling is an action applying to one topic. Understand "call [text]" as calling.
-
-Understand the command "phone" as "call".
+Calling is an action applying to one topic. Understand "call [text]" as calling. Understand the command "phone" as "call".
 
 Carry out calling:
-	if the player is in the bed:
-		say "[cant-reach-from-bed]";
-	else if the player is not in the bedroom:
-		say "There's no phone here!";
-	else if the player is hungover:
-		say "You reach for the receiver. [lurches]";
-	else if the phone is handled:
-		say "The cable is down, remember?";
-	else if the topic understood includes "police" or the topic understood includes "cops":
-		now the phone is handled;
-		say "You explain your situation. The desk sergeant promises to send someone over soon, and says not to try anything crazy in the meantime, like lying down in front of [the bulldozer]. [dialling-tone]";
-	else if the topic understood matches "home":
-		say "Who do you think you are, E.T.?";
-	else:
-		say "You don't know the number."
+	say "There's no phone here!"
 
-[Calling With, "call police with phone"]
+[Calling With]
 
 Calling with is an action applying to one topic and one thing. Understand "call [text] with [something]" as calling with. Understand "call [text] on [something]" as calling with.
 
@@ -86,7 +131,6 @@ Check calling with:
 		try calling the topic understood instead.
 
 [Diagnosing]
-[HITCHHIKER'S will give you a brief medical report of your physical condition.]
 
 Diagnosing is an action applying to nothing. Understand "diagnose" as diagnosing.
 
@@ -98,64 +142,39 @@ Carry out diagnosing:
 	else:
 		say "You are in good health.";
 
-[TODO Footnote]
-[@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
-[Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
-
-[Getting Out Of, "get out of bed"]
+[Getting Out Of]
 
 Getting out of is an action applying to one thing. Understand "get out of [something]" as getting out of.
 
 Carry out getting out of something:
 	try exiting instead.
 
-Part 5 - Concepts
+[Tying]
 
-[Hangover]
+Tying is an action applying to one thing. Understand "tie [something]" as tying.
 
-The hangover is a backdrop. The hangover is everywhere. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. [backdrop so you can interact with it anywhere]
+Carry out tying:
+	say "You can't tie [the noun]."
 
-After deciding the scope of the player while in darkness: place the hangover in scope. [so you can examine it with the lights off]
+[Tying Together]
 
-Before examining the hangover, try diagnosing instead.
+Tying together is an action applying to one thing. Understand "tie together [something]" as tying together.
 
-Before doing anything other than examining to the hangover, say "[impossibles]" instead.
+Carry out tying together:
+	say "That sentence isn't one I recognise."
 
-Part 6 - Global Responses
+[Untying]
 
-To say cant-reach-from-bed:
-	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
+Untying is an action applying to one thing. Understand "untie [something]" as untying.
 
-To say dialling-tone:
-	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable."
+Carry out untying:
+	say "[yuks]".
 
-To say impossibles:
-	say "[one of]You have lost your mind[or]You are clearly insane[or]You appear to have gone barking mad[or]I'm not convinced you're allowed to be playing with this computer[or]Run out on the street and say that. See what happens[or]No, no, a thousand times no. Go boil an egg[at random]."
-
-To say lurches:
-	say "[one of]It slips through your fumbling fingers and hits the carpet with a nerve-shattering bang[or]It dances by you like a thing possessed[or]You lunge for it, but the room spins nauseatingly away. The floor gives you a light tap on the forehead[or]You're certainly picking the tough tasks. The floor acts like a trampoline on an ice rink, or like something they've been working on for years at Disneyland[at random]."
-
-To say nice-day:
-	say "t's a bright morning, the sun is shining, the birds are
-singing, the meadows are blooming"
-
-To say random-yuks:
-	say "[one of]What a concept[or]Nice try[or]You can't be serious[or]Not bloody likely[at random]."
-
-To say tell-me-how:
-	say "You must tell me how to do that to [the noun]."
-
-To say two-trees:
-	say "Shouldn't you be taking more interest in events in the world around you? While you've got it...?"
-
-To say unimportant-thing:
-	say "That's not important; leave it alone."
-
-Part 7 - Testing
+Part 4 - Testing
 
 [Walkthrough Tests]
 
-test house with "stand up / turn on light / get gown / wear gown / look in pocket / get all from gown / eat tablet / get screwdriver / get toothbrush / put screwdriver and toothbrush in thing".
+test house with "stand up / turn on light / get gown / wear gown / look in pocket / get all from gown / get screwdriver / get toothbrush / put screwdriver and toothbrush in thing".
 
 test bulldozer with "south / get mail / read mail / south / lie down / wait / wait / wait / wait / wait / wait".
 
@@ -163,13 +182,33 @@ test pub with "south / west / examine shelf / buy sandwich / drink beer / drink 
 
 [Other Tests]
 
+test start with "turn on light / stand up / wear gown / look in pocket / swallow pill".
+
 test hangover with "take phone / turn on light / open curtains / stand up / take toothbrush / take screwdriver / take phone / get gown / wear gown / look in pocket / eat tablet / take toothbrush / take screwdriver / take phone".
 
 test phone with "call ford with screwdriver / call ford with phone / call home / call police / take phone".
 
+test exit-bedroom with "turn on light / stand up / south / test start / south / north / open curtains / south".
+
+test sleeves with "tie sleeves / remove gown / tie together sleeves / wear gown / untie sleeves / wear gown".
+
 [======================================]
 
-Volume 2 - Rooms
+Volume 2 - Concepts
+
+[Hangover]
+
+The hangover is a backdrop. The hangover is everywhere. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. [backdrop so you can interact with it anywhere]
+
+After deciding the scope of the player while in darkness: place the hangover in scope. [allow examining with lights off]
+
+Before examining the hangover, try diagnosing instead.
+
+Before doing anything other than examining to the hangover, say "[impossibles]" instead.
+
+[======================================]
+
+Volume 3 - Rooms
 
 Book 1 - Earth
 
@@ -182,8 +221,6 @@ Book 1 - Earth
 [TODO house]
 
 [TODO rubble]
-
-[TODO hangover]
 
 [--------------------------------------]
 
@@ -224,7 +261,11 @@ Before taking something when the player is in the bed:
 
 Instead of opening or closing the bed, say "[tell-me-how]".
 
-[TODO Bedroom furnishings]
+[Bedroom Furnishings]
+
+The bedroom-furnishings is scenery in the bedroom. The printed name is "it". Understand "wall", "faded", "old", "carpet", "wallpaper", "paper", "chair" as the bedroom-furnishings.
+
+Instead of doing anything to the bedroom-furnishings, say "[unimportant-thing]".
 
 [Curtains]
 
@@ -244,16 +285,23 @@ The light is a scenery device in the bedroom. Understand "lights", "lamp" as the
 After deciding the scope of the player when the location is the bedroom:
 	place the light in scope.
 
-Instead of switching on the light:
-	now the light is lit;	
-	say "Good start to the day. Pity it's going to be the worst one of your life. The light is now on."
+After switching on the light:
+	if the light is lit:
+		say "It is.";
+	else:
+		now the light is lit;	
+		say "Good start to the day. Pity it's going to be the worst one of your life. The light is now on."
 
-Instead of switching off the light:
+After switching off the light:
 	now the light is not lit.
 
-[TODO Sink]
+[Sink]
 
-[Stuff under bed]
+The sink is scenery in the bedroom. The printed name is "it". Understand "wash", "basin", "washbasin" as the sink.
+
+Instead of doing anything to the sink, say "[unimportant-thing]".
+
+[Stuff Under Bed]
 
 The stuff-under-bed is scenery in the bedroom. The printed name is "it". Understand "soiled", "foreign", "book", "coin", "coins", "handkerchief", "handkerchiefs" as the stuff-under-bed.
 
@@ -269,48 +317,109 @@ Chapter 2 - Items
 
 [Fluff]
 
-The pocket fluff is in the bedroom
+Some pocket fluff is in your gown. Understand "lint" as the pocket fluff.
 
 [Gown]
 
-Your gown is in the bedroom. "Your gown is here." It is a wearable openable undescribed container. Understand "my", "your", "dressing", "tatty", "faded", "battered", "pocket", "loop", "robe" as your gown. The carrying capacity is 14.
+[TODO gown-hung description]
+Your gown is in the bedroom. It is a wearable closed openable undescribed container. The description is "The dressing gown is faded and battered, and is clearly a garment which has seen better decades. It has a pocket which is [if gown is open]open[else]closed[end if], and a small loop at the back of the collar[if the sleeves are tied]. The sleeves are tied closed[end if]." Understand "my", "your", "dressing", "tatty", "faded", "battered", "pocket", "loop", "robe" as your gown. The carrying capacity is 14.
 
-[TODO sleeves]
+After taking your gown when the player is hungover, say "Luckily, this is large enough for you to get hold of. You notice something in the pocket."
+
+Before searching the gown when the gown is closed, try opening the gown instead.
+
+Before opening or closing the gown when the player is not wearing the gown, say "It's hard to open or close the pocket unless you're wearing the gown." instead.
+
+Before wearing the gown when the sleeves are tied, say "You'll have to untie the sleeve first." instead.
+
+Instead of tying the gown, try tying the sleeves.
+
+Instead of untying the gown, try untying the sleeves.
+
+[Sleeves]
+
+The sleeves are part of the gown. Understand "sleeve" as the sleeves. The sleeves can be tied or untied.
+
+Instead of tying together the sleeves, try tying the sleeves.
+
+Before tying the sleeves when the player is wearing the gown, say "You'll have to take off the gown first." instead.
+
+Instead of tying or closing the sleeves:
+	if the sleeves are tied:
+		say "It is.";
+	else:
+		now the sleeves are tied;
+		say "The sleeves are now tied closed."
+
+Instead of untying or opening the sleeves:
+	if the sleeves are untied:
+		say "It isn't tied!";
+	else:
+		now the sleeves are untied;
+		say "Untied."
 
 [Phone]
 
-The phone is in the bedroom. The printed name is "telephone". Understand "telephone", "receiver" as the phone.
+The phone is in the bedroom. It is undescribed. The printed name is "telephone". Understand "telephone", "receiver" as the phone.
 
 Instead of taking the phone:
 	if the player is hungover:
 		say "[lurches]";
 	else if the phone is handled:
-		try calling "police"; [doesn't matter who we call, calling will trigger 'the line is down']
+		try calling "police"; [doesn't matter who we call, the line is down]
 	else:
 		now the phone is handled;
-		say "You pick up the receiver. [dialling-tone][if the toothbrush is handled] [two-trees][end if]";
+		say "You pick up the receiver. [dialling-tone].[if the toothbrush is handled][two-trees][end if]";
 
 Instead of answering the phone, say "It isn't ringing."
 
+Instead of calling when the player is in the bedroom:
+	if the player is in the bed:
+		say "[cant-reach-from-bed]";
+	else if the player is hungover:
+		say "You reach for the receiver. [lurches]";
+	else if the phone is handled:
+		say "The cable is down, remember?";
+	else if the topic understood includes "police" or the topic understood includes "cops":
+		now the phone is handled;
+		say "You explain your situation. The desk sergeant promises to send someone over soon, and says not to try anything crazy in the meantime, like lying down in front of [the bulldozer]. [dialling-tone].[if the toothbrush is handled][two-trees][end if]";
+	else if the topic understood matches "home":
+		say "Who do you think you are, E.T.?";
+	else:
+		say "You don't know the number."
+
 [Screwdriver]
 
-The screwdriver is in the bedroom.
+The screwdriver is a tool in the bedroom. The printed name is "flathead screwdriver". Understand "proper", "tool", "tools" as the screwdriver.
 
 Instead of taking the screwdriver when the player is hungover, say "[lurches]".
 
 [Tablet]
 
-The tablet is in the bedroom. It is edible.
+The tablet is in your gown. It is edible. The printed name is "buffered analgesic". Understand "large", "buffered", "analgesic", "aspirin", "pill" as the tablet.
 
-[Thing]
+Instead of eating or drinking or taking the tablet:
+	now the tablet is nowhere;
+	now the player is not hungover;
+	increase the score by 10;
+	say "You swallow the tablet. After a few seconds the room begins to calm down and behave in an orderly manner. Your terrible headache goes."
 
-The gift is in the bedroom. Understand "thing" as the gift.
+[Thing: renamed "gift" because inform won't allow "thing"]
+
+The gift is a container in your gown. The printed name is "thing your aunt gave you which you don't know what it is". The description is "Apart from a label on the bottom saying 'Made in Ibiza' it furnishes you with no clue as to its purpose, if indeed it has one. You are surprised to see it because you thought you'd thrown it away. Like most gifts from your aunt, [get-rid]." Understand "aunt's", "thing" as the gift. The carrying capacity is 90.
+
+After dropping the gift, say "It falls to the ground with a light 'thunk.' It doesn't do anything else at all."
+
+Instead of closing the gift, say "Come to think of it, you vaguely remember an instruction booklet with directions for that. You never read it and lost it months ago."
 
 [Toothbrush]
 
-The toothbrush is in the bedroom.
+The toothbrush is a tool in the bedroom. Understand "my", "proper", "brush", "tool", "tools" as the toothbrush.
 
 Instead of taking the toothbrush when the player is hungover, say "[lurches]".
+
+After taking the toothbrush:
+	say "As you pick up [the toothbrush] a tree outside the window collapses. There is no causal relationship between these two events.[if the phone is handled][two-trees][end if]";
 
 [--------------------------------------]
 
@@ -384,7 +493,7 @@ The sandwich is in the pub.
 
 [======================================]
 
-Volume 2 - Actors
+Volume 4 - Actors
 
 A person can be hungover.
 A person can be groggy.
