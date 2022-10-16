@@ -17,10 +17,8 @@ TODO: Commands
 - [ ] Address carrying capacity & size (see gown)
 - [ ] What is AWAITING-REPLY and I-REPLY?
 - [ ] IDROP
-- [ ] I-THING
 ;"put interrupts on clock chain"
 <ENABLE <QUEUE I-HOUSEWRECK 20>>
-<ENABLE <QUEUE I-THING 21>>
 <ENABLE <QUEUE I-VOGONS 50>>
 ]
 
@@ -28,9 +26,12 @@ TODO: Commands
 
 Volume 1 - Setup
 
-Use American dialect and the serial comma and scoring.
+Use American dialect and the serial comma and scoring. The maximum score is 400.
 
 After printing the banner text when not requesting the story file version, say "[line break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
+
+When play begins:
+	the gift returns in 21 turns from now.
 
 [--------------------------------------]
 
@@ -411,6 +412,19 @@ The gift is a container in your gown. The printed name is "thing your aunt gave 
 After dropping the gift, say "It falls to the ground with a light 'thunk.' It doesn't do anything else at all."
 
 Instead of closing the gift, say "Come to think of it, you vaguely remember an instruction booklet with directions for that. You never read it and lost it months ago."
+
+At the time when the gift returns:
+	the gift returns in a random number between 4 and 8 turns from now;
+	unless the gift is held by the player or the gift is in the gown or the gift is visible:
+		if a random chance of 2 in 5 succeeds:
+			now the gift is in the location of the player;
+			say "(MOVED THE THING here)";
+		else if the player is wearing the gown and the gown is open and a random chance of 2 in 3 succeeds:
+			now the gift is in the gown;
+			say "(MOVED THE THING to your pocket)";
+		else:
+			now the gift is in the player;
+			say "(MOVED THE THING to your inventory)";
 
 [Toothbrush]
 
