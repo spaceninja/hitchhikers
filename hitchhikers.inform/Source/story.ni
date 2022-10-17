@@ -215,9 +215,9 @@ Volume 2 - Rooms
 
 Book 1 - Earth
 
-The House is a region.
+Arthur's House is a region.
 
-The Outdoors is a region.
+The Outdoors Area is a region.
 
 [TODO time]
 
@@ -235,7 +235,7 @@ Part 1 - Bedroom
 
 [TODO bedroom globals]
 
-The Bedroom is a dark room in the house. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
+The Bedroom is a dark room in Arthur's house. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
 
 After deciding the scope of the player when the location is the bedroom:
 	if the bedroom is dark:
@@ -322,6 +322,14 @@ Instead of doing anything to the stuff-under-bed, say "[unimportant-thing]".
 The water is scenery in the bedroom.
 
 Instead of doing anything to the water, say "[unimportant-thing]".
+
+[Window]
+
+The bedroom window is scenery in the bedroom. The printed name is "window".
+
+Instead of searching or examining the bedroom window, try opening the curtains.
+
+Instead of opening or closing the bedroom window, say "The bloody thing's been jammed shut for months, now."
 
 Chapter 2 - Items
 
@@ -448,7 +456,7 @@ After taking the toothbrush:
 
 Part 2 - Front Porch
 
-The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north." It is in the house.
+The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north." It is in Arthur's house.
 
 Instead of going up from the Front Porch, try going north. Instead of going inside from the Front Porch, try going north. [reroute through door]
 
@@ -460,7 +468,7 @@ Some mail is in the front porch.
 
 Part 3 - Front of House
 
-The Front Garden is south of the Front Porch and outside from the Front Porch. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House". It is in the outdoors.
+The Front Garden is south of the Front Porch and outside from the Front Porch. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House". It is in the outdoors area.
 
 Chapter 1 - Items
 
@@ -478,13 +486,13 @@ Instead of doing anything other than examining to the bulldozer when the player 
 
 Part 4 - Back of House
 
-The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House". It is in the outdoors.
+The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House". It is in the outdoors area.
 
 [--------------------------------------]
 
 Part 5 - Country Lane
 
-The Country Lane is south of the Front Garden. "The road runs from your home, to the north, toward the village Pub, to the west." It is in the outdoors.
+The Country Lane is south of the Front Garden. "The road runs from your home, to the north, toward the village Pub, to the west." It is in the outdoors area.
 
 [TODO dog]
 
@@ -494,7 +502,18 @@ Part 6 - Pub
 
 The Pub is west of the Country Lane and inside from the Country Lane. "The Pub is pleasant and cheerful and full of pleasant and cheerful people who don't know they've got about twelve minutes to live and are therefore having a spot of lunch. Some music is playing on an old jukebox. The exit is east."
 
-Chapter 1 - Items
+Chapter 1 - Scenery
+
+[Window]
+
+The pub window is scenery in the pub. The printed name is "window".
+
+Instead of searching or examining the pub window, say "You see the country lane."
+
+Instead of opening or closing the pub window, say "It won't budge."
+
+
+Chapter 2 - Items
 
 [TODO pub object]
 
@@ -515,6 +534,28 @@ The peanuts are in the pub.
 The sandwich is in the pub.
 
 [TODO barman]
+
+Part 7 - Backdrops
+
+[TODO these aren't working right]
+
+[Home]
+
+Your home is a backdrop. It is in the outdoors area and Arthur's house.
+
+[House]
+
+Your house is a backdrop. It is in the outdoors area and Arthur's house.
+
+[Stairs]
+
+The stairs are a backdrop. Understand "stair", "stairway" as the stairs. They are in Arthur's house.
+
+Instead of climbing the stairs, try going up.
+
+[Third Planet]
+
+The third planet is a backdrop. It is everywhere.
 
 [======================================]
 
