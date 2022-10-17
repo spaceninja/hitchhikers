@@ -14,7 +14,6 @@ TODO: Commands
 [Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
 
 - [ ] Add sunglasses game over messages
-- [ ] Better method for concepts like hangover than backdrops?
 - [ ] Address carrying capacity & size (see gown)
 
 - [ ] What is AWAITING-REPLY and I-REPLY?
@@ -216,6 +215,10 @@ Volume 2 - Rooms
 
 Book 1 - Earth
 
+The House is a region.
+
+The Outdoors is a region.
+
 [TODO time]
 
 [TODO vogon fleet]
@@ -232,7 +235,7 @@ Part 1 - Bedroom
 
 [TODO bedroom globals]
 
-The Bedroom is a dark room. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
+The Bedroom is a dark room in the house. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
 
 After deciding the scope of the player when the location is the bedroom:
 	if the bedroom is dark:
@@ -445,7 +448,7 @@ After taking the toothbrush:
 
 Part 2 - Front Porch
 
-The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north."
+The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north." It is in the house.
 
 Instead of going up from the Front Porch, try going north. Instead of going inside from the Front Porch, try going north. [reroute through door]
 
@@ -457,13 +460,15 @@ Some mail is in the front porch.
 
 Part 3 - Front of House
 
-The Front Garden is south of the Front Porch and outside from the Front Porch. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House".
+The Front Garden is south of the Front Porch and outside from the Front Porch. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House". It is in the outdoors.
 
 Chapter 1 - Items
 
 The roses are in the front garden.
 
-The bulldozer is in the front garden. The bulldozer can be observed or unobserved. It is unobserved.
+The bulldozer is a backdrop in the outdoors. The bulldozer can be observed or unobserved. It is unobserved.
+
+Instead of doing anything other than examining to the bulldozer when the player is not in the front garden, say "[The bulldozer] isn't here.";
 
 [TODO bulldozer driver]
 
@@ -473,13 +478,13 @@ The bulldozer is in the front garden. The bulldozer can be observed or unobserve
 
 Part 4 - Back of House
 
-The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House".
+The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House". It is in the outdoors.
 
 [--------------------------------------]
 
 Part 5 - Country Lane
 
-The Country Lane is south of the Front Garden. "The road runs from your home, to the north, toward the village Pub, to the west."
+The Country Lane is south of the Front Garden. "The road runs from your home, to the north, toward the village Pub, to the west." It is in the outdoors.
 
 [TODO dog]
 
@@ -524,8 +529,6 @@ The player is in the bed.
 [Hangover]
 
 The hangover is an undescribed part of the player. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover.
-
-After deciding the scope of the player while in darkness: place the hangover in scope. [allow examining with lights off]
 
 Before examining the hangover, try diagnosing instead.
 
