@@ -13,10 +13,21 @@ TODO: Commands
 [@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
 [Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
 
+- [ ] Add sunglasses game over messages
 - [ ] Better method for concepts like hangover than backdrops?
 - [ ] Address carrying capacity & size (see gown)
+
 - [ ] What is AWAITING-REPLY and I-REPLY?
-- [ ] IDROP
+	- AWAITING-REPLY is a global set to a number
+	- If you answer YES or NO, those verbs reference the global
+	  and respond with something snarky
+	- I-REPLY is a timeout queue that sets AWAITING-REPLY to false,
+	  so you only get the snarky response if you answer in time.
+
+- [ ] What is IDROP?
+	- A routine to handle lots of conditions,
+	  many of which are standard actions now.
+
 ;"put interrupts on clock chain"
 <ENABLE <QUEUE I-HOUSEWRECK 20>>
 <ENABLE <QUEUE I-VOGONS 50>>
@@ -99,6 +110,12 @@ Part 2 - Update Standard Actions
 [Examining]
 
 Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
+
+[Reaching]
+
+Rule for reaching inside a room:
+	say "[The noun] isn't here.";
+	deny access.
 
 [Taking]
 
@@ -195,21 +212,7 @@ test sleeves with "tie sleeves / remove gown / tie together sleeves / wear gown 
 
 [======================================]
 
-Volume 2 - Concepts
-
-[Hangover]
-
-The hangover is a backdrop. The hangover is everywhere. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. [backdrop so you can interact with it anywhere]
-
-After deciding the scope of the player while in darkness: place the hangover in scope. [allow examining with lights off]
-
-Before examining the hangover, try diagnosing instead.
-
-Before doing anything other than examining to the hangover, say "[impossibles]" instead.
-
-[======================================]
-
-Volume 3 - Rooms
+Volume 2 - Rooms
 
 Book 1 - Earth
 
@@ -231,13 +234,19 @@ Part 1 - Bedroom
 
 The Bedroom is a dark room. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
 
-The bedroom door is an open scenery door. It is south of the Bedroom. The printed name is "door".
+After deciding the scope of the player when the location is the bedroom:
+	if the bedroom is dark:
+		place the light in scope;
+	if the bulldozer is observed:
+		place the bulldozer in scope;
 
-Instead of going down from the Bedroom, try going south. Instead of going outside from the Bedroom, try going south. [reroute through door]
+The bedroom door is an open scenery door. It is south of the Bedroom. The printed name is "door".
 
 Instead of opening or closing the bedroom door when the player is in the bed, say "[cant-reach-from-bed]".
 
 Before going from the bedroom when the player is hungover, say "You miss the doorway by a good eighteen inches. The wall jostles you rather rudely." instead.
+
+Instead of going down from the Bedroom, try going south. Instead of going outside from the Bedroom, try going south. [reroute through door]
 
 Report going from the bedroom:
 	if the bulldozer is observed:
@@ -282,9 +291,6 @@ Instead of opening or searching your curtains:
 [Light]
 
 The light is a scenery device in the bedroom. Understand "lights", "lamp" as the light.
-
-After deciding the scope of the player when the location is the bedroom:
-	place the light in scope.
 
 After switching on the light:
 	if the light is lit:
@@ -507,13 +513,23 @@ The sandwich is in the pub.
 
 [======================================]
 
-Volume 4 - Actors
+Volume 3 - Actors
 
 A person can be hungover.
 A person can be groggy.
 
 The player is hungover.
 The player is in the bed.
+
+[Hangover]
+
+The hangover is an undescribed part of the player. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover.
+
+After deciding the scope of the player while in darkness: place the hangover in scope. [allow examining with lights off]
+
+Before examining the hangover, try diagnosing instead.
+
+Before doing anything other than examining to the hangover, say "[impossibles]" instead.
 
 Part 1 - Ford
 
