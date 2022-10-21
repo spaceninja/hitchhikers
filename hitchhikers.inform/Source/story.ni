@@ -15,6 +15,7 @@ TODO: Commands
 
 - [ ] Add sunglasses game over messages
 - [ ] Address carrying capacity & size (see gown)
+- [ ] Add Awaiting Reply reponses
 
 - [ ] What is AWAITING-REPLY and I-REPLY?
 	- AWAITING-REPLY is a global set to a number
@@ -30,6 +31,10 @@ TODO: Commands
 ;"put interrupts on clock chain"
 <ENABLE <QUEUE I-HOUSEWRECK 20>>
 <ENABLE <QUEUE I-VOGONS 50>>
+
+Before examining the house:
+	if the player's command includes "house":
+		say "It's not a house, it's a home."
 ]
 
 [======================================]
@@ -147,6 +152,20 @@ Check calling with:
 	else:
 		try calling the topic understood instead.
 
+[Climbing Down]
+
+Climbing down is an action applying to one thing. Understand "climb down [something]" as climbing down. Understand "walk down [something]" as climbing down. Understand "descend [something]" as climbing down.
+
+Carry out climbing down:
+	say "[yuks]".
+
+[Climbing Up]
+
+Climbing up is an action applying to one thing. Understand "climb up [something]" as climbing up. Understand "walk up [something]" as climbing up. Understand "ascend [something]" as climbing up. Understand "scale [something]" as climbing up.
+
+Carry out climbing up:
+	say "[yuks]".
+
 [Diagnosing]
 
 Diagnosing is an action applying to nothing. Understand "diagnose" as diagnosing.
@@ -209,23 +228,17 @@ test exit-bedroom with "turn on light / stand up / south / test start / south / 
 
 test sleeves with "tie sleeves / remove gown / tie together sleeves / wear gown / untie sleeves / wear gown".
 
+test backdrops with "x bulldozer / touch bulldozer / x home / touch home / x house / touch house / x stairs / touch stairs / x third planet / touch third planet".
+
 [======================================]
 
 Volume 2 - Rooms
 
 Book 1 - Earth
 
-Arthur's House is a region.
-
-The Outdoors Area is a region.
-
 [TODO time]
 
 [TODO vogon fleet]
-
-[TODO home]
-
-[TODO house]
 
 [TODO rubble]
 
@@ -233,9 +246,7 @@ The Outdoors Area is a region.
 
 Part 1 - Bedroom
 
-[TODO bedroom globals]
-
-The Bedroom is a dark room in Arthur's house. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
+The Bedroom is a dark room. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
 
 After deciding the scope of the player when the location is the bedroom:
 	if the bedroom is dark:
@@ -299,17 +310,25 @@ After switching on the light:
 	if the light is lit:
 		say "It is.";
 	else:
-		now the light is lit;	
+		now the light is lit;
 		say "Good start to the day. Pity it's going to be the worst one of your life. The light is now on."
 
 After switching off the light:
-	now the light is not lit.
+	now the light is not lit;
 
 [Sink]
 
 The sink is scenery in the bedroom. The printed name is "it". Understand "wash", "basin", "washbasin" as the sink.
 
 Instead of doing anything to the sink, say "[unimportant-thing]".
+
+[Stairs]
+
+The stairs are a backdrop. Understand "stair", "stairway" as the stairs.
+
+Instead of climbing the stairs, try going up.
+Instead of climbing up the stairs, try going up.
+Instead of climbing down the stairs, try going down.
 
 [Stuff Under Bed]
 
@@ -456,7 +475,7 @@ After taking the toothbrush:
 
 Part 2 - Front Porch
 
-The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north." It is in Arthur's house.
+The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north."
 
 Instead of going up from the Front Porch, try going north. Instead of going inside from the Front Porch, try going north. [reroute through door]
 
@@ -468,13 +487,13 @@ Some mail is in the front porch.
 
 Part 3 - Front of House
 
-The Front Garden is south of the Front Porch and outside from the Front Porch. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House". It is in the outdoors area.
+The Front Garden is south of the Front Porch and outside from the Front Porch. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House".
 
 Chapter 1 - Items
 
 The roses are in the front garden.
 
-The bulldozer is a backdrop in the outdoors. The bulldozer can be observed or unobserved. It is unobserved.
+The bulldozer is a backdrop. The bulldozer can be observed or unobserved. It is unobserved.
 
 Instead of doing anything other than examining to the bulldozer when the player is not in the front garden, say "[The bulldozer] isn't here.";
 
@@ -486,13 +505,13 @@ Instead of doing anything other than examining to the bulldozer when the player 
 
 Part 4 - Back of House
 
-The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House". It is in the outdoors area.
+The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House".
 
 [--------------------------------------]
 
 Part 5 - Country Lane
 
-The Country Lane is south of the Front Garden. "The road runs from your home, to the north, toward the village Pub, to the west." It is in the outdoors area.
+The Country Lane is south of the Front Garden. "The road runs from your home, to the north, toward the village Pub, to the west."
 
 [TODO dog]
 
@@ -535,27 +554,25 @@ The sandwich is in the pub.
 
 [TODO barman]
 
-Part 7 - Backdrops
+Part 7 - Backdrop Locations
 
-[TODO these aren't working right]
+[Bulldozer]
+
+The bulldozer is in the front garden, back garden, country lane.
 
 [Home]
 
-Your home is a backdrop. It is in the outdoors area and Arthur's house.
+Your house is a backdrop. The printed name is "your home". Understand "my", "your", "home" as the house. It is in the bedroom, front porch, front garden, back garden, country lane.
 
-[House]
-
-Your house is a backdrop. It is in the outdoors area and Arthur's house.
+Instead of examining your house, say "[Your house] is a very nice example of [your house]. [The house] is also."
 
 [Stairs]
 
-The stairs are a backdrop. Understand "stair", "stairway" as the stairs. They are in Arthur's house.
-
-Instead of climbing the stairs, try going up.
+The stairs are in the bedroom, front porch.
 
 [Third Planet]
 
-The third planet is a backdrop. It is everywhere.
+The third planet is a backdrop. It is everywhere. The description is "Description for the third planet."
 
 [======================================]
 
