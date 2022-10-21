@@ -17,13 +17,6 @@ TODO: Commands
 - [ ] Address carrying capacity & size (see gown)
 - [ ] Add Awaiting Reply reponses
 
-- [ ] What is AWAITING-REPLY and I-REPLY?
-	- AWAITING-REPLY is a global set to a number
-	- If you answer YES or NO, those verbs reference the global
-	  and respond with something snarky
-	- I-REPLY is a timeout queue that sets AWAITING-REPLY to false,
-	  so you only get the snarky response if you answer in time.
-
 - [ ] What is IDROP?
 	- A routine to handle lots of conditions,
 	  many of which are standard actions now.
@@ -45,18 +38,31 @@ Use American dialect and the serial comma and scoring. The maximum score is 400.
 
 After printing the banner text when not requesting the story file version, say "[line break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
 
-When play begins:
-	the gift returns in 21 turns from now.
+[--------------------------------------]
+
+Book 1 - Initial State
+
+The current topic is a number that varies.
 
 [--------------------------------------]
 
-Book 1 - Kinds
+Book 2 - Timers
+
+When play begins:
+	the gift returns in 21 turns from now.
+
+At the time when the current topic resets:
+	now the current topic is 0;
+
+[--------------------------------------]
+
+Book 3 - Kinds
 
 A tool is a kind of thing.
 
 [--------------------------------------]
 
-Book 2 - Text Substitutions
+Book 4 - Text Substitutions
 
 Part 1 - Random Responses
 
@@ -93,11 +99,38 @@ To say nice-day:
 singing, the meadows are blooming".
 
 To say two-trees:
+	now the current topic is 9;
+	the current topic resets in two turns from now;
 	say "[line break]Shouldn't you be taking more interest in events in the world around you? While you've got it...?"
+
+Part 4 - Response Tables
+
+Table of negative replies
+number	reply
+3	"I should think not."
+4	"The word 'no' is not in our hostess['] vocabulary."
+5	"Well, tough."
+6	"That was just a rhetorical question."
+9	"I disagree."
+12	"'Think you're funny, huh?' The TODO:ENGINEER TODO:ROARS-OFF, making sure to spray you with his Sub-Ethon exhaust."
+14	"Then stop."
+16	"I didn't think so."
+18	"'Well, leave me alone then! I'm busy!'"
+
+Table of positive replies
+number	reply
+3	"Well, tough."
+5	"So do I."
+6	"That was just a rhetorical question."
+7	"Well, good for you!"
+10	"This is family entertainment, not a video nasty."
+12	"'Well, let's see the malfunctioning equipment.'"
+16	"Then type it."
+18	"'Well, leave me alone then! I'm busy!'"
 
 [--------------------------------------]
 
-Book 3 - Actions
+Book 5 - Actions
 
 Part 1 - Disable Some Standard Rules
 
@@ -120,6 +153,68 @@ Understand the command "inspect" or "study" or "observe" or "see" or "scour" as 
 Rule for reaching inside a room:
 	say "[The noun] isn't here.";
 	deny access.
+
+[Saying No]
+
+Check an actor saying no (this is the saying no to a topic rule):
+	if the actor is the player:
+		if the current topic is:
+			-- 1: [do nothing]
+			-- 2: try going south instead;
+			-- 3: try responding negatively with 3;
+			-- 4: try responding negatively with 4;
+			-- 5: try responding negatively with 5;
+			-- 6: try responding negatively with 6;
+			-- 7: try responding negatively with 5;
+			-- 8: try responding negatively with 5;
+			-- 9: try responding negatively with 9;
+			-- 10: try responding negatively with 3;
+			-- 11: try responding negatively with 6;
+			-- 12:
+				[TODO:ENGINEER-LEAVE]
+				try responding negatively with 12;
+			-- 13: try responding negatively with 5;
+			-- 14: try responding negatively with 14;
+			-- 15: try responding negatively with 5;
+			-- 16: try responding negatively with 16;
+			-- 18: try responding negatively with 18;
+			-- 19: try responding negatively with 18;
+			-- otherwise: say "You sound rather negative.";
+	stop the action.
+
+The saying no to a topic rule substitutes for the block saying no rule.
+
+[Saying Yes]
+
+Understand the command "ok" or "okay" or "sure" as "yes".
+
+Check an actor saying yes (this is the saying yes to a topic rule):
+	if the actor is the player:
+		if the current topic is:
+			-- 1: try going south instead;
+			-- 2: [do nothing]
+			-- 3: try responding positively with 3;
+			-- 4: [TODO: TAKE ITEM-DROPPED-AT-PARTY]
+			-- 5: try responding positively with 5;
+			-- 6: try responding positively with 6;
+			-- 7: try responding positively with 7;
+			-- 8: try responding positively with 6;
+			-- 9: try responding positively with 7;
+			-- 10: try responding positively with 10;
+			-- 11: try responding positively with 6;
+			-- 12:
+				[TODO:QUEUE I-ENGINEER]
+				try responding positively with 12;
+			-- 13: try responding positively with 6;
+			-- 14: try responding positively with 6;
+			-- 15: try responding positively with 6;
+			-- 16: try responding positively with 16;
+			-- 18: try responding positively with 18;
+			-- 19: try responding positively with 18;
+			-- otherwise: say "You sound rather positive.";
+	stop the action.
+
+The saying yes to a topic rule substitutes for the block saying yes rule.
 
 [Taking]
 
@@ -184,6 +279,20 @@ Getting out of is an action applying to one thing. Understand "get out of [somet
 
 Carry out getting out of something:
 	try exiting instead.
+
+[Responding Negatively]
+
+Responding negatively with is an action applying to one number.
+
+Carry out responding negatively with:
+	say "[reply corresponding to a number of the number understood in the Table of negative replies]";
+
+[Responding Positively]
+
+Responding positively with is an action applying to one number.
+
+Carry out responding positively with:
+	say "[reply corresponding to a number of the number understood in the Table of positive replies]";
 
 [Tying]
 
@@ -592,9 +701,13 @@ Before examining the hangover, try diagnosing instead.
 
 Before doing anything other than examining to the hangover, say "[impossibles]" instead.
 
+[--------------------------------------]
+
 Part 1 - Ford
 
 [TODO Ford, satchel, satchel fluff, towel]
+
+[--------------------------------------]
 
 Part 2 - Arthur
 
