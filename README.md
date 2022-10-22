@@ -23,7 +23,7 @@ This repo is a port of The Hitchhiker's Guide to the Galaxy from [the original Z
 
 - [ ] [Earth](https://github.com/historicalsource/hitchhikersguide/blob/master/earth.zil)
   - [x] Bedroom
-  - [ ] Front Porch
+  - [x] Front Porch
   - [ ] Front-of-House
   - [ ] Back-of-House
   - [ ] Country Lane

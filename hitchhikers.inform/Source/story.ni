@@ -13,13 +13,9 @@ TODO: Commands
 [@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
 [Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
 
+- [ ] Reconsider "your X" names. Perhaps understand your as x is enough.
 - [ ] Add sunglasses game over messages
 - [ ] Address carrying capacity & size (see gown)
-- [ ] Add Awaiting Reply reponses
-
-- [ ] What is IDROP?
-	- A routine to handle lots of conditions,
-	  many of which are standard actions now.
 
 ;"put interrupts on clock chain"
 <ENABLE <QUEUE I-HOUSEWRECK 20>>
@@ -100,7 +96,7 @@ singing, the meadows are blooming".
 
 To say two-trees:
 	now the current topic is 9;
-	the current topic resets in two turns from now;
+	the current topic resets in one turn from now;
 	say "[line break]Shouldn't you be taking more interest in events in the world around you? While you've got it...?"
 
 Part 4 - Response Tables
@@ -588,9 +584,31 @@ The Front Porch is south of the bedroom door and down from the Bedroom and outsi
 
 Instead of going up from the Front Porch, try going north. Instead of going inside from the Front Porch, try going north. [reroute through door]
 
-Chapter 1 - Items
+Instead of going outside from the front porch, try going south. [reroute through south for exit condition]
 
-Some mail is in the front porch.
+Before going south from the front porch:
+	unless the player is wearing something:
+		now the current topic is 10;
+		the current topic resets in one turn from now;
+		say "Do you want to get arrested for indecent exposure?" instead.
+
+Chapter 1 - Scenery
+
+[Doormat]
+
+The doormat is scenery in the front porch. Understand "mat" as the doormat.
+
+Instead of doing anything to the doormat, say "[unimportant-thing]".
+
+Chapter 2 - Items
+
+[Mail]
+
+The mail is in the front porch. "On the doormat is a pile of junk mail." The printed name is "loose pile of junk mail". Understand "demolition", "order", "junk", "my", "official", "loose", "pile", "letter" as the mail. The description is "There are many pieces of mail. Most are from some computer company called Infocom which wants you to buy their games. Hidden underneath is an official letter from the local council, dated some two years ago and inexplicably not delivered till now, explaining that a demolition order has been served on your home. The date of demolition is today's date."
+
+After taking the mail, say "You gather up the pile of mail."
+
+Instead of opening the mail, try examining the mail.
 
 [--------------------------------------]
 
@@ -600,7 +618,7 @@ The Front Garden is south of the Front Porch and outside from the Front Porch. "
 
 Chapter 1 - Items
 
-The roses are in the front garden.
+Some roses are in the front garden.
 
 The bulldozer is a backdrop. The bulldozer can be observed or unobserved. It is unobserved.
 
@@ -671,7 +689,7 @@ The bulldozer is in the front garden, back garden, country lane.
 
 [Home]
 
-Your house is a backdrop. The printed name is "your home". Understand "my", "your", "home" as the house. It is in the bedroom, front porch, front garden, back garden, country lane.
+Your house is a backdrop. The printed name is "your home". Understand "my", "your", "home" as the house. It is in the bedroom, front porch, front garden, back garden, country lane. Your house can be demolished.
 
 Instead of examining your house, say "[Your house] is a very nice example of [your house]. [The house] is also."
 
