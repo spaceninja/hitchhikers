@@ -25,7 +25,7 @@ This repo is a port of The Hitchhiker's Guide to the Galaxy from [the original Z
   - [x] Bedroom
   - [x] Front Porch
   - [ ] Front-of-House
-  - [ ] Back-of-House
+  - [x] Back-of-House
   - [ ] Country Lane
   - [ ] Pub
   - [ ] Ford

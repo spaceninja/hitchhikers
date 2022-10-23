@@ -13,7 +13,7 @@ TODO: Commands
 [@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
 [Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
 
-- [ ] Reconsider "your X" names. Perhaps understand your as x is enough.
+- [ ] Is "GENERIC POCKET-FLUFF" the same as "does the player mean pocket fluff?"
 - [ ] Add sunglasses game over messages
 - [ ] Address carrying capacity & size (see gown)
 
@@ -32,7 +32,7 @@ Volume 1 - Setup
 
 Use American dialect and the serial comma and scoring. The maximum score is 400.
 
-After printing the banner text when not requesting the story file version, say "[line break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
+After printing the banner text when not requesting the story file version, say "[paragraph break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
 
 [--------------------------------------]
 
@@ -56,6 +56,8 @@ Book 3 - Kinds
 
 A tool is a kind of thing.
 
+An owned thing is a kind of thing. An owned thing has some text called the owner.
+
 [--------------------------------------]
 
 Book 4 - Text Substitutions
@@ -75,6 +77,12 @@ Part 2 - Shared Responses
 
 To say cant-reach-from-bed:
 	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
+
+To say look-around:
+	say "Look around you."
+	
+To say private:
+	say "You can't. It's not yours. It's [owner of the noun]'s and it's private."
 
 To say tell-me-how:
 	say "You must tell me how to do that to [the noun]."
@@ -98,6 +106,14 @@ To say two-trees:
 	now the current topic is 9;
 	the current topic resets in one turn from now;
 	say "[line break]Shouldn't you be taking more interest in events in the world around you? While you've got it...?"
+
+To say walk-around:
+	now the current topic is 16;
+	the current topic resets in one turn from now;
+	say "Did you have any particular direction in mind?"
+
+To say zen:
+	say "A brave, Zen-like effort. It fails"
 
 Part 4 - Response Tables
 
@@ -140,9 +156,21 @@ Instead of the player going through a closed door, say "The door is closed."
 
 Part 2 - Update Standard Actions
 
+[Attacking]
+Check an actor attacking (this is the updated block attacking rule):
+	if the actor is the player:
+		say "You are obviously letting things get to you. You should learn to relax a little.";
+	stop the action.
+
+The updated block attacking rule substitutes for the block attacking rule.
+
 [Examining]
 
 Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
+
+[Looking Under]
+
+Understand "look behind [something]" as looking under.
 
 [Reaching]
 
@@ -214,7 +242,7 @@ The saying yes to a topic rule substitutes for the block saying yes rule.
 
 [Taking]
 
-Check taking anything that is scenery:
+Check taking anything that is fixed in place:
 	say "[yuks]" instead.
 
 Part 3 - New Actions
@@ -269,9 +297,20 @@ Carry out diagnosing:
 	else:
 		say "You are in good health.";
 
+[Enjoying]
+
+Enjoying is an action applying to one thing. Understand "enjoy [something]" as enjoying.
+
+Check enjoying:
+	if the noun is a person:
+		try kissing the noun instead.
+
+Carry out enjoying:
+	say "Not difficult at all, considering how enjoyable [the noun] is."
+
 [Getting Out Of]
 
-Getting out of is an action applying to one thing. Understand "get out of [something]" as getting out of.
+Getting out of is an action applying to one thing. Understand "get out of [something]" as getting out of. Understand "exit [something]" as getting out of.
 
 Carry out getting out of something:
 	try exiting instead.
@@ -281,14 +320,14 @@ Carry out getting out of something:
 Responding negatively with is an action applying to one number.
 
 Carry out responding negatively with:
-	say "[reply corresponding to a number of the number understood in the Table of negative replies]";
+	say "[reply corresponding to a number of the number understood in the Table of negative replies][line break]";
 
 [Responding Positively]
 
 Responding positively with is an action applying to one number.
 
 Carry out responding positively with:
-	say "[reply corresponding to a number of the number understood in the Table of positive replies]";
+	say "[reply corresponding to a number of the number understood in the Table of positive replies][line break]";
 
 [Tying]
 
@@ -313,6 +352,25 @@ Carry out untying:
 
 Part 4 - Testing
 
+[Demolish House]
+
+Demolishing is an action applying to nothing. Understand "demolish" as demolishing.
+
+Carry out demolishing:
+	now your house is demolished;
+	say "Crash!";
+
+[Swap Characters]
+
+Transforming is an action applying to nothing. Understand "transform" as transforming.
+
+Carry out transforming:
+	if the player is Arthur:
+		now the player is Ford;
+	else:
+		now the player is Arthur;
+	try examining the player;
+
 [Walkthrough Tests]
 
 test house with "stand up / turn on light / get gown / wear gown / look in pocket / get all from gown / get screwdriver / get toothbrush / put screwdriver and toothbrush in thing".
@@ -323,7 +381,7 @@ test pub with "south / west / examine shelf / buy sandwich / drink beer / drink 
 
 [Other Tests]
 
-test start with "turn on light / stand up / wear gown / look in pocket / swallow pill".
+test init with "turn on light / stand up / wear gown / look in pocket / swallow pill".
 
 test hangover with "take phone / turn on light / open curtains / stand up / take toothbrush / take screwdriver / take phone / get gown / wear gown / look in pocket / eat tablet / take toothbrush / take screwdriver / take phone".
 
@@ -344,8 +402,6 @@ Book 1 - Earth
 [TODO time]
 
 [TODO vogon fleet]
-
-[TODO rubble]
 
 [--------------------------------------]
 
@@ -390,12 +446,6 @@ Before taking something when the player is in the bed:
 
 Instead of opening or closing the bed, say "[tell-me-how]".
 
-[Bedroom Furnishings]
-
-The bedroom-furnishings is scenery in the bedroom. The printed name is "it". Understand "wall", "faded", "old", "carpet", "wallpaper", "paper", "chair" as the bedroom-furnishings.
-
-Instead of doing anything to the bedroom-furnishings, say "[unimportant-thing]".
-
 [Curtains]
 
 Your curtains are scenery in the bedroom. Understand "your", "curtain", "shade", "shades" as your curtains.
@@ -406,6 +456,12 @@ Instead of opening or searching your curtains:
 	else:
 		now the bulldozer is observed;
 		say "As you part [the curtains] you see that i[nice-day], and a large yellow [bulldozer] is advancing on your home."
+
+[Furnishings]
+
+The bedroom furnishings are scenery in the bedroom. Understand "wall", "faded", "old", "carpet", "wallpaper", "paper", "chair" as the bedroom furnishings.
+
+Instead of doing anything to the bedroom furnishings, say "[unimportant-thing]".
 
 [Light]
 
@@ -423,7 +479,7 @@ After switching off the light:
 
 [Sink]
 
-The sink is scenery in the bedroom. The printed name is "it". Understand "wash", "basin", "washbasin" as the sink.
+The sink is scenery in the bedroom. Understand "wash", "basin", "washbasin" as the sink.
 
 Instead of doing anything to the sink, say "[unimportant-thing]".
 
@@ -437,7 +493,7 @@ Instead of climbing down the stairs, try going down.
 
 [Stuff Under Bed]
 
-The stuff-under-bed is scenery in the bedroom. The printed name is "it". Understand "soiled", "foreign", "book", "coin", "coins", "handkerchief", "handkerchiefs" as the stuff-under-bed.
+The stuff-under-bed is scenery in the bedroom. Understand "soiled", "foreign", "book", "coin", "coins", "handkerchief", "handkerchiefs" as the stuff-under-bed.
 
 Instead of doing anything to the stuff-under-bed, say "[unimportant-thing]".
 
@@ -464,7 +520,7 @@ Some pocket fluff is in your gown. Understand "lint" as the pocket fluff.
 [Gown]
 
 [TODO gown-hung description]
-Your gown is in the bedroom. It is a wearable closed openable undescribed container. The description is "The dressing gown is faded and battered, and is clearly a garment which has seen better decades. It has a pocket which is [if gown is open]open[else]closed[end if], and a small loop at the back of the collar[if the sleeves are tied]. The sleeves are tied closed[end if]." Understand "my", "your", "dressing", "tatty", "faded", "battered", "pocket", "loop", "robe" as your gown. The carrying capacity is 14.
+Your gown is in the bedroom. It is a wearable closed openable undescribed container. The description is "The dressing gown is faded and battered, and is clearly a garment which has seen better decades. It has a pocket which is [if gown is open]open[else]closed[end if], and a small loop at the back of the collar[if the sleeves are tied]. The sleeves are tied closed[end if]." Understand "your", "dressing", "tatty", "faded", "battered", "pocket", "loop", "robe" as your gown. The carrying capacity is 14.
 
 After taking your gown when the player is hungover, say "Luckily, this is large enough for you to get hold of. You notice something in the pocket."
 
@@ -569,7 +625,7 @@ At the time when the gift returns:
 
 [Toothbrush]
 
-The toothbrush is a tool in the bedroom. Understand "my", "proper", "brush", "tool", "tools" as the toothbrush.
+The toothbrush is a tool in the bedroom. Understand "proper", "brush", "tool", "tools" as the toothbrush.
 
 Instead of taking the toothbrush when the player is hungover, say "[lurches]".
 
@@ -604,7 +660,7 @@ Chapter 2 - Items
 
 [Mail]
 
-The mail is in the front porch. "On the doormat is a pile of junk mail." The printed name is "loose pile of junk mail". Understand "demolition", "order", "junk", "my", "official", "loose", "pile", "letter" as the mail. The description is "There are many pieces of mail. Most are from some computer company called Infocom which wants you to buy their games. Hidden underneath is an official letter from the local council, dated some two years ago and inexplicably not delivered till now, explaining that a demolition order has been served on your home. The date of demolition is today's date."
+The mail is in the front porch. "On the doormat is a pile of junk mail." The printed name is "loose pile of junk mail". Understand "demolition", "order", "junk", "official", "loose", "pile", "letter" as the mail. The description is "There are many pieces of mail. Most are from some computer company called Infocom which wants you to buy their games. Hidden underneath is an official letter from the local council, dated some two years ago and inexplicably not delivered till now, explaining that a demolition order has been served on your home. The date of demolition is today's date."
 
 After taking the mail, say "You gather up the pile of mail."
 
@@ -616,9 +672,15 @@ Part 3 - Front of House
 
 The Front Garden is south of the Front Porch and outside from the Front Porch. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House".
 
-Chapter 1 - Items
+Chapter 1 - Scenery
 
-Some roses are in the front garden.
+[Roses]
+
+Some roses are scenery in the front garden. Understand "rose", "rosebed", "bed" as some roses.
+
+Instead of doing anything to some roses, say "[unimportant-thing]".
+
+Chapter 2 - Items
 
 The bulldozer is a backdrop. The bulldozer can be observed or unobserved. It is unobserved.
 
@@ -633,6 +695,14 @@ Instead of doing anything other than examining to the bulldozer when the player 
 Part 4 - Back of House
 
 The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House".
+
+Chapter 1 - Scenery
+
+[Birds]
+
+Some birds are scenery in the back garden.
+
+Instead of doing anything to some birds, say "[unimportant-thing]".
 
 [--------------------------------------]
 
@@ -650,6 +720,48 @@ The Pub is west of the Country Lane and inside from the Country Lane. "The Pub i
 
 Chapter 1 - Scenery
 
+[Bar]
+
+The bar is a scenery supporter in the pub. Understand "counter" as the bar.
+
+Instead of looking under the bar, try examining the pub shelf.
+
+[Furnishings]
+
+The pub furnishings are scenery in the pub. Understand "usual", "soggy", "beermat", "beermats", "glass", "glasses", "bottle", "bottles" as the pub furnishings.
+
+Instead of doing anything to the pub furnishings, say "[unimportant-thing]".
+
+[Jukebox]
+
+The jukebox is an owned thing in the pub. It is lit scenery. [lit scenery] Understand "old", "juke", "box" as the jukebox. The owner of the jukebox is "the Pub".
+
+Instead of listening to the jukebox:
+	say "The song is ";
+	if a random chance of 1 in 4 succeeds:
+		say "a Walker Brothers single, 'The Sun Ain't Gonna Shine Anymore.'";
+	else if a random chance of 1 in 3 succeeds:
+		say "'Get Back' by the Beatles.";
+	else if a random chance of 1 in 2 succeeds:
+		say "'Hey Jude' by the Beatles (Footnote 4). It's a particular favourite, and listening to it calms you down, and cheers you up.";
+	else:
+		say "'Tie a Yellow Ribbon[if the player is Ford].' You can't stand it, and are pleased to think that this is probably the last time it will ever be heard.[else].'";
+	
+Instead of switching off the jukebox:
+	say "[private]";
+
+[Music]
+
+The music is scenery in the pub. Understand "song", "songs" as the music.
+
+Instead of enjoying or listening to the music, try listening to the jukebox.
+
+[People]
+
+Some patrons are scenery in the pub. Understand "people" as some patrons.
+
+Instead of doing anything to some patrons, say "[unimportant-thing]".
+
 [Window]
 
 The pub window is scenery in the pub. The printed name is "window".
@@ -661,25 +773,38 @@ Instead of opening or closing the pub window, say "It won't budge."
 
 Chapter 2 - Items
 
-[TODO pub object]
+[Barman]
 
-The bar is in the pub.
+The barman is a man in the pub. "There is a barman serving at the bar." Understand "bartender" as the barman.
 
-The pub shelf is in the pub.
+[Beer]
 
-The jukebox is in the pub.
+The beer is in the pub. It is edible and undescribed. The beer can be purchased. Understand "lots", "bitter", "pint", "pints" as the beer.
 
-The music is in the pub.
+[Peanuts]
 
-The pub furnishings are in the pub.
+Some peanuts are in the pub. They are edible and undescribed. Some peanuts can be purchased. Understand "packet", "peanut", "nut", "nuts" as some peanuts.
 
-The beer is in the pub.
+[Sandwich]
 
-The peanuts are in the pub.
+The cheese sandwich is in the pub. It is edible and undescribed. The sandwich can be purchased. Understand "plate", "univiting" as the cheese sandwich.
 
-The sandwich is in the pub.
+[Shelf]
 
-[TODO barman]
+The pub shelf is a supporter in the pub. "Behind the bar is a shelf. It is full of the sort of items you find on shelves behind bars in pubs." The printed name is "shelf of items". Understand "shelves", "items" as the pub shelf.
+
+To say snacks:
+	unless peanuts are purchased:
+		if sandwich is purchased:
+			say ", and";
+		else:
+			say ",";
+		say " some packets of peanuts";
+	unless sandwich is purchased:
+		say ", and a plate of uninviting [cheese sandwich]es";
+		
+Instead of examining the pub shelf:
+	say "On the shelf behind the bar is the usual array of bottles, glasses and soggy beermats[snacks].";
 
 Part 7 - Backdrop Locations
 
@@ -687,11 +812,75 @@ Part 7 - Backdrop Locations
 
 The bulldozer is in the front garden, back garden, country lane.
 
+[Ground]
+
+The ground is a backdrop. Understand "floor", "mud" as the ground. It is everywhere.
+
+[Hangover]
+
+The hangover is a backdrop. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. It is everywhere.
+
+After deciding the scope of the player while in darkness: place the hangover in scope. [allow examining with lights off]
+
+Before examining the hangover, try diagnosing instead.
+
+Before doing anything other than examining to the hangover, say "[impossibles]" instead.
+
 [Home]
 
-Your house is a backdrop. The printed name is "your home". Understand "my", "your", "home" as the house. It is in the bedroom, front porch, front garden, back garden, country lane. Your house can be demolished.
+Your house is a backdrop. The printed name is "your home". Understand "your", "home" as the house. It is in the bedroom, front porch, front garden, back garden, country lane. Your house can be demolished.
 
-Instead of examining your house, say "[Your house] is a very nice example of [your house]. [The house] is also."
+Instead of enjoying your house when your house is demolished, say "[zen]. You can't enjoy a [rubble] properly till it's at least a hundred years old. Also, you are haunted by the tragic vision of your favourite teapot lying shattered among the dust.[line break]There is also the matter of all your clothes."
+
+Instead of examining your house when your house is demolished, say "It is now [a rubble]."
+
+Instead of doing anything to your house when the player is Ford, say "[unimportant-thing]".
+
+Instead of entering your house: [walk through home]
+	if the player is in the front garden or the player is in the front porch:
+		try going north;
+	else if the player is in the bedroom:
+		say "[look-around]";
+	else:
+		say "[walk-around]";
+
+Instead of getting out of your house: [leave home]
+	if the player is in the front porch:
+		try going south;
+	else if the player is in the bedroom:
+		say "[walk-around]";
+	else:
+		say "[look-around]";
+
+[Pub]
+
+The pub-object is a backdrop. The printed name is "Pub". Understand "horse", "'n", "groom", "pub" as the pub-object. The pub-object is in the country lane, pub.
+
+Instead of entering the pub-object:
+	if the player is in the pub:
+		say "[look-around]";
+	else:
+		try going west.
+
+Instead of getting out of the pub-object:
+	if the player is in the pub:
+		try going east;
+	else:
+		say "[look-around]".
+
+Does the player mean getting out of or entering the pub-object when the pub-object is visible: it is very likely.
+
+Rule for clarifying the parser's choice of something while getting out of or entering:
+	if the noun is the pub-object:
+		stop the action; [don't print the name of the pub-object]
+
+[Rubble]
+
+The rubble is a backdrop. The printed name is "pile of rubble". Understand "pile", "debris" as the rubble. It is in the front garden, back garden.
+
+Instead of examining the rubble, try examining your house.
+
+Instead of enjoying the rubble, try enjoying your house.
 
 [Stairs]
 
@@ -699,7 +888,21 @@ The stairs are in the bedroom, front porch.
 
 [Third Planet]
 
-The third planet is a backdrop. It is everywhere. The description is "Description for the third planet."
+The third planet is a backdrop. "It is an utterly insignificant little blue-green planet, of the sort where they probably still wear digital watches." Understand "third", "blue", "blue-green", "small", "earth" as the third planet. It is everywhere. The third planet can be demolished.
+
+Before doing anything to the third planet:
+	unless the third planet is demolished:
+		now the noun is the ground;
+
+Instead of getting out of the third planet:
+	if the third planet is demolished:
+		say "You did!"
+
+[Tree]
+
+The tree is a backdrop. It is in the front garden, back garden, country lane. Understand "trees" as the tree.
+
+Instead of climbing the tree, say "You were never very good at that."
 
 [======================================]
 
@@ -708,25 +911,18 @@ Volume 3 - Actors
 A person can be hungover.
 A person can be groggy.
 
-The player is hungover.
-The player is in the bed.
-
-[Hangover]
-
-The hangover is an undescribed part of the player. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover.
-
-Before examining the hangover, try diagnosing instead.
-
-Before doing anything other than examining to the hangover, say "[impossibles]" instead.
-
 [--------------------------------------]
 
 Part 1 - Ford
+
+Ford is a man in the back garden. The description is "You are Ford."
 
 [TODO Ford, satchel, satchel fluff, towel]
 
 [--------------------------------------]
 
 Part 2 - Arthur
+
+Arthur is a man in the bedroom. Arthur is hungover. The player is Arthur. The description is "You are Arthur."
 
 [TODO Arthur]
