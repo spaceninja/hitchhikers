@@ -60,7 +60,17 @@ An owned thing is a kind of thing. An owned thing has some text called the owner
 
 [--------------------------------------]
 
-Book 4 - Text Substitutions
+Book 4 - Conditions
+
+A person can be hungover.
+A person can be groggy.
+A person can be prone.
+
+Instead of going while the player is prone, say "[while-lying]".
+
+[--------------------------------------]
+
+Book 5 - Text Substitutions
 
 Part 1 - Random Responses
 
@@ -72,6 +82,9 @@ To say lurches:
 
 To say yuks:
 	say "[one of]What a concept[or]Nice try[or]You can't be serious[or]Not bloody likely[in random order]."
+
+To say wastes:
+	say "[one of]Complete waste of time[or]Useless. Utterly useless[or]A totally unhelpful idea[in random order]."
 
 Part 2 - Shared Responses
 
@@ -89,6 +102,9 @@ To say tell-me-how:
 
 To say unimportant-thing:
 	say "That's not important; leave it alone."
+
+To say while-lying:
+	say "You can't do that while you're lying down!"
 
 Part 3 - Shared Snippets
 
@@ -142,7 +158,7 @@ number	reply
 
 [--------------------------------------]
 
-Book 5 - Actions
+Book 6 - Actions
 
 Part 1 - Disable Some Standard Rules
 
@@ -315,6 +331,24 @@ Getting out of is an action applying to one thing. Understand "get out of [somet
 Carry out getting out of something:
 	try exiting instead.
 
+[Lying Down]
+
+Lying down is an action applying to nothing. Understand "lie down" as lying down.
+
+Check lying down:
+	try lying down on the ground instead.
+
+[Lying Down On]
+
+Lying down on is an action applying to one thing. Understand "lie on [something]" as lying down on. Understand "lie down on [something]" as lying down on. Understand "lie down [something]" as lying down on.
+
+Check lying down on:
+	if the noun is a person:
+		try kissing the noun instead.
+
+Carry out lying down on:
+	say "[wastes]".
+
 [Responding Negatively]
 
 Responding negatively with is an action applying to one number.
@@ -328,6 +362,28 @@ Responding positively with is an action applying to one number.
 
 Carry out responding positively with:
 	say "[reply corresponding to a number of the number understood in the Table of positive replies][line break]";
+
+[Standing]
+
+Understand the command "stand" as something new.
+
+Standing is an action applying to nothing. Understand "stand" as standing. Understand "stand up" as standing.
+
+Check standing:
+	if the actor is prone:
+		now the actor is not prone;
+		if true is false:
+			[RUNNING? ,I-PROSSER]
+			say "TODO: you are safe Prosser sighs";
+		else if false is true:
+			[NOT PROSSER-LYING]
+			say "TODO: bulldozer driver chews gum and slams clutch";
+		else:
+			say "You are now on your feet.";
+	else:
+		say "You are already standing."
+
+Understand "stand on [something]" as entering.
 
 [Tying]
 
@@ -445,6 +501,11 @@ Before taking something when the player is in the bed:
 		say "[cant-reach-from-bed]" instead.
 
 Instead of opening or closing the bed, say "[tell-me-how]".
+
+Instead of lying down on the bed, try entering the bed.
+
+Instead of standing when the player is in the bed:
+	try exiting instead.
 
 [Curtains]
 
@@ -816,6 +877,23 @@ The bulldozer is in the front garden, back garden, country lane.
 
 The ground is a backdrop. Understand "floor", "mud" as the ground. It is everywhere.
 
+Instead of climbing or climbing down or entering the ground, say "[wastes]".
+
+Instead of looking under the ground, say "[impossibles]" instead.
+
+Instead of getting out of the ground, try going up instead.
+
+Instead of lying down on the ground:
+	if the player is in the front garden:
+		[try blocking the bulldozer instead;]
+		say "TODO: BLOCK BULLDOZER";
+	else:
+		now the player is prone;
+		say "You are now lying on the ground."
+
+Instead of enjoying the ground when the player is in the front garden and the player is prone:
+	say "It occurs to you that you've never deliberately lain in any mud before and that it's actually a pleasant sort of squishy sensation. You let the mud ooze between your toes. You may be here for some time, so you may as well make the most of it."
+
 [Hangover]
 
 The hangover is a backdrop. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. It is everywhere.
@@ -908,9 +986,6 @@ Instead of climbing the tree, say "You were never very good at that."
 
 Volume 3 - Actors
 
-A person can be hungover.
-A person can be groggy.
-
 [--------------------------------------]
 
 Part 1 - Ford
@@ -923,6 +998,6 @@ Ford is a man in the back garden. The description is "You are Ford."
 
 Part 2 - Arthur
 
-Arthur is a man in the bedroom. Arthur is hungover. The player is Arthur. The description is "You are Arthur."
+Arthur is a man in the bed. Arthur is hungover. The player is Arthur. The description is "You are Arthur."
 
 [TODO Arthur]
