@@ -32,6 +32,8 @@ Volume 1 - Setup
 
 Use American dialect and the serial comma and scoring. The maximum score is 400.
 
+Include Basic Screen Effects by Emily Short.
+
 After printing the banner text when not requesting the story file version, say "[paragraph break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
 
 [--------------------------------------]
@@ -42,17 +44,45 @@ The current topic is a number that varies.
 
 [--------------------------------------]
 
-Book 2 - Timers
+Book 2 - When Play Ends
 
-When play begins:
-	the gift returns in 21 turns from now.
-
-At the time when the current topic resets:
-	now the current topic is 0;
+Rule for printing the player's obituary: 
+	say "We are about to give you your score. Put on your peril-sensitive sunglasses now. (Hit RETURN or ENTER when ready.)[paragraph break]";
+	wait for any key;
+	say "Your score is [score] of a possible 400, in [turn count] turn[s].";
+	rule succeeds.
 
 [--------------------------------------]
 
-Book 3 - Kinds
+Book 3 - Timers
+
+[Reset the Current Topic]
+At the time when the current topic resets:
+	now the current topic is 0;
+
+[Return the Thing]
+When play begins:
+	the gift returns in 21 turns from now.
+
+[Wreck the House]
+When play begins:
+	the house is wrecked in 7 turns from now.
+
+At the time when the house is wrecked:
+	if the player is in the bed or the player is in the bedroom or the player is in the front porch:
+		say "Astoundingly, [a bulldozer] pokes through your wall. However, you have no time for surprise because the ceiling is collapsing on you as [better-luck]";
+		end the story;
+
+After going north from the front garden:
+	the house is wrecked in 5 turns from now;
+	continue the action;
+
+[to disable house wrecked:
+	the house is wrecked in -1 turns from now;]
+
+[--------------------------------------]
+
+Book 4 - Kinds
 
 A tool is a kind of thing.
 
@@ -60,7 +90,7 @@ An owned thing is a kind of thing. An owned thing has some text called the owner
 
 [--------------------------------------]
 
-Book 4 - Conditions
+Book 5 - Conditions
 
 A person can be hungover.
 A person can be groggy.
@@ -70,7 +100,7 @@ Instead of going while the player is prone, say "[while-lying]".
 
 [--------------------------------------]
 
-Book 5 - Text Substitutions
+Book 6 - Text Substitutions
 
 Part 1 - Random Responses
 
@@ -108,11 +138,23 @@ To say while-lying:
 
 Part 3 - Shared Snippets
 
+To say better-luck:
+	say " your home is unexpectedly demolished to make way for a new bypass. You are seriously injured in the process, but on your way to the hospital [make-way-for].[paragraph break]";
+	if the light is not lit:
+		say "Next time, try turning on the light.";
+	else if the gown is closed and the player is hungover:
+		say "Too bad you never found an aspirin for your hangover.";
+	else:
+		say "Better luck next life.";
+
 To say dialling-tone:
 	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable".
 
 To say get-rid:
 	say "you've been trying to get rid of it for years".
+
+To say make-way-for:
+	say "[a fleet] unexpectedly arrives and demolishes the Earth to make way for a new hyperspace bypass".
 
 To say nice-day:
 	say "t's a bright morning, the sun is shining, the birds are
@@ -158,7 +200,7 @@ number	reply
 
 [--------------------------------------]
 
-Book 6 - Actions
+Book 7 - Actions
 
 Part 1 - Disable Some Standard Rules
 
@@ -457,7 +499,7 @@ Book 1 - Earth
 
 [TODO time]
 
-[TODO vogon fleet]
+The fleet is scenery. The printed name is "fleet of Vogon Constructor ships". Understand "vogon", "constructor", "huge", "ugly", "yellow", "ship", "ships", "spaceship", "spaceships" as the fleet.
 
 [--------------------------------------]
 
