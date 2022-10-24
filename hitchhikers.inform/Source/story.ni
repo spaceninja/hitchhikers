@@ -95,6 +95,7 @@ Book 5 - Conditions
 A person can be hungover.
 A person can be groggy.
 A person can be prone.
+A person can be asleep.
 
 Instead of going while the player is prone, say "[while-lying]".
 
@@ -103,6 +104,9 @@ Instead of going while the player is prone, say "[while-lying]".
 Book 6 - Text Substitutions
 
 Part 1 - Random Responses
+
+To say bores:
+	say "[one of]newts he has known[or]cricket[or]how badly Americans make tea[or]the deteriorating condition of the motorways[or]a recent visit to Tiverton[or]a new book by Douglas Adams[or]computers[in random order]."
 
 To say impossibles:
 	say "[one of]You have lost your mind[or]You are clearly insane[or]You appear to have gone barking mad[or]I'm not convinced you're allowed to be playing with this computer[or]Run out on the street and say that. See what happens[or]No, no, a thousand times no. Go boil an egg[in random order]."
@@ -456,6 +460,7 @@ Demolishing is an action applying to nothing. Understand "demolish" as demolishi
 
 Carry out demolishing:
 	now your house is demolished;
+	now the third planet is demolished;
 	say "Crash!";
 
 [Swap Characters]
@@ -465,9 +470,11 @@ Transforming is an action applying to nothing. Understand "transform" as transfo
 Carry out transforming:
 	if the player is Arthur:
 		now the player is Ford;
+		say "You are now Ford!";
 	else:
 		now the player is Arthur;
-	try examining the player;
+		say "You are now Arthur!";
+	try looking;
 
 [Walkthrough Tests]
 
@@ -496,8 +503,6 @@ test backdrops with "x bulldozer / touch bulldozer / x home / touch home / x hou
 Volume 2 - Rooms
 
 Book 1 - Earth
-
-[TODO time]
 
 The fleet is scenery. The printed name is "fleet of Vogon Constructor ships". Understand "vogon", "constructor", "huge", "ugly", "yellow", "ship", "ships", "spaceship", "spaceships" as the fleet.
 
@@ -785,13 +790,30 @@ Instead of doing anything to some roses, say "[unimportant-thing]".
 
 Chapter 2 - Items
 
-The bulldozer is a backdrop. The bulldozer can be observed or unobserved. It is unobserved.
+[Bulldozer]
+
+The bulldozer is a backdrop. Understand "large", "huge", "yellow", "bull", "dozer" as the bulldozer. The bulldozer can be observed or unobserved. It is unobserved.
 
 Instead of doing anything other than examining to the bulldozer when the player is not in the front garden, say "[The bulldozer] isn't here.";
 
-[TODO bulldozer driver]
+[Digital Watch]
 
-[TODO Mr Prosser, digital watch]
+The digital watch is an owned thing. Understand "watches" as the digital watch. The owner of the digital watch is "Mr. Prosser".
+
+Instead of taking or examining the digital watch:
+	say "[private]";
+
+Chapter 3 - Actors
+
+[Bulldozer Driver]
+
+The bulldozer driver is a man in the front garden. He is undescribed.
+
+[Mr Prosser]
+
+Mr Prosser is a man in the front garden. The printed name is "Mr. Prosser". Understand "foreman", "wrecking", "crew", "mister", "mr" as Mr Prosser. He is undescribed.
+
+The digital watch is held by Mr Prosser.
 
 [--------------------------------------]
 
@@ -1008,7 +1030,7 @@ The stairs are in the bedroom, front porch.
 
 [Third Planet]
 
-The third planet is a backdrop. "It is an utterly insignificant little blue-green planet, of the sort where they probably still wear digital watches." Understand "third", "blue", "blue-green", "small", "earth" as the third planet. It is everywhere. The third planet can be demolished.
+The third planet is a backdrop. "It is an utterly insignificant little blue-green planet, of the sort where they probably still wear [digital watch]es." Understand "third", "blue", "blue-green", "small", "earth" as the third planet. It is everywhere. The third planet can be demolished.
 
 Before doing anything to the third planet:
 	unless the third planet is demolished:
@@ -1017,6 +1039,10 @@ Before doing anything to the third planet:
 Instead of getting out of the third planet:
 	if the third planet is demolished:
 		say "You did!"
+
+[Time]
+
+A backdrop called time is everywhere.
 
 [Tree]
 
@@ -1032,7 +1058,7 @@ Volume 3 - Actors
 
 Part 1 - Ford
 
-Ford is a man in the back garden. The description is "You are Ford."
+Ford is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]." The printed name is "Ford Prefect".
 
 [TODO Ford, satchel, satchel fluff, towel]
 
@@ -1040,6 +1066,6 @@ Ford is a man in the back garden. The description is "You are Ford."
 
 Part 2 - Arthur
 
-Arthur is a man in the bed. Arthur is hungover. The player is Arthur. The description is "You are Arthur."
+Arthur is a man in the bed. "Arthur Dent is here." The printed name is "Arthur Dent". Arthur is hungover. The player is Arthur.
 
 [TODO Arthur]
