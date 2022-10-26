@@ -13,6 +13,7 @@ TODO: Commands
 [@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
 [Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
 
+- [ ] better scope backdrops to regions
 - [ ] Is "GENERIC POCKET-FLUFF" the same as "does the player mean pocket fluff?"
 - [ ] Add sunglasses game over messages
 - [ ] Address carrying capacity & size (see gown)
@@ -66,7 +67,7 @@ When play begins:
 
 [Wreck the House]
 When play begins:
-	the house is wrecked in 7 turns from now.
+	the house is wrecked in 20 turns from now.
 
 At the time when the house is wrecked:
 	if the player is in the bed or the player is in the bedroom or the player is in the front porch:
@@ -226,6 +227,10 @@ Check an actor attacking (this is the updated block attacking rule):
 
 The updated block attacking rule substitutes for the block attacking rule.
 
+[Entering]
+
+Understand "go to [something]" as entering.
+
 [Examining]
 
 Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
@@ -302,6 +307,10 @@ Check an actor saying yes (this is the saying yes to a topic rule):
 
 The saying yes to a topic rule substitutes for the block saying yes rule.
 
+[Sleeping]
+
+Understand "nap", "snooze" as "[sleep]". [set as a token to reuse as synonyms for the backdrop sleep, so you can "nap", "take a snooze", "go to sleep"]
+
 [Taking]
 
 Check taking anything that is fixed in place:
@@ -377,6 +386,13 @@ Getting out of is an action applying to one thing. Understand "get out of [somet
 Carry out getting out of something:
 	try exiting instead.
 
+[Giving]
+
+Giving is an action applying to one thing. Understand "give [something]" as giving.
+
+Carry out giving:
+	say "Who do you want to give [the noun] to?"
+
 [Lying Down]
 
 Lying down is an action applying to nothing. Understand "lie down" as lying down.
@@ -386,7 +402,7 @@ Check lying down:
 
 [Lying Down On]
 
-Lying down on is an action applying to one thing. Understand "lie on [something]" as lying down on. Understand "lie down on [something]" as lying down on. Understand "lie down [something]" as lying down on.
+Lying down on is an action applying to one thing. Understand "lie on [something]" as lying down on. Understand "lie down on [something]", "lie down in [something]", "lie down [something]" as lying down on.
 
 Check lying down on:
 	if the noun is a person:
@@ -394,6 +410,13 @@ Check lying down on:
 
 Carry out lying down on:
 	say "[wastes]".
+
+[Making]
+
+Making is an action applying to one thing. Understand "make [something]" as making.
+
+Carry out making:
+	say "You can't make [the noun]!"
 
 [Responding Negatively]
 
@@ -549,6 +572,8 @@ Before taking something when the player is in the bed:
 
 Instead of opening or closing the bed, say "[tell-me-how]".
 
+Instead of lying down in the bedroom, try entering the bed.
+
 Instead of lying down on the bed, try entering the bed.
 
 Instead of standing when the player is in the bed:
@@ -567,7 +592,7 @@ Instead of opening or searching your curtains:
 
 [Furnishings]
 
-The bedroom furnishings are scenery in the bedroom. Understand "wall", "faded", "old", "carpet", "wallpaper", "paper", "chair" as the bedroom furnishings.
+The bedroom furnishings are scenery in the bedroom. Understand "wall", "walls", "ceiling", "roof", "faded", "old", "carpet", "wallpaper", "paper", "chair" as the bedroom furnishings.
 
 Instead of doing anything to the bedroom furnishings, say "[unimportant-thing]".
 
@@ -766,6 +791,12 @@ Instead of doing anything to the doormat, say "[unimportant-thing]".
 
 Chapter 2 - Items
 
+[Furnishings]
+
+The porch furnishings are scenery in the front porch. Understand "wall", "walls", "ceiling", "roof" as the porch furnishings.
+
+Instead of doing anything to the porch furnishings, say "[unimportant-thing]".
+
 [Mail]
 
 The mail is in the front porch. "On the doormat is a pile of junk mail." The printed name is "loose pile of junk mail". Understand "demolition", "order", "junk", "official", "loose", "pile", "letter" as the mail. The description is "There are many pieces of mail. Most are from some computer company called Infocom which wants you to buy their games. Hidden underneath is an official letter from the local council, dated some two years ago and inexplicably not delivered till now, explaining that a demolition order has been served on your home. The date of demolition is today's date."
@@ -853,7 +884,7 @@ Instead of looking under the bar, try examining the pub shelf.
 
 [Furnishings]
 
-The pub furnishings are scenery in the pub. Understand "usual", "soggy", "beermat", "beermats", "glass", "glasses", "bottle", "bottles" as the pub furnishings.
+The pub furnishings are scenery in the pub. Understand "wall", "walls", "ceiling", "roof", "usual", "soggy", "beermat", "beermats", "glass", "glasses", "bottle", "bottles" as the pub furnishings.
 
 Instead of doing anything to the pub furnishings, say "[unimportant-thing]".
 
@@ -931,7 +962,17 @@ To say snacks:
 Instead of examining the pub shelf:
 	say "On the shelf behind the bar is the usual array of bottles, glasses and soggy beermats[snacks].";
 
-Part 7 - Backdrop Locations
+[======================================]
+
+Part 7 - Earth Backdrops
+
+Chapter 1 - Indoors
+
+[Stairs]
+
+The stairs are in the bedroom, front porch.
+
+Chapter 2 - Outdoors
 
 [Bulldozer]
 
@@ -939,7 +980,7 @@ The bulldozer is in the front garden, back garden, country lane.
 
 [Ground]
 
-The ground is a backdrop. Understand "floor", "mud" as the ground. It is everywhere.
+The ground is a backdrop. Understand "floor", "mud" as the ground. It is in the front garden, back garden, country lane.
 
 Instead of climbing or climbing down or entering the ground, say "[wastes]".
 
@@ -957,16 +998,6 @@ Instead of lying down on the ground:
 
 Instead of enjoying the ground when the player is in the front garden and the player is prone:
 	say "It occurs to you that you've never deliberately lain in any mud before and that it's actually a pleasant sort of squishy sensation. You let the mud ooze between your toes. You may be here for some time, so you may as well make the most of it."
-
-[Hangover]
-
-The hangover is a backdrop. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. It is everywhere.
-
-After deciding the scope of the player while in darkness: place the hangover in scope. [allow examining with lights off]
-
-Before examining the hangover, try diagnosing instead.
-
-Before doing anything other than examining to the hangover, say "[impossibles]" instead.
 
 [Home]
 
@@ -1024,10 +1055,57 @@ Instead of examining the rubble, try examining your house.
 
 Instead of enjoying the rubble, try enjoying your house.
 
-[Stairs]
+[Sky]
 
-The stairs are in the bedroom, front porch.
+The sky is a backdrop. It is in the front garden, back garden, country lane.
 
+Instead of examining the sky when the fleet is visible, say "The sky is filled with the ships of [the fleet]."
+
+[Tree]
+
+The tree is a backdrop. It is in the front garden, back garden, country lane. Understand "trees" as the tree.
+
+Instead of climbing the tree, say "You were never very good at that."
+
+[--------------------------------------]
+
+Volume 3 - Everywhere Backdrops
+
+[Air]
+
+The air is a backdrop. It is everywhere.
+
+[Hangover]
+
+The hangover is a backdrop. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. It is everywhere.
+
+After deciding the scope of the player while in darkness: place the hangover in scope. [allow examining with lights off]
+
+Before examining the hangover, try diagnosing instead.
+
+Before doing anything other than examining to the hangover, say "[impossibles]" instead.
+
+[Sleep]
+
+A backdrop called sleep is everywhere. Understand "[sleep]" as sleep.
+
+Instead of entering or taking sleep, try sleeping.
+
+[Speech]
+
+The speech is a backdrop. It is everywhere.
+
+Instead of making or giving the speech, say "This isn't the time or the place for making speeches."
+
+Instead of examining the speech, say "It's extemporaneous."
+
+[Star]
+
+The star is a backdrop. Understand "approaching", "solar", "system", "small", "unregarded", "yellow", "orange", "sun", "sol" as the star. The printed name is "sun". It is everywhere.
+
+Instead of examining the star when the player is in the front garden, or the player is in the back garden, or the player is in the country lane:
+	say "The sun is a smallish yellow star.";
+		
 [Third Planet]
 
 The third planet is a backdrop. "It is an utterly insignificant little blue-green planet, of the sort where they probably still wear [digital watch]es." Understand "third", "blue", "blue-green", "small", "earth" as the third planet. It is everywhere. The third planet can be demolished.
@@ -1044,15 +1122,9 @@ Instead of getting out of the third planet:
 
 A backdrop called time is everywhere.
 
-[Tree]
-
-The tree is a backdrop. It is in the front garden, back garden, country lane. Understand "trees" as the tree.
-
-Instead of climbing the tree, say "You were never very good at that."
-
 [======================================]
 
-Volume 3 - Actors
+Volume 4 - Actors
 
 [--------------------------------------]
 
