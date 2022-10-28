@@ -5,26 +5,37 @@ The story genre is "Science Fiction".
 The story creation year is 1984.
 
 [
-TODO: Commands
+TODO:
+- [ ] Add I-VOGONS queue in 50 turns
 - [ ] Who am I
 - [ ] What is the object of the game
 - [ ] Don't panic
 - [ ] Footnote
 [@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
 [Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
-
-- [ ] better scope backdrops to regions
-- [ ] Is "GENERIC POCKET-FLUFF" the same as "does the player mean pocket fluff?"
-- [ ] Add sunglasses game over messages
+- [ ] Is "GENERIC POCKET-FLUFF" same as "does player mean pocket fluff?"
 - [ ] Address carrying capacity & size (see gown)
 
-;"put interrupts on clock chain"
-<ENABLE <QUEUE I-HOUSEWRECK 20>>
-<ENABLE <QUEUE I-VOGONS 50>>
 
+[How to replace standard response text:]
+See 14.11 for replacing generic response text
+
+[How to disable a timer:]
+$timer in -1 turns from now;
+
+[How to redirect verbs to a new noun:]
+Before examining the wrong thing, now the noun is the right thing;
+
+[How to check player's command for a word:]
 Before examining the house:
 	if the player's command includes "house":
 		say "It's not a house, it's a home."
+
+[How to not print clarification text:]
+Rule for clarifying the parser's choice of something while Xing:
+	if the noun is the right thing:
+		stop the action;
+
 ]
 
 [======================================]
@@ -35,31 +46,11 @@ Use American dialect and the serial comma and scoring. The maximum score is 400.
 
 Include Basic Screen Effects by Emily Short.
 
+[--------------------------------------]
+
+Book 1 - When Play Begins
+
 After printing the banner text when not requesting the story file version, say "[paragraph break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
-
-[--------------------------------------]
-
-Book 1 - Initial State
-
-The current topic is a number that varies.
-
-[--------------------------------------]
-
-Book 2 - When Play Ends
-
-Rule for printing the player's obituary: 
-	say "We are about to give you your score. Put on your peril-sensitive sunglasses now. (Hit RETURN or ENTER when ready.)[paragraph break]";
-	wait for any key;
-	say "Your score is [score] of a possible 400, in [turn count] turn[s].";
-	rule succeeds.
-
-[--------------------------------------]
-
-Book 3 - Timers
-
-[Reset the Current Topic]
-At the time when the current topic resets:
-	now the current topic is 0;
 
 [Return the Thing]
 When play begins:
@@ -69,21 +60,45 @@ When play begins:
 When play begins:
 	the house is wrecked in 20 turns from now.
 
+[--------------------------------------]
+
+Book 2 - When Play Ends
+
+Rule for printing the player's obituary: 
+	say "We are about to give you your score. Put on your peril-sensitive sunglasses now. (Hit RETURN or ENTER when ready.)[paragraph break]";
+	wait for any key;
+	say "Your score is [score] of a possible [maximum score], in [turn count] turn[s].";
+	rule succeeds.
+
+[--------------------------------------]
+
+Book 3 - Variables
+
+[Setting a global variable for the current topic is a fairly convoluted way to handle this. Modern Inform would probably just use a topic table, but I'm converting from the HHG2G ZIL code, which, perhaps as a memory-saving technique, recycles many replies across various situations, so it was easier to preserve their existing "when X happens, the topic number is Y" logic, which I've translated below into the conversation actions.]
+The current topic is a number that varies.
+
+[--------------------------------------]
+
+Book 4 - Timers
+
+[Reset the Current Topic]
+At the time when the current topic resets:
+	now the current topic is 0;
+
+[Wreck the House]
 At the time when the house is wrecked:
 	if the player is in the bed or the player is in the bedroom or the player is in the front porch:
 		say "Astoundingly, [a bulldozer] pokes through your wall. However, you have no time for surprise because the ceiling is collapsing on you as [better-luck]";
 		end the story;
 
+[Reset wreck the house timer if player re-enters the house]
 After going north from the front garden:
 	the house is wrecked in 5 turns from now;
 	continue the action;
 
-[to disable house wrecked:
-	the house is wrecked in -1 turns from now;]
-
 [--------------------------------------]
 
-Book 4 - Kinds
+Book 5 - New Kinds of Things
 
 A tool is a kind of thing.
 
@@ -91,18 +106,54 @@ An owned thing is a kind of thing. An owned thing has some text called the owner
 
 [--------------------------------------]
 
-Book 5 - Conditions
+Book 6 - Conditions
 
-A person can be hungover.
-A person can be groggy.
-A person can be prone.
 A person can be asleep.
+A person can be groggy.
+A person can be hungover.
+A person can be prone.
 
 Instead of going while the player is prone, say "[while-lying]".
 
 [--------------------------------------]
 
-Book 6 - Text Substitutions
+Book 7 - Body Parts
+
+A body part is a kind of thing.
+
+Understand "your" as a thing when the item described is held by the person asked.
+
+[Ears]
+
+Your ears are a body part. They are part of the player. Understand "ear" as your ears.
+
+[Eyes]
+
+Your eyes are a body part. They are part of the player. Understand "eye" as your eyes.
+
+Instead of opening your eyes, say "They are."
+Instead of closing your eyes, say "That won't help."
+
+[Head]
+
+Your head is a body part. It is part of the player. Understand "face" as your head.	
+
+[Hand]
+
+Your hand is a body part. It is part of the player. Understand "hands" as your hand.
+
+Instead of waving your hand, try waving hands.
+
+[TODO Instead of shaking your hand:
+	if the player can see a person (called shakee):]
+
+[Teeth]
+
+Your teeth are a body part. They are part of the player.
+
+[--------------------------------------]
+
+Book 8 - Text Substitutions
 
 Part 1 - Random Responses
 
@@ -121,7 +172,9 @@ To say yuks:
 To say wastes:
 	say "[one of]Complete waste of time[or]Useless. Utterly useless[or]A totally unhelpful idea[in random order]."
 
-Part 2 - Shared Responses
+[--------------------------------------]
+
+Part 2 - Common Responses
 
 To say cant-reach-from-bed:
 	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
@@ -140,6 +193,8 @@ To say unimportant-thing:
 
 To say while-lying:
 	say "You can't do that while you're lying down!"
+
+[--------------------------------------]
 
 Part 3 - Shared Snippets
 
@@ -178,6 +233,8 @@ To say walk-around:
 To say zen:
 	say "A brave, Zen-like effort. It fails"
 
+[--------------------------------------]
+
 Part 4 - Response Tables
 
 Table of negative replies
@@ -205,45 +262,11 @@ number	reply
 
 [--------------------------------------]
 
-Book 7 - Actions
+Book 9 - Actions
 
-Part 1 - Disable Some Standard Rules
+Part 1 - Update Standard Rules & Actions
 
-[Don't get out of bed for the player]
-
-The stand up before going rule does nothing.
-
-[Don't automatically open doors for the player]
-
-Instead of the player going through a closed door, say "The door is closed."
-
-Part 2 - Update Standard Actions
-
-[Attacking]
-Check an actor attacking (this is the updated block attacking rule):
-	if the actor is the player:
-		say "You are obviously letting things get to you. You should learn to relax a little.";
-	stop the action.
-
-The updated block attacking rule substitutes for the block attacking rule.
-
-[Entering]
-
-Understand "go to [something]" as entering.
-
-[Examining]
-
-Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
-
-[Looking Under]
-
-Understand "look behind [something]" as looking under.
-
-[Reaching]
-
-Rule for reaching inside a room:
-	say "[The noun] isn't here.";
-	deny access.
+Chapter 1 - Conversation Rules
 
 [Saying No]
 
@@ -307,6 +330,79 @@ Check an actor saying yes (this is the saying yes to a topic rule):
 
 The saying yes to a topic rule substitutes for the block saying yes rule.
 
+[--------------------------------------]
+
+Chapter 2 - Taking Inventory
+
+To say hangover-inventory:
+	if the player is hungover:
+		say "		[a hangover][line break]";
+
+To say no-tea-inventory:
+	if the player is Arthur:
+		[TODO: check if player is holding no-tea, etc]
+		unless the player is carrying the tea:
+			say "		no tea[line break]";
+
+To say inventory-intro:
+	say "[We] have:[line break]";
+	say "[hangover-inventory]";
+	say "[no-tea-inventory]";
+
+The print empty inventory rule does nothing.
+
+Carry out taking inventory (this is the print hitchhikers inventory rule):
+	if the first thing held by the player is nothing:
+		unless the player is Arthur:
+			say "You are empty-handed.";
+		else:
+			say "[inventory-intro]";
+	else:
+		say "[inventory-intro]";
+		list the contents of the player, with newlines, indented, including contents, giving inventory information, with extra indentation.
+
+The print hitchhikers inventory rule substitutes for the print standard inventory rule.
+
+[--------------------------------------]
+
+Chapter 3 - Standard Actions
+
+[Attacking]
+
+Check an actor attacking (this is the updated block attacking rule):
+	if the actor is the player:
+		say "You are obviously letting things get to you. You should learn to relax a little.";
+	stop the action.
+
+The updated block attacking rule substitutes for the block attacking rule.
+
+[Don't get out of bed for the player]
+
+The stand up before going rule does nothing.
+
+[Don't automatically open doors for the player]
+
+The can't go through closed doors rule does nothing.
+Instead of the player going through a closed door, say "The door is closed."
+
+[Entering]
+
+Understand "go to [something]" as entering.
+
+[Examining]
+
+Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
+
+[Looking Under]
+
+Understand "look behind [something]" as looking under.
+
+[Reaching]
+
+Rule for reaching inside a room:
+	say "[The noun] isn't here.";
+	deny access.
+
 [Sleeping]
 
 Understand "nap", "snooze" as "[sleep]". [set as a token to reuse as synonyms for the backdrop sleep, so you can "nap", "take a snooze", "go to sleep"]
@@ -316,7 +412,9 @@ Understand "nap", "snooze" as "[sleep]". [set as a token to reuse as synonyms fo
 Check taking anything that is fixed in place:
 	say "[yuks]" instead.
 
-Part 3 - New Actions
+[--------------------------------------]
+
+Part 2 - New Actions
 
 [Answering]
 
@@ -452,7 +550,7 @@ Check standing:
 	else:
 		say "You are already standing."
 
-Understand "stand on [something]" as entering.
+Understand "stand on [something]" as entering. [Restore previous usage]
 
 [Tying]
 
@@ -475,7 +573,9 @@ Untying is an action applying to one thing. Understand "untie [something]" as un
 Carry out untying:
 	say "[yuks]".
 
-Part 4 - Testing
+[--------------------------------------]
+
+Part 3 - Testing - Not for release
 
 [Demolish House]
 
@@ -493,9 +593,19 @@ Transforming is an action applying to nothing. Understand "transform" as transfo
 Carry out transforming:
 	if the player is Arthur:
 		now the player is Ford;
+		now your ears are part of Ford;
+		now your eyes are part of Ford;
+		now your head is part of Ford;
+		now your hand is part of Ford;
+		now your teeth are part of Ford;
 		say "You are now Ford!";
 	else:
 		now the player is Arthur;
+		now your ears are part of Arthur;
+		now your eyes are part of Arthur;
+		now your head is part of Arthur;
+		now your hand is part of Arthur;
+		now your teeth are part of Arthur;
 		say "You are now Arthur!";
 	try looking;
 
@@ -519,7 +629,7 @@ test exit-bedroom with "turn on light / stand up / south / test start / south / 
 
 test sleeves with "tie sleeves / remove gown / tie together sleeves / wear gown / untie sleeves / wear gown".
 
-test backdrops with "x bulldozer / touch bulldozer / x home / touch home / x house / touch house / x stairs / touch stairs / x third planet / touch third planet".
+test backdrops with "x bulldozer / touch bulldozer / x home / x stairs / x ground / x rubble / x tree / x pub / x sky / x fleet / x star / x third planet / x air / x hangover / x sleep / x speech / x time".
 
 [======================================]
 
@@ -527,23 +637,15 @@ Volume 2 - Rooms
 
 Book 1 - Earth
 
-The fleet is scenery. The printed name is "fleet of Vogon Constructor ships". Understand "vogon", "constructor", "huge", "ugly", "yellow", "ship", "ships", "spaceship", "spaceships" as the fleet.
+The Indoors is a region.
+
+The Outdoors is a region.
 
 [--------------------------------------]
 
 Part 1 - Bedroom
 
-The Bedroom is a dark room. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
-
-After deciding the scope of the player when the location is the bedroom:
-	if the bedroom is dark:
-		place the light in scope;
-	if the bulldozer is observed:
-		place the bulldozer in scope;
-
-The bedroom door is an open scenery door. It is south of the Bedroom. The printed name is "door".
-
-Instead of opening or closing the bedroom door when the player is in the bed, say "[cant-reach-from-bed]".
+The Bedroom is a dark room in the Indoors. "The bedroom is a mess.[line break]It is a small bedroom with a faded carpet and old wallpaper. There is a washbasin, a chair[if the gown is undescribed] with a tatty dressing gown slung over it[end if], and a window with the curtains drawn. Near the exit leading south is a phone."
 
 Before going from the bedroom when the player is hungover, say "You miss the doorway by a good eighteen inches. The wall jostles you rather rudely." instead.
 
@@ -554,6 +656,12 @@ Report going from the bedroom:
 		say "You rush down the stairs in panic.";
 	else:
 		say "You make your way down to the front porch."
+
+After deciding the scope of the player when the location is the bedroom:
+	if the bedroom is dark:
+		place the light in scope;
+	if the bulldozer is observed:
+		place the bulldozer in scope;
 
 Chapter 1 - Scenery
 
@@ -576,8 +684,7 @@ Instead of lying down in the bedroom, try entering the bed.
 
 Instead of lying down on the bed, try entering the bed.
 
-Instead of standing when the player is in the bed:
-	try exiting instead.
+Instead of standing when the player is in the bed, try exiting instead.
 
 [Curtains]
 
@@ -589,6 +696,12 @@ Instead of opening or searching your curtains:
 	else:
 		now the bulldozer is observed;
 		say "As you part [the curtains] you see that i[nice-day], and a large yellow [bulldozer] is advancing on your home."
+
+[Door]
+
+The bedroom door is an open scenery door. It is south of the Bedroom. The printed name is "door".
+
+Instead of opening or closing the bedroom door when the player is in the bed, say "[cant-reach-from-bed]".
 
 [Furnishings]
 
@@ -610,19 +723,42 @@ After switching on the light:
 After switching off the light:
 	now the light is not lit;
 
+[Phone]
+
+The phone is scenery in the bedroom. The printed name is "telephone". Understand "telephone", "receiver" as the phone.
+
+Instead of taking the phone:
+	if the player is hungover:
+		say "[lurches]";
+	else if the phone is handled:
+		try calling "police"; [doesn't matter who we call, the line is down]
+	else:
+		now the phone is handled;
+		say "You pick up the receiver. [dialling-tone].[if the toothbrush is handled][two-trees][end if]";
+
+Instead of answering the phone, say "It isn't ringing."
+
+Instead of calling when the player is in the bed:
+	say "[cant-reach-from-bed]";
+
+Instead of calling when the player is in the bedroom:
+	if the player is hungover:
+		say "You reach for the receiver. [lurches]";
+	else if the phone is handled:
+		say "The cable is down, remember?";
+	else if the topic understood includes "police" or the topic understood includes "cops":
+		now the phone is handled;
+		say "You explain your situation. The desk sergeant promises to send someone over soon, and says not to try anything crazy in the meantime, like lying down in front of [the bulldozer]. [dialling-tone].[if the toothbrush is handled][two-trees][end if]";
+	else if the topic understood matches "home":
+		say "Who do you think you are, E.T.?";
+	else:
+		say "You don't know the number."
+
 [Sink]
 
 The sink is scenery in the bedroom. Understand "wash", "basin", "washbasin" as the sink.
 
 Instead of doing anything to the sink, say "[unimportant-thing]".
-
-[Stairs]
-
-The stairs are a backdrop. Understand "stair", "stairway" as the stairs.
-
-Instead of climbing the stairs, try going up.
-Instead of climbing up the stairs, try going up.
-Instead of climbing down the stairs, try going down.
 
 [Stuff Under Bed]
 
@@ -689,36 +825,6 @@ Instead of untying or opening the sleeves:
 		now the sleeves are untied;
 		say "Untied."
 
-[Phone]
-
-The phone is in the bedroom. It is undescribed. The printed name is "telephone". Understand "telephone", "receiver" as the phone.
-
-Instead of taking the phone:
-	if the player is hungover:
-		say "[lurches]";
-	else if the phone is handled:
-		try calling "police"; [doesn't matter who we call, the line is down]
-	else:
-		now the phone is handled;
-		say "You pick up the receiver. [dialling-tone].[if the toothbrush is handled][two-trees][end if]";
-
-Instead of answering the phone, say "It isn't ringing."
-
-Instead of calling when the player is in the bedroom:
-	if the player is in the bed:
-		say "[cant-reach-from-bed]";
-	else if the player is hungover:
-		say "You reach for the receiver. [lurches]";
-	else if the phone is handled:
-		say "The cable is down, remember?";
-	else if the topic understood includes "police" or the topic understood includes "cops":
-		now the phone is handled;
-		say "You explain your situation. The desk sergeant promises to send someone over soon, and says not to try anything crazy in the meantime, like lying down in front of [the bulldozer]. [dialling-tone].[if the toothbrush is handled][two-trees][end if]";
-	else if the topic understood matches "home":
-		say "Who do you think you are, E.T.?";
-	else:
-		say "You don't know the number."
-
 [Screwdriver]
 
 The screwdriver is a tool in the bedroom. The printed name is "flathead screwdriver". Understand "proper", "tool", "tools" as the screwdriver.
@@ -769,7 +875,7 @@ After taking the toothbrush:
 
 Part 2 - Front Porch
 
-The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north."
+The Front Porch is south of the bedroom door and down from the Bedroom and outside from the Bedroom and in the Indoors. "This is the enclosed front porch of your home. Your front garden lies to the south, and you can re-enter your home to the north."
 
 Instead of going up from the Front Porch, try going north. Instead of going inside from the Front Porch, try going north. [reroute through door]
 
@@ -788,6 +894,14 @@ Chapter 1 - Scenery
 The doormat is scenery in the front porch. Understand "mat" as the doormat.
 
 Instead of doing anything to the doormat, say "[unimportant-thing]".
+
+[Stairs]
+
+The stairs are a backdrop in the bedroom and in the front porch. Understand "stair", "stairway" as the stairs.
+
+Instead of climbing the stairs, try going up.
+Instead of climbing up the stairs, try going up.
+Instead of climbing down the stairs, try going down.
 
 Chapter 2 - Items
 
@@ -809,7 +923,7 @@ Instead of opening the mail, try examining the mail.
 
 Part 3 - Front of House
 
-The Front Garden is south of the Front Porch and outside from the Front Porch. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House".
+The Front Garden is south of the Front Porch and outside from the Front Porch and in the Outdoors. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House".
 
 Chapter 1 - Scenery
 
@@ -823,9 +937,11 @@ Chapter 2 - Items
 
 [Bulldozer]
 
-The bulldozer is a backdrop. Understand "large", "huge", "yellow", "bull", "dozer" as the bulldozer. The bulldozer can be observed or unobserved. It is unobserved.
+The bulldozer is a backdrop in the Outdoors. Understand "large", "huge", "yellow", "bull", "dozer" as the bulldozer. The bulldozer can be observed or unobserved. It is unobserved.
 
 Instead of doing anything other than examining to the bulldozer when the player is not in the front garden, say "[The bulldozer] isn't here.";
+
+[TODO: Clarify the player means the bulldozer without (the bulldozer)]
 
 [Digital Watch]
 
@@ -850,7 +966,7 @@ The digital watch is held by Mr Prosser.
 
 Part 4 - Back of House
 
-The Back Garden is northwest of the Front Garden and northeast of the Front Garden. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House".
+The Back Garden is northwest of the Front Garden and northeast of the Front Garden and in the Outdoors. "The rear garden is a pleasant place. I[nice-day], and it's a lovely day for a walk. A path leads around the house to the southeast and southwest." The printed name is "Back of House".
 
 Chapter 1 - Scenery
 
@@ -864,7 +980,7 @@ Instead of doing anything to some birds, say "[unimportant-thing]".
 
 Part 5 - Country Lane
 
-The Country Lane is south of the Front Garden. "The road runs from your home, to the north, toward the village Pub, to the west."
+The Country Lane is south of the Front Garden and in the Outdoors. "The road runs from your home, to the north, toward the village Pub, to the west."
 
 [TODO dog]
 
@@ -872,7 +988,7 @@ The Country Lane is south of the Front Garden. "The road runs from your home, to
 
 Part 6 - Pub
 
-The Pub is west of the Country Lane and inside from the Country Lane. "The Pub is pleasant and cheerful and full of pleasant and cheerful people who don't know they've got about twelve minutes to live and are therefore having a spot of lunch. Some music is playing on an old jukebox. The exit is east."
+The Pub is west of the Country Lane and inside from the Country Lane and in the Indoors. "The Pub is pleasant and cheerful and full of pleasant and cheerful people who don't know they've got about twelve minutes to live and are therefore having a spot of lunch. Some music is playing on an old jukebox. The exit is east."
 
 Chapter 1 - Scenery
 
@@ -926,7 +1042,6 @@ Instead of searching or examining the pub window, say "You see the country lane.
 
 Instead of opening or closing the pub window, say "It won't budge."
 
-
 Chapter 2 - Items
 
 [Barman]
@@ -962,25 +1077,17 @@ To say snacks:
 Instead of examining the pub shelf:
 	say "On the shelf behind the bar is the usual array of bottles, glasses and soggy beermats[snacks].";
 
-[======================================]
+[--------------------------------------]
 
 Part 7 - Earth Backdrops
 
-Chapter 1 - Indoors
+[Define these last so they don't initialize their locations]
 
-[Stairs]
-
-The stairs are in the bedroom, front porch.
-
-Chapter 2 - Outdoors
-
-[Bulldozer]
-
-The bulldozer is in the front garden, back garden, country lane.
+Chapter 1 - Outdoors
 
 [Ground]
 
-The ground is a backdrop. Understand "floor", "mud" as the ground. It is in the front garden, back garden, country lane.
+The ground is a backdrop in the Outdoors. Understand "floor", "mud" as the ground. It is in the Outdoors.
 
 Instead of climbing or climbing down or entering the ground, say "[wastes]".
 
@@ -1001,7 +1108,8 @@ Instead of enjoying the ground when the player is in the front garden and the pl
 
 [Home]
 
-Your house is a backdrop. The printed name is "your home". Understand "your", "home" as the house. It is in the bedroom, front porch, front garden, back garden, country lane. Your house can be demolished.
+[For some reason we can't say "in the Outdoors, in the bedroom," etc.]
+Your house is a backdrop in the bedroom, in the front porch, in the front garden, in the back garden, and in the country lane. The printed name is "your home". Understand "your", "home" as the house. Your house can be demolished.
 
 Instead of enjoying your house when your house is demolished, say "[zen]. You can't enjoy a [rubble] properly till it's at least a hundred years old. Also, you are haunted by the tragic vision of your favourite teapot lying shattered among the dust.[line break]There is also the matter of all your clothes."
 
@@ -1009,7 +1117,7 @@ Instead of examining your house when your house is demolished, say "It is now [a
 
 Instead of doing anything to your house when the player is Ford, say "[unimportant-thing]".
 
-Instead of entering your house: [walk through home]
+Instead of entering your house: ["walk through home"]
 	if the player is in the front garden or the player is in the front porch:
 		try going north;
 	else if the player is in the bedroom:
@@ -1017,7 +1125,7 @@ Instead of entering your house: [walk through home]
 	else:
 		say "[walk-around]";
 
-Instead of getting out of your house: [leave home]
+Instead of getting out of your house: ["leave home"]
 	if the player is in the front porch:
 		try going south;
 	else if the player is in the bedroom:
@@ -1027,7 +1135,7 @@ Instead of getting out of your house: [leave home]
 
 [Pub]
 
-The pub-object is a backdrop. The printed name is "Pub". Understand "horse", "'n", "groom", "pub" as the pub-object. The pub-object is in the country lane, pub.
+The pub-object is a backdrop in the country lane and in the pub. The printed name is "Pub". Understand "horse", "'n", "groom", "pub" as the pub-object.
 
 Instead of entering the pub-object:
 	if the player is in the pub:
@@ -1049,7 +1157,7 @@ Rule for clarifying the parser's choice of something while getting out of or ent
 
 [Rubble]
 
-The rubble is a backdrop. The printed name is "pile of rubble". Understand "pile", "debris" as the rubble. It is in the front garden, back garden.
+The rubble is a backdrop in the front garden and in the back garden. The printed name is "pile of rubble". Understand "pile", "debris" as the rubble.
 
 Instead of examining the rubble, try examining your house.
 
@@ -1057,25 +1165,52 @@ Instead of enjoying the rubble, try enjoying your house.
 
 [Sky]
 
-The sky is a backdrop. It is in the front garden, back garden, country lane.
+The sky is a backdrop in the Outdoors.
 
 Instead of examining the sky when the fleet is visible, say "The sky is filled with the ships of [the fleet]."
 
 [Tree]
 
-The tree is a backdrop. It is in the front garden, back garden, country lane. Understand "trees" as the tree.
+The tree is a backdrop in the Outdoors. Understand "trees" as the tree.
 
 Instead of climbing the tree, say "You were never very good at that."
 
 [--------------------------------------]
 
-Volume 3 - Everywhere Backdrops
+Chapter 2 - Space Stuff
+
+[Fleet]
+
+The fleet is scenery. The printed name is "fleet of Vogon Constructor ships". Understand "vogon", "constructor", "huge", "ugly", "yellow", "ship", "ships", "spaceship", "spaceships" as the fleet.
+
+[Star]
+
+The star is a backdrop in the Outdoors. Understand "approaching", "solar", "system", "small", "unregarded", "yellow", "orange", "sun", "sol" as the star. The printed name is "sun".
+
+Instead of examining the star when the player is in the front garden, or the player is in the back garden, or the player is in the country lane:
+	say "The sun is a smallish yellow star.";
+		
+[Third Planet]
+
+The third planet is a backdrop in the Outdoors. "It is an utterly insignificant little blue-green planet, of the sort where they probably still wear [digital watch]es." Understand "third", "blue", "blue-green", "small", "earth" as the third planet. The third planet can be demolished.
+
+Before doing anything to the third planet:
+	unless the third planet is demolished:
+		now the noun is the ground;
+
+Instead of getting out of the third planet:
+	if the third planet is demolished:
+		say "You did!"
+
+[--------------------------------------]
+
+Book 2 - Everywhere
 
 [Air]
 
 The air is a backdrop. It is everywhere.
 
-[Hangover]
+[Hangover] [so player can inspect hangover, which is in inventory]
 
 The hangover is a backdrop. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. It is everywhere.
 
@@ -1085,38 +1220,19 @@ Before examining the hangover, try diagnosing instead.
 
 Before doing anything other than examining to the hangover, say "[impossibles]" instead.
 
-[Sleep]
+[Sleep] [so the player can "take a nap"]
 
 A backdrop called sleep is everywhere. Understand "[sleep]" as sleep.
 
 Instead of entering or taking sleep, try sleeping.
 
-[Speech]
+[Speech] [so the player can "give a speech"]
 
 The speech is a backdrop. It is everywhere.
 
 Instead of making or giving the speech, say "This isn't the time or the place for making speeches."
 
 Instead of examining the speech, say "It's extemporaneous."
-
-[Star]
-
-The star is a backdrop. Understand "approaching", "solar", "system", "small", "unregarded", "yellow", "orange", "sun", "sol" as the star. The printed name is "sun". It is everywhere.
-
-Instead of examining the star when the player is in the front garden, or the player is in the back garden, or the player is in the country lane:
-	say "The sun is a smallish yellow star.";
-		
-[Third Planet]
-
-The third planet is a backdrop. "It is an utterly insignificant little blue-green planet, of the sort where they probably still wear [digital watch]es." Understand "third", "blue", "blue-green", "small", "earth" as the third planet. It is everywhere. The third planet can be demolished.
-
-Before doing anything to the third planet:
-	unless the third planet is demolished:
-		now the noun is the ground;
-
-Instead of getting out of the third planet:
-	if the third planet is demolished:
-		say "You did!"
 
 [Time]
 
@@ -1130,7 +1246,7 @@ Volume 4 - Actors
 
 Part 1 - Ford
 
-Ford is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]." The printed name is "Ford Prefect".
+Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]."
 
 [TODO Ford, satchel, satchel fluff, towel]
 
@@ -1138,6 +1254,14 @@ Ford is a man in the back garden. "[if Ford is asleep]Ford is in the corner, sno
 
 Part 2 - Arthur
 
-Arthur is a man in the bed. "Arthur Dent is here." The printed name is "Arthur Dent". Arthur is hungover. The player is Arthur.
+Arthur Dent is a man in the bed. "Arthur Dent is here." Arthur is hungover. The player is Arthur.
 
 [TODO Arthur]
+
+[--------------------------------------]
+
+Volume 5 - Other
+
+[TEMP - this should live somewhere, but I needed to check if it was in inventory earlier]
+
+The tea is a thing. "There is a nice, hot cup of tea here." Understand "real", "nice", "hot", "cup" as the tea. It is edible.
