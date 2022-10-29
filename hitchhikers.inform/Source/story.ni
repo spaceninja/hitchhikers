@@ -42,9 +42,10 @@ Rule for clarifying the parser's choice of something while Xing:
 
 Volume 1 - Setup
 
-Use American dialect and the serial comma and scoring. The maximum score is 400.
-
+Use American dialect and the serial comma and scoring.
+The maximum score is 400.
 Include Basic Screen Effects by Emily Short.
+Include Hitchhiker Actions by Scott Vandehey.
 
 [--------------------------------------]
 
@@ -106,18 +107,7 @@ An owned thing is a kind of thing. An owned thing has some text called the owner
 
 [--------------------------------------]
 
-Book 6 - Conditions
-
-A person can be asleep.
-A person can be groggy.
-A person can be hungover.
-A person can be prone.
-
-Instead of going while the player is prone, say "[while-lying]".
-
-[--------------------------------------]
-
-Book 7 - Body Parts
+Book 6 - Body Parts
 
 A body part is a kind of thing.
 
@@ -153,50 +143,9 @@ Your teeth are a body part. They are part of the player.
 
 [--------------------------------------]
 
-Book 8 - Text Substitutions
+Book 7 - Text Substitutions
 
-Part 1 - Random Responses
-
-To say bores:
-	say "[one of]newts he has known[or]cricket[or]how badly Americans make tea[or]the deteriorating condition of the motorways[or]a recent visit to Tiverton[or]a new book by Douglas Adams[or]computers[in random order]."
-
-To say impossibles:
-	say "[one of]You have lost your mind[or]You are clearly insane[or]You appear to have gone barking mad[or]I'm not convinced you're allowed to be playing with this computer[or]Run out on the street and say that. See what happens[or]No, no, a thousand times no. Go boil an egg[in random order]."
-
-To say lurches:
-	say "[one of]It slips through your fumbling fingers and hits the carpet with a nerve-shattering bang[or]It dances by you like a thing possessed[or]You lunge for it, but the room spins nauseatingly away. The floor gives you a light tap on the forehead[or]You're certainly picking the tough tasks. The floor acts like a trampoline on an ice rink, or like something they've been working on for years at Disneyland[in random order]."
-
-To say yuks:
-	say "[one of]What a concept[or]Nice try[or]You can't be serious[or]Not bloody likely[in random order]."
-
-To say wastes:
-	say "[one of]Complete waste of time[or]Useless. Utterly useless[or]A totally unhelpful idea[in random order]."
-
-[--------------------------------------]
-
-Part 2 - Common Responses
-
-To say cant-reach-from-bed:
-	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
-
-To say look-around:
-	say "Look around you."
-	
-To say private:
-	say "You can't. It's not yours. It's [owner of the noun]'s and it's private."
-
-To say tell-me-how:
-	say "You must tell me how to do that to [the noun]."
-
-To say unimportant-thing:
-	say "That's not important; leave it alone."
-
-To say while-lying:
-	say "You can't do that while you're lying down!"
-
-[--------------------------------------]
-
-Part 3 - Shared Snippets
+Part 1 - Common Responses
 
 To say better-luck:
 	say " your home is unexpectedly demolished to make way for a new bypass. You are seriously injured in the process, but on your way to the hospital [make-way-for].[paragraph break]";
@@ -206,6 +155,9 @@ To say better-luck:
 		say "Too bad you never found an aspirin for your hangover.";
 	else:
 		say "Better luck next life.";
+
+To say cant-reach-from-bed:
+	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
 
 To say dialling-tone:
 	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable".
@@ -219,6 +171,9 @@ To say make-way-for:
 To say nice-day:
 	say "t's a bright morning, the sun is shining, the birds are
 singing, the meadows are blooming".
+
+To say private:
+	say "You can't. It's not yours. It's [owner of the noun]'s and it's private."
 
 To say two-trees:
 	now the current topic is 9;
@@ -235,7 +190,7 @@ To say zen:
 
 [--------------------------------------]
 
-Part 4 - Response Tables
+Part 2 - Response Tables
 
 Table of negative replies
 number	reply
@@ -262,11 +217,9 @@ number	reply
 
 [--------------------------------------]
 
-Book 9 - Actions
+Book 8 - Actions
 
-Part 1 - Update Standard Rules & Actions
-
-Chapter 1 - Conversation Rules
+Part 1 - Saying Yes or No to Current Topic
 
 [Saying No]
 
@@ -330,9 +283,23 @@ Check an actor saying yes (this is the saying yes to a topic rule):
 
 The saying yes to a topic rule substitutes for the block saying yes rule.
 
+[Responding Negatively]
+
+Responding negatively with is an action applying to one number.
+
+Carry out responding negatively with:
+	say "[reply corresponding to a number of the number understood in the Table of negative replies][line break]";
+
+[Responding Positively]
+
+Responding positively with is an action applying to one number.
+
+Carry out responding positively with:
+	say "[reply corresponding to a number of the number understood in the Table of positive replies][line break]";
+
 [--------------------------------------]
 
-Chapter 2 - Taking Inventory
+Part 2 - Taking Inventory
 
 To say hangover-inventory:
 	if the player is hungover:
@@ -362,216 +329,6 @@ Carry out taking inventory (this is the print hitchhikers inventory rule):
 		list the contents of the player, with newlines, indented, including contents, giving inventory information, with extra indentation.
 
 The print hitchhikers inventory rule substitutes for the print standard inventory rule.
-
-[--------------------------------------]
-
-Chapter 3 - Standard Actions
-
-[Attacking]
-
-Check an actor attacking (this is the updated block attacking rule):
-	if the actor is the player:
-		say "You are obviously letting things get to you. You should learn to relax a little.";
-	stop the action.
-
-The updated block attacking rule substitutes for the block attacking rule.
-
-[Don't get out of bed for the player]
-
-The stand up before going rule does nothing.
-
-[Don't automatically open doors for the player]
-
-The can't go through closed doors rule does nothing.
-Instead of the player going through a closed door, say "The door is closed."
-
-[Entering]
-
-Understand "go to [something]" as entering.
-
-[Examining]
-
-Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
-
-[Looking Under]
-
-Understand "look behind [something]" as looking under.
-
-[Reaching]
-
-Rule for reaching inside a room:
-	say "[The noun] isn't here.";
-	deny access.
-
-[Sleeping]
-
-Understand "nap", "snooze" as "[sleep]". [set as a token to reuse as synonyms for the backdrop sleep, so you can "nap", "take a snooze", "go to sleep"]
-
-[Taking]
-
-Check taking anything that is fixed in place:
-	say "[yuks]" instead.
-
-[--------------------------------------]
-
-Part 2 - New Actions
-
-[Answering]
-
-Answering is an action applying to one thing. Understand "answer [something]" as answering.
-
-Carry out answering:
-	say "It is hardly likely that [the noun] is interested."
-
-[Calling]
-
-Calling is an action applying to one topic. Understand "call [text]" as calling. Understand the command "phone" as "call".
-
-Carry out calling:
-	say "There's no phone here!"
-
-[Calling With]
-
-Calling with is an action applying to one topic and one thing. Understand "call [text] with [something]" as calling with. Understand "call [text] on [something]" as calling with.
-
-Check calling with:
-	if the second noun is not the phone:
-		say "You can't use [the second noun] as a phone." instead;
-	else:
-		try calling the topic understood instead.
-
-[Climbing Down]
-
-Climbing down is an action applying to one thing. Understand "climb down [something]" as climbing down. Understand "walk down [something]" as climbing down. Understand "descend [something]" as climbing down.
-
-Carry out climbing down:
-	say "[yuks]".
-
-[Climbing Up]
-
-Climbing up is an action applying to one thing. Understand "climb up [something]" as climbing up. Understand "walk up [something]" as climbing up. Understand "ascend [something]" as climbing up. Understand "scale [something]" as climbing up.
-
-Carry out climbing up:
-	say "[yuks]".
-
-[Diagnosing]
-
-Diagnosing is an action applying to nothing. Understand "diagnose" as diagnosing.
-
-Carry out diagnosing:
-	if the player is hungover:
-		say "You have a big blinding throbber.";
-	else if the player is groggy:
-		say "You feel weak.";
-	else:
-		say "You are in good health.";
-
-[Enjoying]
-
-Enjoying is an action applying to one thing. Understand "enjoy [something]" as enjoying.
-
-Check enjoying:
-	if the noun is a person:
-		try kissing the noun instead.
-
-Carry out enjoying:
-	say "Not difficult at all, considering how enjoyable [the noun] is."
-
-[Getting Out Of]
-
-Getting out of is an action applying to one thing. Understand "get out of [something]" as getting out of. Understand "exit [something]" as getting out of.
-
-Carry out getting out of something:
-	try exiting instead.
-
-[Giving]
-
-Giving is an action applying to one thing. Understand "give [something]" as giving.
-
-Carry out giving:
-	say "Who do you want to give [the noun] to?"
-
-[Lying Down]
-
-Lying down is an action applying to nothing. Understand "lie down" as lying down.
-
-Check lying down:
-	try lying down on the ground instead.
-
-[Lying Down On]
-
-Lying down on is an action applying to one thing. Understand "lie on [something]" as lying down on. Understand "lie down on [something]", "lie down in [something]", "lie down [something]" as lying down on.
-
-Check lying down on:
-	if the noun is a person:
-		try kissing the noun instead.
-
-Carry out lying down on:
-	say "[wastes]".
-
-[Making]
-
-Making is an action applying to one thing. Understand "make [something]" as making.
-
-Carry out making:
-	say "You can't make [the noun]!"
-
-[Responding Negatively]
-
-Responding negatively with is an action applying to one number.
-
-Carry out responding negatively with:
-	say "[reply corresponding to a number of the number understood in the Table of negative replies][line break]";
-
-[Responding Positively]
-
-Responding positively with is an action applying to one number.
-
-Carry out responding positively with:
-	say "[reply corresponding to a number of the number understood in the Table of positive replies][line break]";
-
-[Standing]
-
-Understand the command "stand" as something new.
-
-Standing is an action applying to nothing. Understand "stand" as standing. Understand "stand up" as standing.
-
-Check standing:
-	if the actor is prone:
-		now the actor is not prone;
-		if true is false:
-			[RUNNING? ,I-PROSSER]
-			say "TODO: you are safe Prosser sighs";
-		else if false is true:
-			[NOT PROSSER-LYING]
-			say "TODO: bulldozer driver chews gum and slams clutch";
-		else:
-			say "You are now on your feet.";
-	else:
-		say "You are already standing."
-
-Understand "stand on [something]" as entering. [Restore previous usage]
-
-[Tying]
-
-Tying is an action applying to one thing. Understand "tie [something]" as tying.
-
-Carry out tying:
-	say "You can't tie [the noun]."
-
-[Tying Together]
-
-Tying together is an action applying to one thing. Understand "tie together [something]" as tying together.
-
-Carry out tying together:
-	say "That sentence isn't one I recognise."
-
-[Untying]
-
-Untying is an action applying to one thing. Understand "untie [something]" as untying.
-
-Carry out untying:
-	say "[yuks]".
 
 [--------------------------------------]
 
@@ -1095,13 +852,9 @@ Instead of looking under the ground, say "[impossibles]" instead.
 
 Instead of getting out of the ground, try going up instead.
 
-Instead of lying down on the ground:
-	if the player is in the front garden:
+Instead of lying down on the ground when the player is in the front garden:
 		[try blocking the bulldozer instead;]
 		say "TODO: BLOCK BULLDOZER";
-	else:
-		now the player is prone;
-		say "You are now lying on the ground."
 
 Instead of enjoying the ground when the player is in the front garden and the player is prone:
 	say "It occurs to you that you've never deliberately lain in any mud before and that it's actually a pleasant sort of squishy sensation. You let the mud ooze between your toes. You may be here for some time, so you may as well make the most of it."
@@ -1264,4 +1017,4 @@ Volume 5 - Other
 
 [TEMP - this should live somewhere, but I needed to check if it was in inventory earlier]
 
-The tea is a thing. "There is a nice, hot cup of tea here." Understand "real", "nice", "hot", "cup" as the tea. It is edible.
+The tea is a thing held by the barman. "There is a nice, hot cup of tea here." Understand "real", "nice", "hot", "cup" as the tea. It is edible.
