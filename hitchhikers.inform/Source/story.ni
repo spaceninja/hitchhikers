@@ -16,6 +16,7 @@ TODO:
 - [ ] Is "GENERIC POCKET-FLUFF" same as "does player mean pocket fluff?"
 - [ ] Address carrying capacity & size (see gown)
 
+TODO: change most actions to Report or block rules, to match standard actions
 
 [How to replace standard response text:]
 See 14.11 for replacing generic response text
@@ -148,7 +149,7 @@ Book 7 - Text Substitutions
 Part 1 - Common Responses
 
 To say better-luck:
-	say " your home is unexpectedly demolished to make way for a new bypass. You are seriously injured in the process, but on your way to the hospital [make-way-for].[paragraph break]";
+	say "your home is unexpectedly demolished to make way for a new bypass. You are seriously injured in the process, but on your way to the hospital [make-way-for].[paragraph break]";
 	if the light is not lit:
 		say "Next time, try turning on the light.";
 	else if the gown is closed and the player is hungover:
@@ -419,6 +420,10 @@ After deciding the scope of the player when the location is the bedroom:
 		place the light in scope;
 	if the bulldozer is observed:
 		place the bulldozer in scope;
+
+Instead of sleeping in the bedroom:
+	say "You nod off and are wakened briefly a few hours later as [better-luck]";
+	end the story;
 
 Chapter 1 - Scenery
 
@@ -741,6 +746,8 @@ The Country Lane is south of the Front Garden and in the Outdoors. "The road run
 
 [TODO dog]
 
+The dog is an animal in the country lane.
+
 [--------------------------------------]
 
 Part 6 - Pub
@@ -975,7 +982,7 @@ Before doing anything other than examining to the hangover, say "[impossibles]" 
 
 [Sleep] [so the player can "take a nap"]
 
-A backdrop called sleep is everywhere. Understand "[sleep]" as sleep.
+A backdrop called sleep is everywhere. Understand "sleep", "nap", "snooze" as sleep.
 
 Instead of entering or taking sleep, try sleeping.
 
@@ -983,7 +990,9 @@ Instead of entering or taking sleep, try sleeping.
 
 The speech is a backdrop. It is everywhere.
 
-Instead of making or giving the speech, say "This isn't the time or the place for making speeches."
+Before giving the speech to someone, try making the speech instead;
+
+Instead of making the speech, say "This isn't the time or the place for making speeches."
 
 Instead of examining the speech, say "It's extemporaneous."
 
@@ -999,7 +1008,7 @@ Volume 4 - Actors
 
 Part 1 - Ford
 
-Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]."
+Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]." Understand "ford", "prefect" as Ford.
 
 [TODO Ford, satchel, satchel fluff, towel]
 
@@ -1007,7 +1016,7 @@ Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the cor
 
 Part 2 - Arthur
 
-Arthur Dent is a man in the bed. "Arthur Dent is here." Arthur is hungover. The player is Arthur.
+Arthur Dent is a man in the bed. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
 
 [TODO Arthur]
 
