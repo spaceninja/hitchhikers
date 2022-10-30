@@ -760,7 +760,7 @@ Chapter 1 - Scenery
 
 The bar is a scenery supporter in the pub. Understand "counter" as the bar.
 
-Instead of looking under the bar, try examining the pub shelf.
+Instead of looking behind the bar, try examining the pub shelf.
 
 [Furnishings]
 
@@ -818,15 +818,15 @@ The beer is in the pub. It is edible and undescribed. The beer can be purchased.
 
 [Peanuts]
 
-Some peanuts are in the pub. They are edible and undescribed. Some peanuts can be purchased. Understand "packet", "peanut", "nut", "nuts" as some peanuts.
+Some peanuts are on the pub shelf. They are edible and undescribed. Some peanuts can be purchased. Understand "packet", "peanut", "nut", "nuts" as some peanuts.
 
 [Sandwich]
 
-The cheese sandwich is in the pub. It is edible and undescribed. The sandwich can be purchased. Understand "plate", "univiting" as the cheese sandwich.
+The cheese sandwich is on the pub shelf. It is edible and undescribed. The sandwich can be purchased. Understand "plate", "univiting" as the cheese sandwich.
 
 [Shelf]
 
-The pub shelf is a supporter in the pub. "Behind the bar is a shelf. It is full of the sort of items you find on shelves behind bars in pubs." The printed name is "shelf of items". Understand "shelves", "items" as the pub shelf.
+The pub shelf is a supporter in the pub. "Behind the bar is a shelf. It is full of the sort of items you find on shelves behind bars in pubs." The printed name is "shelf of items!". Understand "shelves", "items" as the pub shelf.
 
 To say snacks:
 	unless peanuts are purchased:
