@@ -18,6 +18,8 @@ TODO:
 
 TODO: change most actions to Report or block rules, to match standard actions
 
+TODO: dry up commands: "Understand "drop [other things] in/into/down [something]" as inserting it into."
+
 [How to replace standard response text:]
 See 14.11 for replacing generic response text
 
@@ -770,7 +772,7 @@ Instead of doing anything to the pub furnishings, say "[unimportant-thing]".
 
 [Jukebox]
 
-The jukebox is an owned thing in the pub. It is lit scenery. [lit scenery] Understand "old", "juke", "box" as the jukebox. The owner of the jukebox is "the Pub".
+The jukebox is an owned thing in the pub. It is lit scenery. Understand "old", "juke", "box" as the jukebox. The owner of the jukebox is "the Pub".
 
 Instead of listening to the jukebox:
 	say "The song is ";

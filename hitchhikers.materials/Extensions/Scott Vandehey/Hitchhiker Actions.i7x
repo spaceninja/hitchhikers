@@ -94,23 +94,23 @@ Book 7 - Block Telling
 
 The block telling rule response (A) is "It doesn't look like [the noun] is interested."
 
-Book 8 - Block Waking
+Book 9 - Block Waking
 
 The block waking rule response (A) is "I don't think [the noun] [are] sleeping."
 
-Book 9 - Can't Close Unless Openable
+Book 10 - Can't Close Unless Openable
 
 The can't close unless openable rule response (A) is "[tell-me-how]".
 
-Book 10 - Can't Eat Unless Edible
+Book 11 - Can't Eat Unless Edible
 
 The can't eat unless edible rule response (A) is "Stuffing [the noun] in your mouth would do little to help at this point."
 
-Book 11 - Can't Give to a Non-Person
+Book 12 - Can't Give to a Non-Person
 
 The can't give to a non-person rule response (A) is "You can't give [the noun] to [the second noun]!"
 
-Book 12 - Can't Go Through Closed Doors
+Book 13 - Can't Go Through Closed Doors
 
 [Don't automatically open doors for the player]
 The can't go through closed doors rule does nothing.
@@ -118,15 +118,15 @@ The can't go through closed doors rule does nothing.
 Check the player going through a closed door:
 	say "The door is closed." instead.
 
-Book 13 - Can't Open Unless Openable
+Book 14 - Can't Open Unless Openable
 
 The can't open unless openable rule response (A) is "[tell-me-how]".
 
-Book 14 - Can't Search Unless Container or Supporter
+Book 15 - Can't Search Unless Container or Supporter
 
 The can't search unless container or supporter rule response (A) is "There is nothing special to be seen."
 
-Book 15 - Looking Under
+Book 16 - Looking Under
 
 Carry out the player looking under:
 	if the noun is worn by the player:
@@ -136,51 +136,55 @@ Carry out the player looking under:
 	else:
 		say "There is nothing but dust there." instead;
 
-Book 16 - Reaching Inside a Room
+Book 17 - Putting
+
+Understand the command "stuff", "place", and "lay" as "put".
+
+Book 18 - Reaching Inside a Room
 
 Rule for reaching inside a room:
 	say "[The noun] isn't here.";
 	deny access.
 
-Book 17 - Report Closing
+Book 19 - Report Closing
 
 The standard report closing rule response (A) is "Okay, [the noun] is now closed."
 
-Book 18 - Report Listening
+Book 20 - Report Listening
 
 The report listening rule response (A) is "At the moment, [the noun] makes no sound."
 
-Book 19 - Report Opening
+Book 21 - Report Opening
 
 The standard report opening rule response (A) is "Okay, [the noun] is now open."
 
-Book 20 - Report Smelling
+Book 22 - Report Smelling
 
 The report smelling rule response (A) is "It smells just like [the noun]."
 
-Book 21 - Report Tasting
+Book 23 - Report Tasting
 
 The report tasting rule response (A) is "[not-in-this-game]".
 
-Book 22 - Report Touching Things
+Book 24 - Report Touching Things
 
 The report touching things rule response (A) is "Fiddling with [the noun] [ho-hum]".
 
-Book 23 - Report Waving Things
+Book 25 - Report Waving Things
 
 The report waving things rule response (A) is "[yuks]".
 
-Book 24 - Report Waving Hands
+Book 26 - Report Waving Hands
 
 The report waving hands rule response (A) is "How nice."
 
-Book 25 - Requested Actions Require Persuasion
+Book 27 - Requested Actions Require Persuasion
 
 [This may be overkill, HHG2G actually only sets this response for V-ASK-FOR, but Inform applies this rule when asking for something]
 
 The requested actions require persuasion rule response (A) is "Unsurprisingly, [the noun] doesn't oblige."
 
-Book 26 - Stand Up Before Going
+Book 28 - Stand Up Before Going
 
 [Don't get out of bed for the player]
 The stand up before going rule does nothing.
@@ -262,7 +266,11 @@ Book 14 - Turning
 
 Understand the command "spin", and "whirl" as "turn".
 
-Book 15 - Waking
+Book 15 - Tying It To
+
+Understand the command "connect" as "tie".
+
+Book 16 - Waking
 
 Understand the command "alarm" and "rouse" as "wake".
 
@@ -544,42 +552,57 @@ Filling is an action applying to one thing. Understand "fill [something]" as fil
 Check the player filling:
 	say "Phil who?" instead.
 
-Book 34 - Fripping
+Book 34 - Following
+
+Following is an action applying to one thing. Understand "follow [anything]" as following. Understand the command "pursue" and "chase" as "follow".
+
+A rule for reaching inside a room when following:
+	allow access.
+
+Check the player following:
+	if the noun is in the location:
+		say "But [the noun] is right here!" instead;
+	else if the noun is not a person:
+		say "[impossibles]" instead;
+	else:
+		say "You have no idea where [the noun] is."
+
+Book 35 - Fripping
 
 Fripping is an action applying to nothing. Understand "fripping" as fripping. Understand the command "lyshus", "wimbgunts", "gashee", "morphousite", "thou", "bleem", "miserable", and "venchit" as "fripping".
 
 Check the player fripping:
 	say "Aaaaaaarggggghhhhhh!" instead.
 
-Book 35 - Getting Out Of
+Book 36 - Getting Out Of
 
 Getting out of is an action applying to one thing. Understand "get out of [something]" and "exit [something]" as getting out of.
 
 Carry out getting out of something:
 	try exiting instead.
 
-Book 36 - Hanging
+Book 37 - Hanging
 
 Hanging is an action applying to two things. Understand "hang [something] on [something]" and "hang [something] from [something]" as hanging.
 
 Check the player hanging:
 	say "You can't hang something from [the second noun]!" instead.
 
-Book 37 - Hiding
+Book 38 - Hiding
 
 Hiding is an action applying to nothing. Understand "hide" as hiding.
 
 Check the player hiding:
 	say "There's no place to hide here." instead.
 
-Book 38 - Hiding Behind
+Book 39 - Hiding Behind
 
 Hiding behind is an action applying to one thing. Understand "hide behind [something]" and "hide under [something]" as hiding behind.
 
 Check the player hiding behind:
 	try hiding instead.
 
-Book 39 - Introducing
+Book 40 - Introducing
 
 [TODO use topic here. See "ask" documentation for understanding objects]
 
@@ -591,35 +614,45 @@ A rule for reaching inside a room when introducing:
 Carry out the player introducing:
 	say "Pleased to meet you. I'm your computer."
 
-Book 40 - Kicking
+Book 41 - Kicking
 
 Kicking is an action applying to one thing. Understand "kick [something]" as kicking.
 
 Check the player kicking:
 	say "Kicking [the noun] [ho-hum]" instead.
 
-Book 41 - Kneeling
+Book 42 - Kneeling
 
 Kneeling is an action applying to nothing. Understand "kneel" as kneeling. Understand the command "crawl" and "peek" as "kneel".
 
 Check the player kneeling:
 	say "[not-in-this-game]" instead.
 
-Book 42 - Looking Behind
+Book 43 - Knocking
+
+Knocking is an action applying to one thing. Understand "knock at [something]" and "knock on [something]" as knocking. Understand the command "rap" as "knock".
+
+Check the player knocking:
+	if the noun is a door:
+		say "Nobody's home.";
+	else:
+		say "Knocking on [the noun] [ho-hum]" instead.
+
+Book 44 - Looking Behind
 
 Looking behind is an action applying to one visible thing and requiring light. Understand "look behind [something]" as looking behind.
 
 Check the player looking behind:
 	say "There is nothing behind [the noun]." instead.
 
-Book 43 - Lowering
+Book 45 - Lowering
 
 Lowering is an action applying to one thing. Understand "lower [something]" as lowering.
 
 Check the player lowering:
 	try raising the noun instead.
 
-Book 44 - Lying Down
+Book 46 - Lying Down
 
 Lying down is an action applying to nothing. Understand "lie down" and "recline" as lying down.
 
@@ -630,7 +663,7 @@ Carry out the player lying down:
 		now the player is prone;
 		say "You are now lying on the ground."
 
-Book 45 - Lying Down On
+Book 47 - Lying Down On
 
 Lying down on is an action applying to one thing. Understand "lie on [something]", "lie down on [something]", "lie down in [something]", and "lie down [something]" as lying down on.
 
@@ -640,63 +673,133 @@ Check the player lying down on:
 	else:
 		say "[wastes]" instead.
 
-Book 46 - Making
+Book 48 - Making
 
 Making is an action applying to one thing. Understand "make [something]" as making.
 
 Check the player making:
 	say "You can't make [the noun]!" instead.
 
-Book 47 - Panicking
+Book 49 - Panicking
 
 Panicking is an action applying to nothing. Understand "panic" as panicking.
 
 Check the player panicking:
 	say "Not surprised." instead.
 
-Book 48 - Picking
+Book 50 - Picking
 
 Picking is an action applying to one thing. Understand "pick [something]" as picking.
 
 Check the player picking:
 	say "[impossibles]" instead.
 	
-Book 49 - Picking With
+Book 51 - Picking With
 
 Picking with is an action applying to two things. Understand "pick [something] with [something]" as picking with.
 
 Check the player picking with:
 	try picking the noun instead.
 
-Book 50 - Pulling Together
+Book 52 - Planting
+
+Planting is an action applying to two things. Understand "plant [something preferably held] in [something]" as planting. Understand the command "bury" as "plant".
+
+Check the player planting:
+	say "You can't plant something in [the second noun]." instead.
+
+Book 53 - Plugging
+
+Plugging is an action applying to two things. Understand "plug [something] in [something]", "plug [something] to [something]", "plug [something] into [something]", "plug in [something] in [something]", and "plug in [something] to [something]" as plugging.
+
+Check the player plugging:
+	say "You can't seem to plug [the noun] into [the second noun]."
+
+Book 54 - Pouring
+
+Pouring is an action applying to one thing. Understand "pour [something preferably held]" as pouring. Understand the command "spill" and "sprinkle" as "pour".
+
+Check the player pouring:
+	say "[yuks]" instead.
+
+Book 55 - Pouring It In
+
+Pouring it in is an action applying to two things. Understand "pour [something preferably held] in [something]", "pour [something preferably held] on [something]", and "pour [something preferably held] over [something]" as pouring it in.
+
+Check the player pouring something in:
+	try pouring the noun instead.
+
+Book 56 - Protesting
+
+Protesting is an action applying to nothing. Understand "protest" as protesting. Understand the command "argue" as "protest".
+
+Check the player protesting:
+	say "To whom? About what? Why?" instead.
+
+Book 57 - Pulling Together
 
 Pulling together is an action applying to one thing. Understand "pull together [something]" and "move together [something]" as pulling together.
 
 Check the player pulling together:
 	say "[unrecognized-sentence]" instead.
 
-Book 51 - Raising
+Book 58 - Putting it behind
+
+Putting it behind is an action applying to two things. Understand "put [other things] behind [something]" as putting it behind.
+
+Check the player putting something behind:
+	say "[wastes]" instead.	
+
+Book 59 - Putting it in front
+
+Putting it in front is an action applying to two things. Understand "put [other things] at/before [something]", "drop [other things] before [something]", "put [other things] in front of [something]", and "drop [other things] in front of [something]" as putting it in front.
+
+Check the player putting something in front:
+	say "[wastes]" instead.	
+
+Book 60 - Raising
 
 Raising is an action applying to one thing. Understand "raise [something]" as raising. Understand the command "lift" as "raise".
 
 Check the player raising:
 	say "Playing in this way with [the noun] [ho-hum]" instead.
 
-Book 52 - Relaxing
+Book 61 - Relaxing
 
 Relaxing is an action applying to nothing. Understand "relax" as relaxing.
 
 Check the player relaxing:
 	say "[zen]" instead.
 
-Book 53 - Saying Hello
+Book 62 - Repairing
+
+Repairing is an action applying to one thing. Understand "repair [something]" as repairing. Understand the command "fix" and "unjam" as "repair".
+
+Check the player repairing:
+	say "I'm not sure it's broken." instead.
+
+Book 63 - Replacing
+
+Replacing is an action applying to one thing. Understand "replace [something]" as replacing.
+
+Check the player replacing:
+	say "It's not in need of replacement." instead.
+
+Book 64 - Rescuing
+
+Rescuing is an action applying to one thing. Understand "save [something]" and "help [something]" as rescuing.
+
+Check the player rescuing:
+	say "Sorry, but [the noun] is beyond help." instead.
+
+Book 65 - Saying Hello
 
 Saying hello is an action applying to nothing. Understand "hello" as saying hello. Understand the command "hi" as "hello".
 
 Check the player saying hello:
 	say "[talking-to-yourself]" instead.
 
-Book 54 - Saying Hello To
+Book 66 - Saying Hello To
 
 Saying hello to is an action applying to one thing. Understand "hello [something]" as saying hello to.
 
@@ -706,14 +809,14 @@ Carry out the player saying hello to:
 	else:
 		try answering the noun that "hello" instead.
 
-Book 55 - Saying Idiot
+Book 67 - Saying Idiot
 
 Saying idiot is an action applying to nothing. Understand "idiot" as saying idiot.
 
 Carry out the player saying idiot:
 	say "[talking-to-yourself]".
 
-Book 56 - Shaking
+Book 68 - Shaking
 
 Shaking is an action applying to one thing. Understand "shake [something]" as shaking.
 
@@ -723,63 +826,70 @@ Check the player shaking:
 	else:
 		say "Shaking [the noun] [ho-hum]" instead.
 
-Book 57 - Smiling
+Book 69 - Smiling
 
 Smiling is an action applying to nothing. Understand "smile" as smiling.
 
 Carry out the player smiling:
 	say "How nice."
 
-Book 58 - Smiling At
+Book 70 - Smiling At
 
 Smiling at is an action applying to one thing. Understand "smile at [something]" as smiling at.
 
 Check the player smiling at:
 	try smiling instead.
 
-Book 59 - Throwing Off
+Book 71 - Steering
+
+Steering is an action applying to two things. Understand "point [something] at/to [something]" as steering.
+
+Check the player steering:
+	say "That would be pointless." instead.
+
+Book 72 - Throwing Off
 
 Throwing off is an action applying to two things. Understand "throw [something preferably held] off [something]" and "throw [something preferably held] over [something]" as throwing off.
 
 Check the player throwing off:
 	say "You can't do that!" instead.
 
-Book 60 - Tying
+Book 73 - Tying
 
 Tying is an action applying to one thing. Understand "tie [something]" as tying.
 
 Check the player tying:
 	say "You can't tie [the noun]." instead.
 
-Book 61 - Tying Together
+Book 74 - Tying Together
 
 Tying together is an action applying to one thing. Understand "tie together [something]" and "tie [something] together" as tying together.
 
 Check the player tying together:
 	say "[unrecognized-sentence]" instead.
 
-Book 62 - Typing
+Book 75 - Typing
 
 Typing is an action applying to nothing. Understand "type" as typing.
 
 Check the player typing:
 	say "There's no keyboard in sight." instead.
 
-Book 63 - Typing On
+Book 76 - Typing On
 
 Typing on is an action applying to one thing. Understand "type on [something]" as typing on.
 
 Check the player typing on:
 	say "You can't type on that!" instead.
 
-Book 64 - Untying
+Book 77 - Untying
 
 Untying is an action applying to one thing. Understand "untie [something]" as untying.
 
 Check the player untying:
 	say "[yuks]" instead.
 
-Book 65 - Waiting For
+Book 78 - Waiting For
 
 Waiting for is an action applying to one thing. Understand "wait for [anything]" as waiting for.
 
@@ -789,21 +899,21 @@ A rule for reaching inside a room when waiting for:
 Check the player waiting for:
 	say "You may be waiting quite a while." instead.
 
-Book 66 - Watering
+Book 79 - Watering
 
 Watering is an action applying to two things. Understand "water [something] with [something]" as watering.
 
 Check the player watering:
 	say "It doesn't need watering." instead.
 
-Book 67 - Waving At
+Book 80 - Waving At
 
 Waving at is an action applying to one thing. Understand "wave at [something]" and "wave to [something]" as waving at.
 
 Check the player waving at:
 	say "Despite your friendly nature, [the noun] isn't likely to respond."
 
-Book 68 - Yelling
+Book 81 - Yelling
 
 Understand the command "shout" as something new.
 
@@ -812,7 +922,7 @@ Yelling is an action applying to nothing. Understand "yell" as yelling. Understa
 Check the player yelling:
 	say "You begin to get a sore throat." instead.
 	
-Book 69 - Yelling At
+Book 82 - Yelling At
 
 Yelling at is an action applying to one thing. Understand "yell at [something]" as yelling at.
 
