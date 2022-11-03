@@ -20,6 +20,8 @@ TODO: change most actions to Report or block rules, to match standard actions
 
 TODO: dry up commands: "Understand "drop [other things] in/into/down [something]" as inserting it into."
 
+TODO: dry up commands see "can't enter what's not enterable rule" for example of reacting to different command synonyms without adding new commands.
+
 [How to replace standard response text:]
 See 14.11 for replacing generic response text
 
