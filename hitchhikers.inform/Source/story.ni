@@ -830,7 +830,7 @@ The cheese sandwich is on the pub shelf. It is edible and undescribed. The sandw
 
 [Shelf]
 
-The pub shelf is a supporter in the pub. "Behind the bar is a shelf. It is full of the sort of items you find on shelves behind bars in pubs." The printed name is "shelf of items!". Understand "shelves", "items" as the pub shelf.
+The pub shelf is a supporter in the pub. "Behind the bar is a shelf. It is full of the sort of items you find on shelves behind bars in pubs." The printed name is "shelf of items". Understand "shelves", "items" as the pub shelf.
 
 To say snacks:
 	unless peanuts are purchased:
