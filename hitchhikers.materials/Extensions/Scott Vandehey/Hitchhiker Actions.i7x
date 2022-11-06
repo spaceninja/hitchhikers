@@ -5,19 +5,33 @@ Hitchhiker Actions by Scott Vandehey begins here.
 "Ported from the original ZIL code by Infocom."
 
 Use authorial modesty.
-
-[
-You must create a Table of Footnotes, like so:
-
-Table of Footnotes
-number	note
-1	"The footnote text"
-]
-
+Include Basic Screen Effects by Emily Short.
 
 [--------------------------------------]
 
-Volume 1 - Random Responses
+Volume 1 - Conditions
+
+A person can be asleep.
+A person can be groggy.
+A person can be hungover.
+A person can be prone.
+
+[--------------------------------------]
+
+Volume 2 - Variables
+
+The current topic is a number that varies.
+
+[--------------------------------------]
+
+Volume 3 - Timers
+
+At the time when the current topic resets:
+	now the current topic is 0;
+
+[--------------------------------------]
+
+Volume 4 - Random Responses
 
 To say ho-hum:
 	say "[one of]doesn't do anything[or]accomplishes nothing[or]has no desirable effect[in random order]."
@@ -31,9 +45,12 @@ To say wastes:
 To say yuks:
 	say "[one of]What a concept[or]Nice try[or]You can't be serious[or]Not bloody likely[in random order]."
 
+To say zen:
+	say "A brave, Zen-like effort. It fails."
+
 [--------------------------------------]
 
-Volume 2 - Common Responses
+Volume 5 - Common Responses
 
 To say unrecognized-sentence:
 	say "That sentence isn't one I recognise."
@@ -58,16 +75,7 @@ To say while-lying:
 
 [--------------------------------------]
 
-Volume 3 - Conditions
-
-A person can be asleep.
-A person can be groggy.
-A person can be hungover.
-A person can be prone.
-
-[--------------------------------------]
-
-Volume 4 - Modifications to Standard Rules
+Volume 6 - Modifications to Standard Rules
 
 Book 1 - Block Attacking
 
@@ -137,67 +145,113 @@ Book 16 - Can't Search Unless Container or Supporter
 
 The can't search unless container or supporter rule response (A) is "There is nothing special to be seen."
 
-Book 17 - Reaching Inside a Room
+Book 17 - Printing the Player's Obituary
+
+Rule for printing the player's obituary: 
+	say "We are about to give you your score. Put on your peril-sensitive sunglasses now. (Hit RETURN or ENTER when ready.)[paragraph break]";
+	wait for any key;
+	say "Your score is [score] of a possible [maximum score], in [turn count] turn[s].";
+	rule succeeds.
+
+Book 2 - Print Inventory
+
+To say inventory-intro:
+	say "[We] have:[line break]";
+	if the player is hungover:
+		say "		[a hangover][line break]";
+
+Carry out taking inventory (this is the print hitchhikers inventory rule):
+	if the first thing held by the player is nothing:
+		if the player is not hungover:
+			say "You are empty-handed.";
+		else:
+			say "[inventory-intro]";
+	else:
+		say "[inventory-intro]";
+		list the contents of the player, with newlines, indented, including contents, giving inventory information, with extra indentation.
+
+The print empty inventory rule does nothing.
+The print hitchhikers inventory rule substitutes for the print standard inventory rule.
+
+Book 18 - Reaching Inside a Room
 
 Rule for reaching inside a room:
 	say "[The noun] isn't here.";
 	deny access.
-
-Book 18 - Report Closing
+	
+Book 19 - Report Closing
 
 The standard report closing rule response (A) is "Okay, [the noun] is now closed."
 
-Book 19 - Report Jumping
+Book 20 - Report Jumping
 
 The report jumping rule response (A) is "Wasn't that fun?"
 
-Book 20 - Report Listening
+Book 21 - Report Listening
 
 The report listening rule response (A) is "At the moment, [the noun] makes no sound."
 
-Book 21 - Report Opening
+Book 22 - Report Opening
 
 The standard report opening rule response (A) is "Okay, [the noun] is now open."
 
-Book 22 - Report Smelling
+Book 23 - Report Smelling
 
 The report smelling rule response (A) is "It smells just like [the noun]."
 
-Book 23 - Report Tasting
+Book 24 - Report Tasting
 
 The report tasting rule response (A) is "[not-in-this-game]".
 
-Book 24 - Report Touching Things
+Book 25 - Report Touching Things
 
 The report touching things rule response (A) is "Fiddling with [the noun] [ho-hum]".
 
-Book 25 - Report Waving Things
+Book 26 - Report Waving Things
 
 The report waving things rule response (A) is "[yuks]".
 
-Book 26 - Report Waving Hands
+Book 27 - Report Waving Hands
 
 The report waving hands rule response (A) is "How nice."
 
-Book 27 - Requested Actions Require Persuasion
+Book 28 - Requested Actions Require Persuasion
 
 [This may be overkill, HHG2G actually only sets this response for V-ASK-FOR, but Inform applies this rule when asking for something]
 
 The requested actions require persuasion rule response (A) is "Unsurprisingly, [the noun] doesn't oblige."
 
-Book 28 - Stand Up Before Going
+Book 29 - Saying No
+
+Check an actor saying no (this is the saying no to a topic rule):
+	if the actor is the player:
+		try responding negatively with the current topic;
+	stop the action.
+
+The saying no to a topic rule substitutes for the block saying no rule.
+
+Book 30 - Saying Yes
+
+Check an actor saying yes (this is the saying yes to a topic rule):
+	if the actor is the player:
+		try responding positively with the current topic;
+	stop the action.
+
+The saying yes to a topic rule substitutes for the block saying yes rule.
+
+Book 31 - Stand Up Before Going
 
 [Don't get out of bed for the player]
 The stand up before going rule does nothing.
 
-Book 29 - Throwing It At
+Book 32 - Throwing It At
 
 The futile to throw things at inanimate objects rule does nothing.
 The block throwing at rule does nothing.
 
 [--------------------------------------]
 
-Volume 5 - Modifications to Standard Actions
+Volume 7 - Modifications to Standard Actions
 
 Book 1 - Answering
 
@@ -254,14 +308,18 @@ Book 11 - Rubbing
 Check the player rubbing:
 	try touching the noun instead.
 
-Book 12 - Searching
+Book 12 - Saying Yes
+
+Understand the command "ok" or "okay" or "sure" as "yes".
+
+Book 13 - Searching
 
 Understand "look down [something]" and "look up [something]" as searching.
 
 Check the player searching a person:
 	say "That wouldn't be polite." instead.
 
-Book 13 - Standing
+Book 14 - Standing
 
 Understand the command "stand" as something new.
 
@@ -276,41 +334,45 @@ Carry out the player standing:
 	else:
 		say "You are already standing."
 
-Book 14 - Taking
+Book 15 - Taking
 
 Check the player taking anything that is fixed in place:
 	say "[yuks]" instead.
 
-Book 15 - Tasting
+Book 16 - Tasting
 
 Understand the command "lick" as "taste".
 
-Book 16 - Throwing It At
+Book 17 - Throwing It At
 
 Check an actor throwing something at:
 	now the noun is in the location;
 	say "You missed.";
 	stop the action.
 
-Book 17 - Touching
+Book 18 - Touching
 
 Understand the command "pat" and "pet" as "touch".
 
-Book 18 - Turning
+Book 19 - Turning
 
 Understand the command "spin", and "whirl" as "turn".
 
-Book 19 - Tying It To
+Book 20 - Tying It To
 
 Understand the command "connect" as "tie".
 
-Book 20 - Waking
+Book 21 - Waking
 
 Understand the command "alarm" and "rouse" as "wake".
 
+Book 22 - Your Things
+
+Understand "your" as a thing when the item described is held by the person asked.
+
 [--------------------------------------]
 
-Volume 6 - New Actions
+Volume 8 - New Actions
 
 Book 1 - Answering
 
@@ -734,8 +796,6 @@ Check the player hitchhiking:
 
 Book 49 - Introducing
 
-[TODO use topic here. See "ask" documentation for understanding objects]
-
 Introducing is an action applying to one thing. Understand "I am [anything]", "I'm [anything]", "I [anything]", "my name is [anything]" as introducing.
 
 A rule for reaching inside a room when introducing:
@@ -788,9 +848,13 @@ Looking up a footnote is an action out of world, applying to one number. Underst
 
 Carry out looking up a footnote:
 	if the number understood is a number listed in the Table of Footnotes:
-		say "([number entry]): [note entry]";
+		say "[note entry]";
 	else:
 		say "There is no Footnote [number understood]".
+
+Table of Footnotes
+number	noun	note
+0	--	"Specify a number, as in 'FOOTNOTE 6.'"
 
 Book 56 - Lowering
 
@@ -979,14 +1043,42 @@ Rescuing is an action applying to one thing. Understand "save [something]" and "
 Check the player rescuing:
 	say "Sorry, but [the noun] is beyond help." instead.
 
-Book 80 - Saying Hello
+Book 80 - Responsing Negatively With
+
+Responding negatively with is an action out of world, applying to one number.
+
+Carry out responding negatively with:
+	if the number understood is a number listed in the Table of Negative Replies:
+		say "[reply entry]";
+	else:
+		say "[the reply corresponding to a number of 0 in the Table of Negative Replies]"
+
+Table of Negative Replies
+number	reply
+0	"You sound rather negative."
+
+Book 81 - Responsing Positively With
+
+Responding positively with is an action out of world, applying to one number.
+
+Carry out responding positively with:
+	if the number understood is a number listed in the Table of Positive Replies:
+		say "[reply entry]";
+	else:
+		say "[the reply corresponding to a number of 0 in the Table of Positive Replies]"
+
+Table of Positive Replies
+number	reply
+0	"You sound rather positive."
+
+Book 82 - Saying Hello
 
 Saying hello is an action applying to nothing. Understand "hello" as saying hello. Understand the command "hi" as "hello".
 
 Check the player saying hello:
 	say "[talking-to-yourself]" instead.
 
-Book 81 - Saying Hello To
+Book 83 - Saying Hello To
 
 Saying hello to is an action applying to one thing. Understand "hello [something]" as saying hello to.
 
@@ -996,14 +1088,14 @@ Carry out the player saying hello to:
 	else:
 		try answering the noun that "hello" instead.
 
-Book 82 - Saying Idiot
+Book 84 - Saying Idiot
 
 Saying idiot is an action applying to nothing. Understand "idiot" as saying idiot.
 
 Carry out the player saying idiot:
 	say "[talking-to-yourself]".
 
-Book 83 - Shaking
+Book 85 - Shaking
 
 Shaking is an action applying to one thing. Understand "shake [something]" as shaking.
 
@@ -1013,35 +1105,35 @@ Check the player shaking:
 	else:
 		say "Shaking [the noun] [ho-hum]" instead.
 
-Book 84 - Shaking it with
+Book 86 - Shaking it with
 
 Shaking it with is an action applying to two things. Understand "shake [something] with [something]" as shaking it with.
 
 Check the player shaking something with:
 	say "[unrecognized-sentence]" instead.
 
-Book 85 - Shooting
+Book 87 - Shooting
 
 Shooting is an action applying to nothing. Understand "shoot" as shooting. Understand the command "fire" and "blast" as "shoot".
 
 Check the player shooting:
 	say "With what? At whom? Why?" instead.
 
-Book 86 - Shooting at
+Book 88 - Shooting at
 
 Shooting at is an action applying to one thing. Understand "shoot [something]" as shooting at.
 
 Check the player shooting at:
 	say "You have nothing to shoot [the noun] with." instead.
 
-Book 87 - Shooting it with
+Book 89 - Shooting it with
 
 Shooting it with is an action applying to two things. Understand "shoot [something] with [something preferably held]" as shooting it with. Understand "shoot [something preferably held] at [something]" as shooting it with (with nouns reversed).
 
 Check the player shooting something with:
 	say "Don't ever bother applying for a job as an armaments expert." instead.
 
-Book 88 - Skipping
+Book 90 - Skipping
 
 Understand the command "skip" and "hop" as something new.
 
@@ -1050,35 +1142,35 @@ Skipping is an action applying to nothing. Understand "skip" as skipping. Unders
 Check the player skipping:
 	say "Wasn't that fun?" instead.
 
-Book 89 - Smiling
+Book 91 - Smiling
 
 Smiling is an action applying to nothing. Understand "smile" as smiling.
 
 Carry out the player smiling:
 	say "How nice."
 
-Book 90 - Smiling At
+Book 92 - Smiling At
 
 Smiling at is an action applying to one thing. Understand "smile at [something]" as smiling at.
 
 Check the player smiling at:
 	try smiling instead.
 
-Book 91 - Standing Before
+Book 93 - Standing Before
 
 Standing before is an action applying to one thing. Understand "stand before [something]" as standing before.
 
 Check the player standing before:
 	say "[wastes]" instead.
 
-Book 92 - Steering
+Book 94 - Steering
 
 Steering is an action applying to two things. Understand "steer [something] at/to [something]" as steering.
 
 Check the player steering:
 	say "[pointless]" instead.
 
-Book 93 - Telling
+Book 95 - Telling
 
 Telling is an action applying to one thing. Understand "tell [something]" and "say to [something]" as telling. Understand the command "address" as "tell".
 
@@ -1088,7 +1180,7 @@ Check the player telling:
 	else:
 		say "Hmmm ... [The Noun] looks at you expectantly, as if you seemed to be about to talk." instead.
 
-Book 94 - Thanking
+Book 96 - Thanking
 
 Thanking is an action applying to one thing. Understand "thank [something]" as thanking. Understand the command "thanks" as "thank".
 
@@ -1098,56 +1190,56 @@ Check the player thanking:
 	else:
 		say "[yuks]" instead.
 
-Book 95 - Throwing Off
+Book 97 - Throwing Off
 
 Throwing off is an action applying to two things. Understand "throw [something preferably held] off [something]" and "throw [something preferably held] over [something]" as throwing off.
 
 Check the player throwing off:
 	say "You can't do that!" instead.
 
-Book 96 - Tying
+Book 98 - Tying
 
 Tying is an action applying to one thing. Understand "tie [something]" as tying.
 
 Check the player tying:
 	say "You can't tie [the noun]." instead.
 
-Book 97 - Tying Together
+Book 99 - Tying Together
 
 Tying together is an action applying to one thing. Understand "tie together [something]" and "tie [something] together" as tying together.
 
 Check the player tying together:
 	say "[unrecognized-sentence]" instead.
 
-Book 98 - Typing
+Book 100 - Typing
 
 Typing is an action applying to nothing. Understand "type" as typing.
 
 Check the player typing:
 	say "There's no keyboard in sight." instead.
 
-Book 99 - Typing On
+Book 101 - Typing On
 
 Typing on is an action applying to one thing. Understand "type on [something]" as typing on.
 
 Check the player typing on:
 	say "You can't type on that!" instead.
 
-Book 100 - Unplugging
+Book 102 - Unplugging
 
 Unplugging is an action applying to one thing. Understand "unplug [something]" as unplugging. Understand the command "disconnect" as "unplug".
 
 Check the player unplugging:
 	say "[impossibles]" instead.
 
-Book 101 - Untying
+Book 103 - Untying
 
 Untying is an action applying to one thing. Understand "untie [something]" as untying.
 
 Check the player untying:
 	say "[yuks]" instead.
 
-Book 102 - Waiting For
+Book 104 - Waiting For
 
 Waiting for is an action applying to one thing. Understand "wait for [anything]" as waiting for.
 
@@ -1157,21 +1249,21 @@ A rule for reaching inside a room when waiting for:
 Check the player waiting for:
 	say "You may be waiting quite a while." instead.
 
-Book 103 - Watering
+Book 105 - Watering
 
 Watering is an action applying to two things. Understand "water [something] with [something]" as watering.
 
 Check the player watering:
 	say "It doesn't need watering." instead.
 
-Book 104 - Waving At
+Book 106 - Waving At
 
 Waving at is an action applying to one thing. Understand "wave at [something]" and "wave to [something]" as waving at.
 
 Check the player waving at:
 	say "Despite your friendly nature, [the noun] isn't likely to respond."
 
-Book 105 - Yelling
+Book 107 - Yelling
 
 Understand the command "shout" as something new.
 
@@ -1180,7 +1272,7 @@ Yelling is an action applying to nothing. Understand "yell" as yelling. Understa
 Check the player yelling:
 	say "You begin to get a sore throat." instead.
 	
-Book 106 - Yelling At
+Book 108 - Yelling At
 
 Yelling at is an action applying to one thing. Understand "yell at [something]" as yelling at.
 

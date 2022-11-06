@@ -12,6 +12,8 @@ TODO:
 - [ ] Is "GENERIC POCKET-FLUFF" same as "does player mean pocket fluff?"
 - [ ] Address carrying capacity & size (see gown)
 
+TODO: fix linebreaks following footnotes and current topic replies. See footnote 12 vs footnote 15 for example
+
 TODO: change most actions to Report or block rules, to match standard actions
 
 TODO: dry up commands: "Understand "drop [other things] in/into/down [something]" as inserting it into."
@@ -47,7 +49,6 @@ Volume 1 - Setup
 
 Use American dialect and the serial comma and scoring.
 The maximum score is 400.
-Include Basic Screen Effects by Emily Short.
 Include Hitchhiker Actions by Scott Vandehey.
 
 [--------------------------------------]
@@ -66,28 +67,7 @@ When play begins:
 
 [--------------------------------------]
 
-Book 2 - When Play Ends
-
-Rule for printing the player's obituary: 
-	say "We are about to give you your score. Put on your peril-sensitive sunglasses now. (Hit RETURN or ENTER when ready.)[paragraph break]";
-	wait for any key;
-	say "Your score is [score] of a possible [maximum score], in [turn count] turn[s].";
-	rule succeeds.
-
-[--------------------------------------]
-
-Book 3 - Variables
-
-[Setting a global variable for the current topic is a fairly convoluted way to handle this. Modern Inform would probably just use a topic table, but I'm converting from the HHG2G ZIL code, which, perhaps as a memory-saving technique, recycles many replies across various situations, so it was easier to preserve their existing "when X happens, the topic number is Y" logic, which I've translated below into the conversation actions.]
-The current topic is a number that varies.
-
-[--------------------------------------]
-
-Book 4 - Timers
-
-[Reset the Current Topic]
-At the time when the current topic resets:
-	now the current topic is 0;
+Book 2 - Timers
 
 [Wreck the House]
 At the time when the house is wrecked:
@@ -95,26 +75,24 @@ At the time when the house is wrecked:
 		say "Astoundingly, [a bulldozer] pokes through your wall. However, you have no time for surprise because the ceiling is collapsing on you as [better-luck]";
 		end the story;
 
-[Reset wreck the house timer if player re-enters the house]
+[Reset wreck-the-house timer if player re-enters the house]
 After going north from the front garden:
 	the house is wrecked in 5 turns from now;
 	continue the action;
 
 [--------------------------------------]
 
-Book 5 - New Kinds of Things
+Book 3 - New Kinds of Things
 
 A tool is a kind of thing.
 
 An owned thing is a kind of thing. An owned thing has some text called the owner.
 
-[--------------------------------------]
-
-Book 6 - Body Parts
-
 A body part is a kind of thing.
 
-Understand "your" as a thing when the item described is held by the person asked.
+[--------------------------------------]
+
+Book 4 - Body Parts
 
 [Ears]
 
@@ -152,55 +130,15 @@ Your teeth are a body part. They are part of the player.
 
 [--------------------------------------]
 
-Book 7 - Text Substitutions
+Book 5 - Text Substitutions
 
-Part 1 - Common Responses
-
-To say already-know-that:
-	say "But then again you must already know that, since you bought one."
-
-To say better-luck:
-	say "your home is unexpectedly demolished to make way for a new bypass. You are seriously injured in the process, but on your way to the hospital [make-way-for].[paragraph break]";
-	if the light is not lit:
-		say "Next time, try turning on the light.";
-	else if the gown is closed and the player is hungover:
-		say "Too bad you never found an aspirin for your hangover.";
-	else:
-		say "Better luck next life.";
-
-To say bores:
-	say "[one of]newts he has known[or]cricket[or]how badly Americans make tea[or]the deteriorating condition of the motorways[or]a recent visit to Tiverton[or]a new book by Douglas Adams[or]computers[in random order]."
-
-To say cant-reach-from-bed:
-	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
-
-To say dialling-tone:
-	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable".
-
-To say get-rid:
-	say "you've been trying to get rid of it for years".
-
-To say look-around:
-	say "Look around you."
-
-To say make-way-for:
-	say "[a fleet] unexpectedly arrives and demolishes the Earth to make way for a new hyperspace bypass".
-
-To say lurches:
-	say "[one of]It slips through your fumbling fingers and hits the carpet with a nerve-shattering bang[or]It dances by you like a thing possessed[or]You lunge for it, but the room spins nauseatingly away. The floor gives you a light tap on the forehead[or]You're certainly picking the tough tasks. The floor acts like a trampoline on an ice rink, or like something they've been working on for years at Disneyland[in random order]."
-
-To say nice-day:
-	say "t's a bright morning, the sun is shining, the birds are
-singing, the meadows are blooming".
+Part 1 - Current Topic Responses
 
 To say not-very-good:
 	now the current topic is 13;
 	[in 0 turns since FOOTNOTE doesn't advance the turn clock]
 	the current topic resets in 0 turns from now;
 	say "It's not a very good [noun corresponding to the number of the number understood in the Table of Footnotes], is it?"
-
-To say private:
-	say "You can't. It's not yours. It's [owner of the noun]'s and it's private."
 
 To say reading-all-footnotes:
 	now the current topic is 14;
@@ -218,37 +156,119 @@ To say walk-around:
 	the current topic resets in one turn from now;
 	say "Did you have any particular direction in mind?"
 
-To say zen:
-	say "A brave, Zen-like effort. It fails"
+[--------------------------------------]
+
+Part 2 - Random Responses
+
+To say bores:
+	say "[one of]newts he has known[or]cricket[or]how badly Americans make tea[or]the deteriorating condition of the motorways[or]a recent visit to Tiverton[or]a new book by Douglas Adams[or]computers[in random order]."
+
+To say lurches:
+	say "[one of]It slips through your fumbling fingers and hits the carpet with a nerve-shattering bang[or]It dances by you like a thing possessed[or]You lunge for it, but the room spins nauseatingly away. The floor gives you a light tap on the forehead[or]You're certainly picking the tough tasks. The floor acts like a trampoline on an ice rink, or like something they've been working on for years at Disneyland[in random order]."
 
 [--------------------------------------]
 
-Part 2 - Response Tables
+Part 3 - Common Responses
 
-Table of Negative Replies
+To say already-know-that:
+	say "But then again you must already know that, since you bought one."
+
+To say better-luck:
+	say "your home is unexpectedly demolished to make way for a new bypass. You are seriously injured in the process, but on your way to the hospital [make-way-for].[paragraph break]";
+	if the light is not lit:
+		say "Next time, try turning on the light.";
+	else if the gown is closed and the player is hungover:
+		say "Too bad you never found an aspirin for your hangover.";
+	else:
+		say "Better luck next life.";
+
+To say cant-reach-from-bed:
+	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
+
+To say dialling-tone:
+	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable".
+
+To say get-rid:
+	say "you've been trying to get rid of it for years".
+
+To say good-for-you:
+	say "Well, good for you!"
+
+To say look-around:
+	say "Look around you."
+
+To say make-way-for:
+	say "[a fleet] unexpectedly arrives and demolishes the Earth to make way for a new hyperspace bypass".
+
+To say leave-me-alone:
+	say "'Well, leave me alone then! I'm busy!'"
+
+To say nice-day:
+	say "t's a bright morning, the sun is shining, the birds are
+singing, the meadows are blooming".
+
+To say private:
+	say "You can't. It's not yours. It's [owner of the noun]'s and it's private."
+
+To say rehetorical-question:
+	say "That was just a rhetorical question."
+
+To say should-think-not:
+	say "I should think not."
+
+To say tough:
+	say "Well, tough."
+
+[--------------------------------------]
+
+Part 4 - Response Tables
+
+Table of Negative Replies (continued)
 number	reply
-3	"I should think not."
+3	"[should-think-not]"
 4	"The word 'no' is not in our hostess['] vocabulary."
-5	"Well, tough."
-6	"That was just a rhetorical question."
+5	"[tough]"
+6	"[rehetorical-question]"
+7	"[tough]"
+8	"[tough]"
 9	"I disagree."
+10	"[should-think-not]"
+11	"[rehetorical-question]"
 12	"'Think you're funny, huh?' The Engineer robot roars off on his ion bike into the Sub-Etha, making sure to spray you with his Sub-Ethon exhaust."
+13	"[tough]"
 14	"Then stop."
+15	"[tough]"
 16	"I didn't think so."
-18	"'Well, leave me alone then! I'm busy!'"
+18	"[leave-me-alone]"
+19	"[leave-me-alone]"
 
-Table of Positive Replies
+[special case when the player answer implies going]
+Instead of saying no when the current topic is 2:
+	try going south instead.
+
+Table of Positive Replies (continued)
 number	reply
-3	"Well, tough."
+3	"[tough]"
 5	"So do I."
-6	"That was just a rhetorical question."
-7	"Well, good for you!"
+6	"[rehetorical-question]"
+7	"[good-for-you]"
+8	"[rehetorical-question]"
+9	"[good-for-you]"
 10	"This is family entertainment, not a video nasty."
+11	"[rehetorical-question]"
 12	"'Well, let's see the malfunctioning equipment.'"
+13	"[rehetorical-question]"
+14	"[rehetorical-question]"
+15	"[rehetorical-question]"
 16	"Then type it."
-18	"'Well, leave me alone then! I'm busy!'"
+18	"[leave-me-alone]"
+19	"[leave-me-alone]"
 
-Table of Footnotes
+[special case when the player answer implies going]
+Instead of saying yes when the current topic is 1:
+	try going south instead.
+
+Table of Footnotes (continued)
 number	noun	note
 1	--	"In case anyone is interested, this quotation is from a letter written by John Keats, and thus he becomes the first major 19th Century British poet to feature in a computer game."
 2	--	"Bob Dylan, 1969."
@@ -268,122 +288,7 @@ number	noun	note
 
 [--------------------------------------]
 
-Book 8 - Actions
-
-Part 1 - Saying Yes or No to Current Topic
-
-[Saying No]
-
-Check an actor saying no (this is the saying no to a topic rule):
-	if the actor is the player:
-		if the current topic is:
-			-- 1: [do nothing]
-			-- 2: try going south instead;
-			-- 3: try responding negatively with 3;
-			-- 4: try responding negatively with 4;
-			-- 5: try responding negatively with 5;
-			-- 6: try responding negatively with 6;
-			-- 7: try responding negatively with 5;
-			-- 8: try responding negatively with 5;
-			-- 9: try responding negatively with 9;
-			-- 10: try responding negatively with 3;
-			-- 11: try responding negatively with 6;
-			-- 12:
-				[TODO:ENGINEER-LEAVE]
-				try responding negatively with 12;
-			-- 13: try responding negatively with 5;
-			-- 14: try responding negatively with 14;
-			-- 15: try responding negatively with 5;
-			-- 16: try responding negatively with 16;
-			-- 18: try responding negatively with 18;
-			-- 19: try responding negatively with 18;
-			-- otherwise: say "You sound rather negative.";
-	stop the action.
-
-The saying no to a topic rule substitutes for the block saying no rule.
-
-[Saying Yes]
-
-Understand the command "ok" or "okay" or "sure" as "yes".
-
-Check an actor saying yes (this is the saying yes to a topic rule):
-	if the actor is the player:
-		if the current topic is:
-			-- 1: try going south instead;
-			-- 2: [do nothing]
-			-- 3: try responding positively with 3;
-			-- 4: [TODO: TAKE ITEM-DROPPED-AT-PARTY]
-			-- 5: try responding positively with 5;
-			-- 6: try responding positively with 6;
-			-- 7: try responding positively with 7;
-			-- 8: try responding positively with 6;
-			-- 9: try responding positively with 7;
-			-- 10: try responding positively with 10;
-			-- 11: try responding positively with 6;
-			-- 12:
-				[TODO:QUEUE I-ENGINEER]
-				try responding positively with 12;
-			-- 13: try responding positively with 6;
-			-- 14: try responding positively with 6;
-			-- 15: try responding positively with 6;
-			-- 16: try responding positively with 16;
-			-- 18: try responding positively with 18;
-			-- 19: try responding positively with 18;
-			-- otherwise: say "You sound rather positive.";
-	stop the action.
-
-The saying yes to a topic rule substitutes for the block saying yes rule.
-
-[Responding Negatively]
-
-Responding negatively with is an action applying to one number.
-
-Carry out responding negatively with:
-	say "[reply corresponding to a number of the number understood in the Table of Negative Replies][line break]";
-
-[Responding Positively]
-
-Responding positively with is an action applying to one number.
-
-Carry out responding positively with:
-	say "[reply corresponding to a number of the number understood in the Table of Positive Replies][line break]";
-
-[--------------------------------------]
-
-Part 2 - Taking Inventory
-
-To say hangover-inventory:
-	if the player is hungover:
-		say "		[a hangover][line break]";
-
-To say no-tea-inventory:
-	if the player is Arthur:
-		[TODO: check if player is holding no-tea, etc]
-		unless the player is carrying the tea:
-			say "		no tea[line break]";
-
-To say inventory-intro:
-	say "[We] have:[line break]";
-	say "[hangover-inventory]";
-	say "[no-tea-inventory]";
-
-The print empty inventory rule does nothing.
-
-Carry out taking inventory (this is the print hitchhikers inventory rule):
-	if the first thing held by the player is nothing:
-		unless the player is Arthur:
-			say "You are empty-handed.";
-		else:
-			say "[inventory-intro]";
-	else:
-		say "[inventory-intro]";
-		list the contents of the player, with newlines, indented, including contents, giving inventory information, with extra indentation.
-
-The print hitchhikers inventory rule substitutes for the print standard inventory rule.
-
-[--------------------------------------]
-
-Part 3 - Testing - Not for release
+Part 5 - Testing - Not for release
 
 [Demolish House]
 
@@ -392,29 +297,30 @@ Demolishing is an action applying to nothing. Understand "demolish" as demolishi
 Carry out demolishing:
 	now your house is demolished;
 	now the third planet is demolished;
-	say "Crash!";
+	say "CRASH!!!";
+
+[Setting Topic]
+
+Setting topic is an action applying to one number. Understand "topic [number]" as setting topic.
+
+Carry out setting topic:
+	now the current topic is the number understood;
 
 [Swap Characters]
 
-Transforming is an action applying to nothing. Understand "transform" as transforming.
+Transforming is an action applying to one thing. Understand "transform to [anyone]" as transforming.
+
+A rule for reaching inside a room when transforming:
+	allow access.
 
 Carry out transforming:
-	if the player is Arthur:
-		now the player is Ford;
-		now your ears are part of Ford;
-		now your eyes are part of Ford;
-		now your head is part of Ford;
-		now your hand is part of Ford;
-		now your teeth are part of Ford;
-		say "You are now Ford!";
-	else:
-		now the player is Arthur;
-		now your ears are part of Arthur;
-		now your eyes are part of Arthur;
-		now your head is part of Arthur;
-		now your hand is part of Arthur;
-		now your teeth are part of Arthur;
-		say "You are now Arthur!";
+	now the player is the noun;
+	now your ears are part of the noun;
+	now your eyes are part of the noun;
+	now your head is part of the noun;
+	now your hand is part of the noun;
+	now your teeth are part of the noun;
+	say "You are now [the printed name of the noun]!";
 	try looking;
 
 [Walkthrough Tests]
@@ -1052,7 +958,7 @@ A backdrop called time is everywhere.
 
 [======================================]
 
-Volume 4 - Actors
+Volume 3 - Actors
 
 [--------------------------------------]
 
@@ -1068,11 +974,23 @@ Part 2 - Arthur
 
 Arthur Dent is a man in the bed. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
 
+Carry out taking inventory when the player is Arthur (this is the print arthur inventory rule):
+	say "[We] have:[line break]";
+	if the player is hungover:
+		say "		[a hangover][line break]";
+	[TODO: check if player is holding no-tea, etc]
+	unless the player is carrying the tea:
+		say "		no tea[line break]";
+	unless the first thing held by the player is nothing:
+		list the contents of the player, with newlines, indented, including contents, giving inventory information, with extra indentation.
+
+The print arthur inventory rule substitutes for the print hitchhikers inventory rule when the player is Arthur.
+
 [TODO Arthur]
 
 [--------------------------------------]
 
-Volume 5 - Other
+Volume 4 - Other
 
 [TEMP - this should live somewhere, but I needed to check if it was in inventory earlier]
 
