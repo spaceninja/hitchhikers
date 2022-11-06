@@ -9,10 +9,6 @@ TODO:
 - [ ] Add I-VOGONS queue in 50 turns
 - [ ] Who am I
 - [ ] What is the object of the game
-- [ ] Don't panic
-- [ ] Footnote
-[@see https://ganelson.github.io/inform-website/book/RB_12_3.html]
-[Occaisionally, the text in HITCHHIKER'S will mention the existence of a footnote. To read the footnote, simply type FOOTNOTE followed by the appropriate footnote number (for example, FOOTNOTE 7). This will not count as a turn.]
 - [ ] Is "GENERIC POCKET-FLUFF" same as "does player mean pocket fluff?"
 - [ ] Address carrying capacity & size (see gown)
 
@@ -21,6 +17,8 @@ TODO: change most actions to Report or block rules, to match standard actions
 TODO: dry up commands: "Understand "drop [other things] in/into/down [something]" as inserting it into."
 
 TODO: dry up commands see "can't enter what's not enterable rule" for example of reacting to different command synonyms without adding new commands.
+
+TODO use topic for introducing here. See "ask" documentation for understanding objects
 
 [How to replace standard response text:]
 See 14.11 for replacing generic response text
@@ -139,6 +137,12 @@ Your hand is a body part. It is part of the player. Understand "hands" as your h
 
 Instead of waving your hand, try waving hands.
 
+Instead of shaking your hand with:
+	If the second noun is not a person:
+		say "I don't think [the second noun] even has hands." instead;
+	else:
+		try thanking the second noun instead.
+
 [TODO Instead of shaking your hand:
 	if the player can see a person (called shakee):]
 
@@ -152,6 +156,9 @@ Book 7 - Text Substitutions
 
 Part 1 - Common Responses
 
+To say already-know-that:
+	say "But then again you must already know that, since you bought one."
+
 To say better-luck:
 	say "your home is unexpectedly demolished to make way for a new bypass. You are seriously injured in the process, but on your way to the hospital [make-way-for].[paragraph break]";
 	if the light is not lit:
@@ -160,6 +167,9 @@ To say better-luck:
 		say "Too bad you never found an aspirin for your hangover.";
 	else:
 		say "Better luck next life.";
+
+To say bores:
+	say "[one of]newts he has known[or]cricket[or]how badly Americans make tea[or]the deteriorating condition of the motorways[or]a recent visit to Tiverton[or]a new book by Douglas Adams[or]computers[in random order]."
 
 To say cant-reach-from-bed:
 	say "You can't reach it from the bed[if the player is hungover]. The effort almost kills you[end if]."
@@ -170,15 +180,33 @@ To say dialling-tone:
 To say get-rid:
 	say "you've been trying to get rid of it for years".
 
+To say look-around:
+	say "Look around you."
+
 To say make-way-for:
 	say "[a fleet] unexpectedly arrives and demolishes the Earth to make way for a new hyperspace bypass".
+
+To say lurches:
+	say "[one of]It slips through your fumbling fingers and hits the carpet with a nerve-shattering bang[or]It dances by you like a thing possessed[or]You lunge for it, but the room spins nauseatingly away. The floor gives you a light tap on the forehead[or]You're certainly picking the tough tasks. The floor acts like a trampoline on an ice rink, or like something they've been working on for years at Disneyland[in random order]."
 
 To say nice-day:
 	say "t's a bright morning, the sun is shining, the birds are
 singing, the meadows are blooming".
 
+To say not-very-good:
+	now the current topic is 13;
+	[in 0 turns since FOOTNOTE doesn't advance the turn clock]
+	the current topic resets in 0 turns from now;
+	say "It's not a very good [noun corresponding to the number of the number understood in the Table of Footnotes], is it?"
+
 To say private:
 	say "You can't. It's not yours. It's [owner of the noun]'s and it's private."
+
+To say reading-all-footnotes:
+	now the current topic is 14;
+	[in 0 turns since FOOTNOTE doesn't advance the turn clock]
+	the current topic resets in 0 turns from now;
+	say "Isn't it fun reading through all the footnotes?"
 
 To say two-trees:
 	now the current topic is 9;
@@ -204,7 +232,7 @@ number	reply
 5	"Well, tough."
 6	"That was just a rhetorical question."
 9	"I disagree."
-12	"'Think you're funny, huh?' The TODO:ENGINEER TODO:ROARS-OFF, making sure to spray you with his Sub-Ethon exhaust."
+12	"'Think you're funny, huh?' The Engineer robot roars off on his ion bike into the Sub-Etha, making sure to spray you with his Sub-Ethon exhaust."
 14	"Then stop."
 16	"I didn't think so."
 18	"'Well, leave me alone then! I'm busy!'"
@@ -219,6 +247,24 @@ number	reply
 12	"'Well, let's see the malfunctioning equipment.'"
 16	"Then type it."
 18	"'Well, leave me alone then! I'm busy!'"
+
+Table of Footnotes
+number	noun	note
+1	--	"In case anyone is interested, this quotation is from a letter written by John Keats, and thus he becomes the first major 19th Century British poet to feature in a computer game."
+2	--	"Bob Dylan, 1969."
+3	--	"A meaningless coincidence."
+4	--	"The first single they recorded on their own Apple label, and one of their most successful songs ever."
+5	--	"Peacefully for a Ravenous Bugblatter Beast of Traal that is. Now and then it snorts or rolls over, and the walls shake a bit."
+6	--	"That was just an example."
+7	"gun"	"[not-very-good]"
+8	"legend"	"[not-very-good]"
+9	--	"Unfortunately, you couldn't hear a word of it, because sound doesn't travel in a vacuum."
+10	--	"I guess it isn't all that dangerous a place after all."
+11	--	"[reading-all-footnotes]"
+12	--	"This is the famous recursive footnote (Footnote 12)."
+13	"autopilot"	"[not-very-good]"
+14	--	"The Hitchhiker's Guide to the Galaxy is also the name of a terrific work of interactive fiction by Douglas Adams and S. Eric Meretzky. [already-know-that]"
+15	"banner"	"[not-very-good]"
 
 [--------------------------------------]
 
