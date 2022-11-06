@@ -153,7 +153,7 @@ Rule for printing the player's obituary:
 	say "Your score is [score] of a possible [maximum score], in [turn count] turn[s].";
 	rule succeeds.
 
-Book 2 - Print Inventory
+Book 18 - Print Inventory
 
 To say inventory-intro:
 	say "[We] have:[line break]";
@@ -173,55 +173,55 @@ Carry out taking inventory (this is the print hitchhikers inventory rule):
 The print empty inventory rule does nothing.
 The print hitchhikers inventory rule substitutes for the print standard inventory rule.
 
-Book 18 - Reaching Inside a Room
+Book 19 - Reaching Inside a Room
 
 Rule for reaching inside a room:
 	say "[The noun] isn't here.";
 	deny access.
 	
-Book 19 - Report Closing
+Book 20 - Report Closing
 
 The standard report closing rule response (A) is "Okay, [the noun] is now closed."
 
-Book 20 - Report Jumping
+Book 21 - Report Jumping
 
 The report jumping rule response (A) is "Wasn't that fun?"
 
-Book 21 - Report Listening
+Book 22 - Report Listening
 
 The report listening rule response (A) is "At the moment, [the noun] makes no sound."
 
-Book 22 - Report Opening
+Book 23 - Report Opening
 
 The standard report opening rule response (A) is "Okay, [the noun] is now open."
 
-Book 23 - Report Smelling
+Book 24 - Report Smelling
 
 The report smelling rule response (A) is "It smells just like [the noun]."
 
-Book 24 - Report Tasting
+Book 25 - Report Tasting
 
 The report tasting rule response (A) is "[not-in-this-game]".
 
-Book 25 - Report Touching Things
+Book 26 - Report Touching Things
 
 The report touching things rule response (A) is "Fiddling with [the noun] [ho-hum]".
 
-Book 26 - Report Waving Things
+Book 27 - Report Waving Things
 
 The report waving things rule response (A) is "[yuks]".
 
-Book 27 - Report Waving Hands
+Book 28 - Report Waving Hands
 
 The report waving hands rule response (A) is "How nice."
 
-Book 28 - Requested Actions Require Persuasion
+Book 29 - Requested Actions Require Persuasion
 
 [This may be overkill, HHG2G actually only sets this response for V-ASK-FOR, but Inform applies this rule when asking for something]
 
 The requested actions require persuasion rule response (A) is "Unsurprisingly, [the noun] doesn't oblige."
 
-Book 29 - Saying No
+Book 30 - Saying No
 
 Check an actor saying no (this is the saying no to a topic rule):
 	if the actor is the player:
@@ -230,7 +230,7 @@ Check an actor saying no (this is the saying no to a topic rule):
 
 The saying no to a topic rule substitutes for the block saying no rule.
 
-Book 30 - Saying Yes
+Book 31 - Saying Yes
 
 Check an actor saying yes (this is the saying yes to a topic rule):
 	if the actor is the player:
@@ -239,12 +239,12 @@ Check an actor saying yes (this is the saying yes to a topic rule):
 
 The saying yes to a topic rule substitutes for the block saying yes rule.
 
-Book 31 - Stand Up Before Going
+Book 32 - Stand Up Before Going
 
 [Don't get out of bed for the player]
 The stand up before going rule does nothing.
 
-Book 32 - Throwing It At
+Book 33 - Throwing It At
 
 The futile to throw things at inanimate objects rule does nothing.
 The block throwing at rule does nothing.
@@ -855,6 +855,8 @@ Carry out looking up a footnote:
 Table of Footnotes
 number	noun	note
 0	--	"Specify a number, as in 'FOOTNOTE 6.'"
+
+Understand "footnote" as a mistake ("Specify a number, as in 'FOOTNOTE 6.'").
 
 Book 56 - Lowering
 

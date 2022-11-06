@@ -22,9 +22,6 @@ TODO: dry up commands see "can't enter what's not enterable rule" for example of
 
 TODO use topic for introducing here. See "ask" documentation for understanding objects
 
-[How to replace standard response text:]
-See 14.11 for replacing generic response text
-
 [How to disable a timer:]
 $timer in -1 turns from now;
 
