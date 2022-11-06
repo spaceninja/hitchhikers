@@ -225,7 +225,7 @@ To say zen:
 
 Part 2 - Response Tables
 
-Table of negative replies
+Table of Negative Replies
 number	reply
 3	"I should think not."
 4	"The word 'no' is not in our hostess['] vocabulary."
@@ -237,7 +237,7 @@ number	reply
 16	"I didn't think so."
 18	"'Well, leave me alone then! I'm busy!'"
 
-Table of positive replies
+Table of Positive Replies
 number	reply
 3	"Well, tough."
 5	"So do I."
@@ -339,14 +339,14 @@ The saying yes to a topic rule substitutes for the block saying yes rule.
 Responding negatively with is an action applying to one number.
 
 Carry out responding negatively with:
-	say "[reply corresponding to a number of the number understood in the Table of negative replies][line break]";
+	say "[reply corresponding to a number of the number understood in the Table of Negative Replies][line break]";
 
 [Responding Positively]
 
 Responding positively with is an action applying to one number.
 
 Carry out responding positively with:
-	say "[reply corresponding to a number of the number understood in the Table of positive replies][line break]";
+	say "[reply corresponding to a number of the number understood in the Table of Positive Replies][line break]";
 
 [--------------------------------------]
 
