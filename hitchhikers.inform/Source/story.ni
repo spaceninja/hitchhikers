@@ -272,6 +272,8 @@ number	noun	note
 
 Part 5 - Testing - Not for release
 
+Persuasion rule: persuasion succeeds.
+
 [Demolish House]
 
 Demolishing is an action applying to nothing. Understand "demolish" as demolishing.
@@ -958,7 +960,7 @@ Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the cor
 
 Part 2 - Arthur
 
-Arthur Dent is a man in the bed. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
+Arthur Dent is a man in the [bed] back garden. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
 
 Carry out taking inventory when the player is Arthur (this is the print arthur inventory rule):
 	say "[We] have:[line break]";
