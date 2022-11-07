@@ -6,10 +6,10 @@ The story creation year is 1984.
 
 [
 TODO:
+- [ ] where am i
 - [ ] Add I-VOGONS queue in 50 turns
 - [ ] Is "GENERIC POCKET-FLUFF" same as "does player mean pocket fluff?"
 - [ ] Address carrying capacity & size (see gown)
-- [ ] Change most actions to Report/block rules, to match standard actions
 - [ ] Fix linebreaks following footnotes and current topic replies.
 			See footnote 12 vs footnote 15 for example
 
@@ -271,8 +271,6 @@ number	noun	note
 [--------------------------------------]
 
 Part 5 - Testing - Not for release
-
-Persuasion rule: persuasion succeeds.
 
 [Demolish House]
 
@@ -960,7 +958,7 @@ Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the cor
 
 Part 2 - Arthur
 
-Arthur Dent is a man in the [bed] back garden. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
+Arthur Dent is a man in the bed. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
 
 Carry out taking inventory when the player is Arthur (this is the print arthur inventory rule):
 	say "[We] have:[line break]";

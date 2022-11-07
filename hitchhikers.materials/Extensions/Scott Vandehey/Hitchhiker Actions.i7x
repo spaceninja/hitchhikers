@@ -180,7 +180,7 @@ Book 19 - Reaching Inside a Room
 
 Rule for reaching inside a room:
 	say "[The noun] isn't here.";
-	deny access.
+	deny access.	
 	
 Book 20 - Report Closing
 
@@ -391,46 +391,57 @@ Book 1 - Answering
 
 Answering is an action applying to one thing. Understand "answer [something]" as answering.
 
-Check the player answering:
-	say "It is hardly likely that [the noun] is interested." instead.
+Check an actor answering (this is the block answering it rule):
+	if the actor is the player:
+		say "It is hardly likely that [the noun] is interested." (A);
+	stop the action.
 
 Book 2 - Applauding
 
-Applauding is an action applying to nothing. Understand "applaud" as applauding. Understand the command "clap" and "cheer" as "applaud".
+Applauding is an action applying to nothing. Understand "applaud" as applauding. Understand the command "clap" and "cheer" as "applaud". To applaud is a verb.
 
-Carry out applauding:
-	say "'Thank you, thank you.'"
+Report an actor applauding (this is the report applauding rule):
+	if the actor is the player:
+		say "'Thank you, thank you.'" (A);
+	otherwise:
+		say "[The actor] [applaud]." (B).
 
 Book 3 - Appreciating
 
 Appreciating is an action applying to one thing. Understand "appreciate [something]" as appreciating.
 
-Check the player appreciating:
-	say "'Hey, I never get any appreciation! There's absolutely no job satisfaction in being a computer.'" instead.
+Check an actor appreciating (this is the block appreciating rule):
+	if the actor is the player:
+		say "'Hey, I never get any appreciation! There's absolutely no job satisfaction in being a computer.'" (A);
+	stop the action.
 
 Book 4 - Asking for Help
 
-Asking for help is an action applying to nothing. Understand "help" as asking for help. Understand the command "hint" and "hints" as "help".
+Asking for help is an action out of world, applying to nothing. Understand "help" as asking for help. Understand the command "hint" and "hints" as "help".
 
-Carry out the player asking for help:
-	say "If you're really stuck, a complete map and InvisiClues Hint Booklet are available from your dealer, or via mail order with the form that came in your package."
+Report asking for help (this is the report asking for help rule):
+	say "If you're really stuck, a complete map and InvisiClues Hint Booklet are available from your dealer, or via mail order with the form that came in your package." (A);
 
 Book 5 - Asking What
 
 Asking what is an action applying to one topic. Understand "what is [text]", "what [text]", and "what's [text]" as asking what.
 
-Check the player asking what:
-	if the topic understood matches the text "object of the game" or the topic understood matches the text "goal of the game", case insensitively:
-		say "That's for me to know and you to find out.";
-	else:
-		say "Good question." instead.
+Check an actor asking what (this is the block asking what rule):
+	if the actor is the player:
+		if the topic understood matches the text "object of the game" or the topic understood matches the text "goal of the game", case insensitively:
+			say "That's for me to know and you to find out." (A);
+		else:
+			say "Good question." (B);
+	stop the action.
 
 Book 6 - Asking What About
 
 Asking what about is an action applying to one topic. Understand "what about [text]" as asking what about.
 
-Check the player asking what about:
-	say "Well, what about it?" instead.
+Check an actor asking what about (this is the block asking what about rule):
+	if the actor is the player:
+		say "Well, what about it?" (A);
+	stop the action.
 
 Book 7 - Asking Where
 
@@ -439,53 +450,67 @@ Asking where is an action applying to one thing. Understand "where is/am [anythi
 A rule for reaching inside a room when asking where:
 	allow access.
 
-Check the player asking where:
-	try finding the noun instead.
+Check an actor asking where (this is the try finding instead rule):
+	try the actor finding the noun instead.
 
 Book 8 - Asking Who
 
 Asking who is an action applying to one topic. Understand "who is/am [text]", "who [text]", and "who's [text]" as asking who.
 
-Check the player asking who:
-	if the topic understood exactly matches the text "i", case insensitively:
-		say "You are [the printed name of the player].";
-	else:
-		try asking what the topic understood instead.
+Check an actor asking who (this is the block asking who rule):
+	unless the actor is the player:
+		stop the action.
+
+Check an actor asking who (this is the try asking what instead rule):
+	unless the topic understood exactly matches the text "i", case insensitively:
+		try the actor asking what the topic understood instead.
+
+Report an actor asking who (this is the report asking who am I rule):
+	if the topic understood exactly matches the text "I", case insensitively:
+		say "You are [the printed name of the player]." (A);
 
 Book 9 - Asking Why
 
 Asking why is an action applying to nothing. Understand "why" as asking why.
 
-Check the player asking why:
-	say "Why not?" instead.
+Check an actor asking why (this is the block asking why rule):
+	if the actor is the player:
+		say "Why not?" (A);
+	stop the action.
 
 Book 10 - Attacking It With
 
 Attacking it with is an action applying to two things. Understand "attack [something] with [something preferably held]" as attacking it with.
 
-Check the player attacking something with:
-	try attacking the noun instead.
+Check an actor attacking something with (this is the try attacking instead rule):
+	try the actor attacking the noun instead.
 
 Book 11 - Biting
 
 Biting is an action applying to one thing. Understand "bite [something]" as biting.
 
-Check the player biting:
-	say "Biting [the noun] [ho-hum]" instead.
+Check an actor biting (this is the block biting rule):
+	if the actor is the player:
+		say "Biting [the noun] [ho-hum]" (A);
+	stop the action.
 
 Book 12 - Blocking
 
 Blocking is an action applying to one thing. Understand "block [something]" and "lie before [something]" as blocking. Understand the command "stop" as "block".
 
-Check the player blocking:
-	say "[wastes]" instead.
+Check an actor blocking (this is the block blocking rule):
+	if the actor is the player:
+		say "[wastes]" (A);
+	stop the action.
 
 Book 13 - Blocking It With
 
 Blocking it with is an action applying to two things. Understand "block [something] with [something]" as blocking it with.
 
-Check the player blocking something with:
-	say "[wastes]" instead.
+Check an actor blocking something with (this is the block blocking it with rule):
+	if the actor is the player:
+		say "[wastes]" (A);
+	stop the action.
 
 Book 14 - Breaking
 
@@ -493,57 +518,70 @@ Understand the command "break", "crack", "destroy", "smash", "wreck" as somethin
 
 Breaking is an action applying to one thing. Understand "break [something]" as breaking. Understand the command "crack", "damage", "demolish", "destroy", "smash", "wreck" as "break".
 
-Check the player breaking:
-	say "Trying to break [the noun] [ho-hum]" instead.
+Check an actor breaking (this is the block breaking rule):
+	if the actor is the player:
+		say "Trying to break [the noun] [ho-hum]" (A);
+	stop the action.
 
 Book 15 - Breaking It With
 
 Breaking it with is an action applying to two things. Understand "break [something] with [something preferably held]" as breaking it with.
 
-Check the player breaking something with:
-	try breaking the noun instead.
+Check an actor breaking something with:
+	try the actor breaking the noun instead.
 
 Book 16 - Brushing
 
 Brushing is an action applying to one thing. Understand "brush [something]" as brushing.
 
-Check the player brushing:
-	say "You have nothing to brush [the noun] with." instead.
+Check an actor brushing (this is the block brushing rule):
+	if the actor is the player:
+		say "You have nothing to brush [the noun] with." (A);
+	stop the action.
 
 Book 17 - Brushing It With
 
 Brushing it with is an action applying to two things. Understand "brush [something] with [something preferably held]" as brushing it with.
 
-Check the player brushing something with:
-	say "With [the second noun]!" instead.
+Check an actor brushing something with (this is the block brushing it with rule):
+	if the actor is the player:
+		say "With [the second noun]!" (A);
+	stop the action.
+
 
 Book 18 - Calling
 
 Calling is an action applying to one topic. Understand "call [text]" as calling. Understand the command "phone" as "call".
 
-Check the player calling:
-	say "There's no phone here!" instead.
+Check an actor calling (this is the block calling rule):
+	if the actor is the player:
+		say "There's no phone here!" (A);
+	stop the action.
 
 Book 19 - Calling It With
 
 Calling it with is an action applying to one topic and one thing. Understand "call [text] with/on [something]" as calling it with.
 
-Check the player calling a topic with:
-	try calling the topic understood instead.
+Check an actor calling a topic with (this is the try calling instead rule):
+	try the actor calling the topic understood instead.
 
 Book 20 - Carving It In
 
 Carving it in is an action applying to two things. Understand "carve [something] on/in [something]" as carving it in. Understand the command "inscribe", "scratch", and "write" as "carve".
 
-Check the player carving something in:
-	say "[yuks]" instead.
+Check an actor carving something in (this is the block carving it in rule):
+	if the actor is the player:
+		say "[yuks]" (A);
+	stop the action.
 
 Book 21 - Carving It With
 
 Carving it with is an action applying to two things. Understand "carve [something] with [something preferably held]" as carving it with.
 
-Check the player carving something with:
-	say "Huh?" instead.
+Check an actor carving something with (this is the block carving it with rule):
+	if the actor is the player:
+		say "Huh?" (A);
+	stop the action.
 
 Book 22 - Cleaning
 
@@ -551,62 +589,84 @@ Understand the command "clean" as something new.
 
 Cleaning is an action applying to one thing. Understand "clean up/-- [something]" as cleaning. Understand the command "wash" and "tidy" as "clean".
 
-Carry out the player cleaning:
-	say "It is now much cleaner."
+Check an actor cleaning (this is the block cleaning rule):
+	unless the actor is the player:
+		stop the action.
+
+Report an actor cleaning (this is the report cleaning rule):
+	say "It is now much cleaner." (A);
 
 Book 23 - Climbing Down
 
 Climbing down is an action applying to one thing. Understand "climb down [something]", "walk down [something]", and "descend [something]" as climbing down.
 
-Check the player climbing down:
-	say "[yuks]" instead.
+Check an actor climbing down (this is the block climbing down rule):
+	if the actor is the player:
+		say "[yuks]" (A);
+	stop the action.
 
 Book 24 - Climbing Up
 
 Climbing up is an action applying to one thing. Understand "climb up [something]", "walk up [something]", "ascend [something]", and "scale [something]" as climbing up.
 
-Check the player climbing up:
-	say "[yuks]" instead.
+Check an actor climbing up (this is the block climbing up rule):
+	if the actor is the player:
+		say "[yuks]" (A);
+	stop the action.
 
 Book 25 - Counting
 
 Counting is an action applying to one thing. Understand "count [something]" as counting.
 
-Check the player counting:
-	say "[impossibles]" instead.
+Check an actor counting (this is the block counting rule):
+	if the actor is the player:
+		say "[impossibles]" (A);
+	stop the action.
 
 Book 26 - Cutting It With
 
 Cutting it with is an action applying to two things. Understand "cut through/-- [something] with [something preferably held]" as cutting it with.
 
-Check the player cutting something with:
-	say "I doubt that the 'cutting edge' of [the second noun] is adequate." instead.
+Check an actor cutting something with (this is the block cutting it with rule):
+	if the actor is the player:
+		say "I doubt that the 'cutting edge' of [the second noun] is adequate." (A);
+	stop the action.
+
 
 Book 27 - Diagnosing
 
 Diagnosing is an action applying to nothing. Understand "diagnose" as diagnosing.
 
-Carry out diagnosing:
+Check an actor diagnosing (this is the block diagnosing rule):
+	unless the actor is the player:
+		stop the action.
+
+Report an actor diagnosing (this is the report diagnosing rule):
 	if the player is hungover:
-		say "You have a big blinding throbber.";
+		say "[We] have a big blinding throbber." (A);
 	else if the player is groggy:
-		say "You feel weak.";
+		say "[We] feel weak." (B);
 	else:
-		say "You are in good health.";
+		say "[We] are in good health." (C);
 
 Book 28 - Digging
 
 Digging is an action applying to one thing. Understand "dig in/with/through/-- [something]" as digging.
 
-Check the player digging:
-	say "[wastes]" instead.
+Check an actor digging (this is the block digging rule):
+	if the actor is the player:
+		say "[wastes]" (A);
+	stop the action.
 
 Book 29 - Drinking From
 
 Drinking from is an action applying to one thing. Understand "drink from [something preferably held]" as drinking from.
 
-Check the player drinking from:
-	say "[impossibles]" instead.
+Check an actor drinking from (this is the block drinking from rule):
+	if the actor is the player:
+		say "[impossibles]" (A);
+	stop the action.
+
 
 Book 30 - Dozing
 
@@ -614,34 +674,46 @@ Understand the command "nap" as something new.
 
 Dozing is an action applying to nothing. Understand "doze" as dozing. Understand the command "nap" and "snooze" as "doze".
 
-Carry out the player dozing:
-	say "You doze for several minutes.";
+Check an actor dozing (this is the block dozing rule):
+	unless the actor is the player:
+		stop the action.
+
+Report an actor dozing (this is the report dozing rule):
+	say "[We] doze for several minutes." (A);
 
 Book 31 - Enjoying
 
 Enjoying is an action applying to one thing. Understand "enjoy [something]" as enjoying.
 
-Check enjoying:
+Check an actor enjoying (this is the can't enjoy other people rule):
 	if the noun is a person:
-		try kissing the noun instead.
+		try the actor kissing the noun instead.
 
-Carry out enjoying:
-	say "Not difficult at all, considering how enjoyable [the noun] is."
+Check an actor enjoying (this is the block enjoying rule):
+	unless the actor is the player:
+		stop the action.
+
+Report an actor enjoying (this is the report enjoying rule):
+	say "Not difficult at all, considering how enjoyable [the noun] is." (A);
 
 Book 32 - Escaping
 
 Escaping is an action applying to nothing. Understand "escape" as escaping.
 
-Check the player escaping:
-	say "You are so keen on escape that you literally leap through the fabric of the space-time continuum. You wake up in a shack on tenth-century Earth. A dressing gown, a toothbrush, and a flathead axe lie by your bed. Before you have a chance to move, Mongol hordes sweep magnificently across the plains of central Asia. They knock down your shack and burn the remains with you inside. You lose interest in the rest of the game.";
+Check an actor escaping (this is the block escaping rule):
+	unless the actor is the player:
+		stop the action.
+
+Report an actor escaping (this is the report escaping rule):
+	say "You are so keen on escape that you literally leap through the fabric of the space-time continuum. You wake up in a shack on tenth-century Earth. A dressing gown, a toothbrush, and a flathead axe lie by your bed. Before you have a chance to move, Mongol hordes sweep magnificently across the plains of central Asia. They knock down your shack and burn the remains with you inside. You lose interest in the rest of the game." (A);
 	end the story instead;
 
 Book 33 - Escaping From
 
 Escaping from is an action applying to one thing. Understand "escape from/-- [something]" as escaping from. Understand the command "flee" as "escape".
 
-Check the player escaping from:
-	try escaping instead.
+Check an actor escaping from (this is the try escaping instead rule):
+	try the actor escaping instead.
 
 Book 34 - Feeding
 
@@ -649,22 +721,35 @@ Understand the command "feed" as something new.
 
 Feeding is an action applying to one thing. Understand "feed [someone]" as feeding.
 
-Check the player feeding:
+Check an actor feeding (this is the block feeding rule):
+	unless the actor is the player:
+		stop the action.
+
+Check an actor feeding (this is the can't feed without food rule):
+	unless the actor is carrying an edible thing:
+		say "[We] have nothing to feed [the noun] with." (A);
+		stop the action.
+
+Carry out an actor feeding (this is the try giving instead rule):
 	if the player is carrying an edible thing (called food):
 		say "([the food])";
-		try giving the food to the noun instead;
-	else:
-		say "You have nothing to feed [the noun] with." instead.
+		try the actor giving the food to the noun instead;
 
 Book 35 - Feeding It To
 
 Feeding it to is an action applying to two things. Understand "feed [something preferably held] to [someone]" as feeding it to. Understand "feed [someone] [something preferably held]" as feeding it to (with nouns reversed).
 
-Check the player feeding something to someone:
-	if the noun is edible:
-		try giving the noun to the second noun instead;
-	else:
-		say "[The noun] isn't edible." instead.
+Check an actor feeding something to someone (this is the block feeding something to someone rule):
+	unless the actor is the player:
+		stop the action.
+
+Check an actor feeding something to someone (this is the can't feed what's not edible rule):
+	unless the noun is edible:
+		say "[The noun] isn't edible." (A);
+		stop the action.
+
+Carry out an actor feeding something to someone (this is the try giving it to instead rule):
+	try the actor giving the noun to the second noun instead;
 
 Book 36 - Finding
 
@@ -673,25 +758,29 @@ Finding is an action applying to one thing. Understand "find [anything]", "searc
 A rule for reaching inside a room when finding:
 	allow access.
 
-Carry out the player finding:
+Check an actor finding (this is the block finding rule):
+	unless the actor is the player:
+		stop the action.
+
+Report an actor finding (this is the report finding rule):
 	if the noun is the player:
-		say "You're in [the location].";
+		say "You're in [the location]." (A);
 	else if the noun is held by the player:
-		say "You have it!";
+		say "You have it!" (B);
 	else if the noun is held by a person and the noun is visible:
-		say "As far as you can tell, [the holder of the noun] has it.";
+		say "As far as you can tell, [the holder of the noun] has it." (C);
 	else if the noun is in a container and the noun is visible:
-		say "It's in [the holder of the noun].";
+		say "It's in [the holder of the noun]." (D);
 	else if the noun is on a supporter and the noun is visible:
-		say "It's on [the holder of the noun].";
+		say "It's on [the holder of the noun]." (E);
 	else if the noun is a backdrop:
-		say "You figure it out!";
+		say "You figure it out!" (F);
 	else if the noun is in the location:
-		say "Right in front of you.";
+		say "Right in front of you." (G);
 	else if the player's command includes "where":
-		say "Beats me.";
+		say "Beats me." (H);
 	else:
-		say "You'll have to do that yourself."
+		say "You'll have to do that yourself." (I);
 
 Book 37 - Filling
 
@@ -716,7 +805,7 @@ Check an actor following (this is the block following rule):
 		else if the noun is not a person:
 			say "[impossibles]" (B);
 		else:
-			say "You have no idea where [the noun] is." (C);
+			say "[We] have no idea where [the noun] is." (C);
 	stop the action.
 
 Book 39 - Fripping
@@ -753,7 +842,7 @@ Book 42 - Getting Out Of
 
 Getting out of is an action applying to one thing. Understand "get out of/-- [something]", "jump out of/-- [something]" and "exit [something]" as getting out of.
 
-Check an actor getting out of something:
+Check an actor getting out of something (this is the try exiting instead rule):
 	try the actor exiting instead.
 
 Book 43 - Getting Undressed
@@ -778,7 +867,7 @@ Hanging it from is an action applying to two things. Understand "hang [something
 
 Check an actor hanging something from (this is the block hanging something from rule):
 	if the actor is the player:
-		say "You can't hang something from [the second noun]!" (A);
+		say "[We] can't hang something from [the second noun]!" (A);
 	stop the action.
 
 Book 45 - Hiding
@@ -794,7 +883,7 @@ Book 46 - Hiding Behind
 
 Hiding behind is an action applying to one thing. Understand "hide behind/under [something]" as hiding behind.
 
-Check an actor hiding behind:
+Check an actor hiding behind (this is the try hiding instead rule):
 	try the actor hiding instead.
 
 Book 47 - Hitchhiking
@@ -871,7 +960,7 @@ Book 54 - Looking up a Footnote
 
 Looking up a footnote is an action out of world, applying to one number. Understand "footnote [number]" as looking up a footnote.
 
-Report looking up a footnote:
+Report looking up a footnote (this is the report looking up a footnote rule):
 	if the number understood is a number listed in the Table of Footnotes:
 		say "[note entry]";
 	else:
@@ -887,7 +976,7 @@ Book 55 - Lowering
 
 Lowering is an action applying to one thing. Understand "lower [something]" as lowering.
 
-Check an actor lowering:
+Check an actor lowering (this is the try raising instead rule):
 	try the actor raising the noun instead.
 
 Book 56 - Lying Down
@@ -978,7 +1067,7 @@ Book 62 - Picking It With
 
 Picking it with is an action applying to two things. Understand "pick [something] with [something]" as picking it with.
 
-Check an actor picking something with:
+Check an actor picking something with (this is the try picking instead rule):
 	try the actor picking the noun instead.
 
 Book 63 - Planting It In
@@ -1021,7 +1110,7 @@ Book 67 - Pouring It In
 
 Pouring it in is an action applying to two things. Understand "pour [something preferably held] in/on/over [something]" as pouring it in.
 
-Check an actor pouring something in:
+Check an actor pouring something in (this is the try pouring instead rule):
 	try the actor pouring the noun instead.
 
 Book 68 - Protesting
@@ -1082,7 +1171,7 @@ Book 74 - Refusing
 
 Refusing is an action applying to one thing. Understand "refuse [something]" as refusing.
 
-Check an actor refusing:
+Check an actor refusing (this is the try not taking instead rule):
 	try the actor negating "take" instead.
 
 Book 75 - Relaxing
@@ -1125,7 +1214,7 @@ Book 79 - Responsing Negatively With
 
 Responding negatively with is an action out of world, applying to one number.
 
-Carry out responding negatively with:
+Report responding negatively with (this is the report responding negatively rule):
 	if the number understood is a number listed in the Table of Negative Replies:
 		say "[reply entry]";
 	else:
@@ -1139,7 +1228,7 @@ Book 80 - Responsing Positively With
 
 Responding positively with is an action out of world, applying to one number.
 
-Carry out responding positively with:
+Report responding positively with (this is the report responding positively rule):
 	if the number understood is a number listed in the Table of Positive Replies:
 		say "[reply entry]";
 	else:
@@ -1260,7 +1349,7 @@ Book 91 - Smiling At
 
 Smiling at is an action applying to one thing. Understand "smile at [something]" as smiling at.
 
-Check an actor smiling at:
+Check an actor smiling at (this is the try smiling instead rule):
 	try the actor smiling instead.
 
 Book 92 - Standing Before
@@ -1421,7 +1510,7 @@ Book 107 - Yelling At
 
 Yelling at is an action applying to one thing. Understand "yell at [something]" as yelling at.
 
-Check an actor yelling at:
+Check an actor yelling at (this is the try yelling instead rule):
 	try the actor yelling instead.
 
 [--------------------------------------]
