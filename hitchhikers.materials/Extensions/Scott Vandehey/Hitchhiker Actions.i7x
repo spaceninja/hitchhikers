@@ -420,7 +420,10 @@ Book 5 - Asking What
 Asking what is an action applying to one topic. Understand "what is [text]", "what [text]", and "what's [text]" as asking what.
 
 Check the player asking what:
-	say "Good question." instead.
+	if the topic understood matches the text "object of the game" or the topic understood matches the text "goal of the game", case insensitively:
+		say "That's for me to know and you to find out.";
+	else:
+		say "Good question." instead.
 
 Book 6 - Asking What About
 
@@ -444,7 +447,10 @@ Book 8 - Asking Who
 Asking who is an action applying to one topic. Understand "who is/am [text]", "who [text]", and "who's [text]" as asking who.
 
 Check the player asking who:
-	try asking what the topic understood instead.
+	if the topic understood exactly matches the text "i", case insensitively:
+		say "You are [the printed name of the player].";
+	else:
+		try asking what the topic understood instead.
 
 Book 9 - Asking Why
 
