@@ -66,11 +66,13 @@ After going north from the front garden:
 
 Book 3 - New Kinds of Things
 
-A tool is a kind of thing.
+A tool is a kind of thing. The description of a tool is usually "It looks like every other [noun] you've ever seen."
 
 An owned thing is a kind of thing. An owned thing has some text called the owner.
 
-A body part is a kind of thing.
+A body part is a kind of thing. The description of a body part is usually "That would involve quite a contortion."
+
+Instead of finding a body part, say "Are you sure [the noun] [are] lost?"
 
 [--------------------------------------]
 
@@ -78,11 +80,11 @@ Book 4 - Body Parts
 
 [Ears]
 
-Your ears are a body part. They are part of the player. Understand "ear" as your ears.
+Your ears are a body part. They are part of the player. Understand "ear" as your ears. They are plural-named.
 
 [Eyes]
 
-Your eyes are a body part. They are part of the player. Understand "eye" as your eyes.
+Your eyes are a body part. They are part of the player. Understand "eye" as your eyes. They are plural-named.
 
 Instead of opening your eyes, say "They are."
 Instead of closing your eyes, say "That won't help."
@@ -93,22 +95,28 @@ Your head is a body part. It is part of the player. Understand "face" as your he
 
 [Hand]
 
-Your hand is a body part. It is part of the player. Understand "hands" as your hand.
+Your hand is a body part. It is part of the player. Understand "hands" as your hand. The description is "You see nothing special about [your hand]."
 
 Instead of waving your hand, try waving hands.
 
+Instead of shaking your hand:
+	if another person (called shakee) is visible:
+		say "(with [the shakee])";
+		try shaking your hand with the shakee;
+	else:
+		say "Pleased to meet you."
+
 Instead of shaking your hand with:
 	If the second noun is not a person:
-		say "I don't think [the second noun] even has hands." instead;
+		say "I don't think [the second noun] even has hands.";
 	else:
 		try thanking the second noun instead.
 
-[TODO Instead of shaking your hand:
-	if the player can see a person (called shakee):]
-
 [Teeth]
 
-Your teeth are a body part. They are part of the player.
+Your teeth are a body part. They are part of the player. They are plural-named.
+
+Instead of cleaning your teeth, try brushing your teeth;
 
 [--------------------------------------]
 
@@ -200,6 +208,9 @@ To say should-think-not:
 
 To say tough:
 	say "Well, tough."
+
+To say with-towel:
+	say "With a towel wrapped around your head!?!"
 
 [--------------------------------------]
 
@@ -486,10 +497,6 @@ Instead of opening or closing the bedroom window, say "The bloody thing's been j
 
 Chapter 2 - Items
 
-[Fluff]
-
-Some pocket fluff is in your gown. Understand "lint" as the pocket fluff.
-
 [Gown]
 
 [TODO gown-hung description]
@@ -506,6 +513,21 @@ Before wearing the gown when the sleeves are tied, say "You'll have to untie the
 Instead of tying the gown, try tying the sleeves.
 
 Instead of untying the gown, try untying the sleeves.
+
+Instead of getting dressed when the player is not wearing the gown:
+	if the player is holding the gown:
+		try wearing the gown;
+	else if the gown is visible:
+		say "You're not holding [the gown].";
+	else:
+		continue the action.
+
+Instead of getting undressed when the player is wearing the gown:
+	try taking off the gown.
+
+[Fluff]
+
+Some pocket fluff is in your gown. Understand "lint" as the pocket fluff.
 
 [Sleeves]
 
@@ -571,6 +593,16 @@ At the time when the gift returns:
 The toothbrush is a tool in the bedroom. Understand "proper", "brush", "tool", "tools" as the toothbrush.
 
 Instead of taking the toothbrush when the player is hungover, say "[lurches]".
+
+Instead of brushing something when the player is holding the toothbrush:
+	say "(with [the toothbrush])";
+	try brushing the noun with the toothbrush instead;
+
+Instead of brushing something with the toothbrush:
+	if the noun is your teeth:
+		say "Congratulations on your fine dental hygiene.";
+	else:
+		say "In general, [toothbrush]es are meant for teeth.";
 
 After taking the toothbrush:
 	say "As you pick up [the toothbrush] a tree outside the window collapses. There is no causal relationship between these two events.[if the phone is handled][two-trees][end if]";
@@ -704,6 +736,10 @@ The bar is a scenery supporter in the pub. Understand "counter" as the bar.
 
 Instead of looking behind the bar, try examining the pub shelf.
 
+Instead of getting drunk in the pub:
+	say "You get drunk and have a terrific time for twelve minutes, are the life and soul of the Pub, tell some really great stories, make everyone laugh a lot, and they all clap you on the back and tell you what a great chap you are and then the Earth gets unexpectedly demolished[if the player is Arthur]. You wake up with a hangover which lasts for all eternity[end if].";
+	end the story;
+
 [Furnishings]
 
 The pub furnishings are scenery in the pub. Understand "wall", "walls", "ceiling", "roof", "usual", "soggy", "beermat", "beermats", "glass", "glasses", "bottle", "bottles" as the pub furnishings.
@@ -789,11 +825,22 @@ Part 7 - Earth Backdrops
 
 [Define these last so they don't initialize their locations]
 
-Chapter 1 - Outdoors
+Chapter 1 - Indoors
+
+The chamber is a backdrop in the bedroom, in the front porch, and in the pub. The printed name is "room". Understand "area", "room", "place", "hall" as the chamber.
+
+Instead of examining the chamber, try looking.
+
+Instead of cleaning the chamber:
+	if the player is in the bedroom:
+		say "Just as you've got it all spick and span [better-luck]";
+		end the story;
+
+Chapter 2 - Outdoors
 
 [Ground]
 
-The ground is a backdrop in the Outdoors. Understand "floor", "mud" as the ground. It is in the Outdoors.
+The ground is a backdrop in the Outdoors. Understand "floor", "mud" as the ground.
 
 Instead of climbing or climbing down or entering the ground, say "[wastes]".
 
@@ -879,7 +926,7 @@ Instead of climbing the tree, say "You were never very good at that."
 
 [--------------------------------------]
 
-Chapter 2 - Space Stuff
+Chapter 3 - Space Stuff
 
 [Fleet]
 
@@ -946,11 +993,29 @@ A backdrop called time is everywhere.
 
 Volume 3 - Actors
 
+Definition: a person is another if it is not the player.
+
 [--------------------------------------]
 
 Part 1 - Ford
 
 Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]." Understand "ford", "prefect" as Ford.
+
+The towel is held by Ford. Understand "towels" as the towel. The towel can be muddy. The towel is wearable.
+
+Instead of looking when the player is wearing the towel, say "You see a towel."
+
+Instead of examining when the player is wearing the towel, say "[with-towel]".
+
+Instead of going when the player is wearing the towel:
+	now the player is lost;
+	say "You stumble in that direction, but as you can't see where you're going you wander around in circles."
+
+Instead of shooting when the player is wearing the towel, say "[with-towel]". Instead of shooting at when the player is wearing the towel, say "[with-towel]". Instead of shooting something with when the player is wearing the towel, say "[with-towel]".
+
+Instead of cleaning the towel:
+	now the towel is not muddy;
+	say "It is now much cleaner.";
 
 [TODO Ford, satchel, satchel fluff, towel]
 

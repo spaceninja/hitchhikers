@@ -14,6 +14,7 @@ Volume 1 - Conditions
 A person can be asleep.
 A person can be groggy.
 A person can be hungover.
+A person can be lost.
 A person can be prone.
 
 [--------------------------------------]
@@ -80,59 +81,63 @@ To say while-lying:
 
 Volume 6 - Modifications to Standard Rules
 
-Book 1 - Block Attacking
+Book 1 - Block Asking
+
+The block asking rule response (A) is "A long silence tells you that [the noun] isn't interested in talking about [the topic understood]."
+
+Book 2 - Block Attacking
 
 The block attacking rule response (A) is "You are obviously letting things get to you. You should learn to relax a little."
 
-Book 2 - Block Buying
+Book 3 - Block Buying
 
 The block buying rule response (A) is "Sorry, [the noun] [aren't] for sale."
 
-Book 3 - Block Drinking
+Book 4 - Block Drinking
 
 The block drinking rule response (A) is "You can't drink that!"
 
-Book 4 - Block Giving
+Book 5 - Block Giving
 
 The block giving rule response (A) is "Politely, [the second noun] refuses your offer."
 
-Book 5 - Block Kissing
+Book 6 - Block Kissing
 
 The block kissing rule response (A) is "This is family entertainment, not a video nasty."
 
-Book 6 - Block Showing
+Book 7 - Block Showing
 
 The block showing rule response (A) is "I doubt [the second noun] [are] interested."
 
-Book 7 - Block Sleeping
+Book 8 - Block Sleeping
 
 The block sleeping rule response (A) is "There's no bed here."
 
-Book 8 - Block Telling
+Book 9 - Block Telling
 
 The block telling rule response (A) is "It doesn't look like [the noun] is interested."
 
-Book 9 - Block Waking
+Book 10 - Block Waking
 
 The block waking rule response (A) is "I don't think [the noun] [are] sleeping."
 
-Book 10 - Can't Close Unless Openable
+Book 11 - Can't Close Unless Openable
 
 The can't close unless openable rule response (A) is "[tell-me-how]".
 
-Book 11 - Can't Eat Unless Edible
+Book 12 - Can't Eat Unless Edible
 
 The can't eat unless edible rule response (A) is "Stuffing [the noun] in your mouth would do little to help at this point."
 
-Book 12 - Can't Enter What's Not Enterable
+Book 13 - Can't Enter What's Not Enterable
 
 The can't enter what's not enterable rule response (D) is "You hit your head against [the noun] as you attempt this feat."
 
-Book 13 - Can't Give to a Non-Person
+Book 14 - Can't Give to a Non-Person
 
 The can't give to a non-person rule response (A) is "You can't give [the noun] to [the second noun]!"
 
-Book 14 - Can't Go Through Closed Doors
+Book 15 - Can't Go Through Closed Doors
 
 [Don't automatically open doors for the player]
 The can't go through closed doors rule does nothing.
@@ -140,15 +145,15 @@ The can't go through closed doors rule does nothing.
 Check the player going through a closed door:
 	say "The door is closed." instead.
 
-Book 15 - Can't Open Unless Openable
+Book 16 - Can't Open Unless Openable
 
 The can't open unless openable rule response (A) is "[tell-me-how]".
 
-Book 16 - Can't Search Unless Container or Supporter
+Book 17 - Can't Search Unless Container or Supporter
 
 The can't search unless container or supporter rule response (A) is "There is nothing special to be seen."
 
-Book 17 - Printing the Player's Obituary
+Book 18 - Printing the Player's Obituary
 
 Rule for printing the player's obituary: 
 	say "We are about to give you your score. Put on your peril-sensitive sunglasses now. (Hit RETURN or ENTER when ready.)[paragraph break]";
@@ -156,7 +161,7 @@ Rule for printing the player's obituary:
 	say "Your score is [score] of a possible [maximum score], in [turn count] turn[s].";
 	rule succeeds.
 
-Book 18 - Print Inventory
+Book 19 - Print Inventory
 
 To say inventory-intro:
 	say "[We] have:[line break]";
@@ -176,55 +181,64 @@ Carry out taking inventory (this is the print hitchhikers inventory rule):
 The print empty inventory rule does nothing.
 The print hitchhikers inventory rule substitutes for the print standard inventory rule.
 
-Book 19 - Reaching Inside a Room
+Book 20 - Reaching Inside a Room
 
 Rule for reaching inside a room:
 	say "[The noun] isn't here.";
 	deny access.	
 	
-Book 20 - Report Closing
+Book 21 - Report Closing
 
 The standard report closing rule response (A) is "Okay, [the noun] is now closed."
 
-Book 21 - Report Jumping
+Book 22 - Report Jumping
 
-The report jumping rule response (A) is "Wasn't that fun?"
+Report an actor jumping (this is the report jumping with response rule):
+	if the actor is the player:
+		if the action is not silent:
+			now the current topic is 15;
+			the current topic resets in one turn from now;
+			say "Wasn't that fun?" (A);
+	otherwise:
+		say "[The actor] [jump] on the spot." (B).
 
-Book 22 - Report Listening
+The report jumping with response rule substitutes for the report jumping rule.
+
+Book 23 - Report Listening
 
 The report listening rule response (A) is "At the moment, [the noun] makes no sound."
 
-Book 23 - Report Opening
+Book 24 - Report Opening
 
 The standard report opening rule response (A) is "Okay, [the noun] is now open."
 
-Book 24 - Report Smelling
+Book 25 - Report Smelling
 
 The report smelling rule response (A) is "It smells just like [the noun]."
 
-Book 25 - Report Tasting
+Book 26 - Report Tasting
 
 The report tasting rule response (A) is "[not-in-this-game]".
 
-Book 26 - Report Touching Things
+Book 27 - Report Touching Things
 
 The report touching things rule response (A) is "Fiddling with [the noun] [ho-hum]".
 
-Book 27 - Report Waving Things
+Book 28 - Report Waving Things
 
 The report waving things rule response (A) is "[yuks]".
 
-Book 28 - Report Waving Hands
+Book 29 - Report Waving Hands
 
 The report waving hands rule response (A) is "How nice."
 
-Book 29 - Requested Actions Require Persuasion
+Book 30 - Requested Actions Require Persuasion
 
 [This may be overkill, HHG2G actually only sets this response for V-ASK-FOR, but Inform applies this rule when asking for something]
 
 The requested actions require persuasion rule response (A) is "Unsurprisingly, [the noun] doesn't oblige."
 
-Book 30 - Saying No
+Book 31 - Saying No
 
 Check an actor saying no (this is the saying no to a topic rule):
 	if the actor is the player:
@@ -233,7 +247,7 @@ Check an actor saying no (this is the saying no to a topic rule):
 
 The saying no to a topic rule substitutes for the block saying no rule.
 
-Book 31 - Saying Yes
+Book 32 - Saying Yes
 
 Check an actor saying yes (this is the saying yes to a topic rule):
 	if the actor is the player:
@@ -242,12 +256,22 @@ Check an actor saying yes (this is the saying yes to a topic rule):
 
 The saying yes to a topic rule substitutes for the block saying yes rule.
 
-Book 32 - Stand Up Before Going
+Book 33 - Stand Up Before Going
 
 [Don't get out of bed for the player]
 The stand up before going rule does nothing.
 
-Book 33 - Throwing It At
+Book 34 - Telling Yourself
+
+Check an actor telling something about (this is the asking what instead rule):
+	if the actor is the noun:
+		if the actor is the player:
+			try the actor asking what the topic understood;
+		stop the action.
+
+The asking what instead rule substitutes for the telling yourself rule.
+
+Book 35 - Throwing It At
 
 The futile to throw things at inanimate objects rule does nothing.
 The block throwing at rule does nothing.
@@ -287,12 +311,19 @@ Understand the command "inspect" or "study" or "observe" or "see" or "scour" as 
 
 Book 7 - Going
 
-Check going while the player is prone:
-	say "[while-lying]" instead.
+Check an actor going while the actor is prone (this is the block going while prone rule):
+	if the actor is the player:
+		say "[while-lying]" (A);
+	stop the action.
 
 Book 8 - Jumping
 
 Understand the command "leap" and "dive" as "jump".
+
+Check an actor jumping while the actor is prone (this is the block jumping while prone rule):
+	if the actor is the player:
+		say "[while-lying]" (A);
+	stop the action.
 
 Book 9 - Looking Under
 
@@ -911,6 +942,11 @@ Jumping over is an action applying to one thing. Understand "jump over/across/fr
 Check an actor jumping over (this is the block jumping over rule):
 	unless the actor is the player:
 		stop the action.
+
+Check an actor jumping over while the actor is prone (this is the block jumping over while prone rule):
+	if the actor is the player:
+		say "[while-lying]" (A);
+	stop the action.
 
 Report an actor jumping over (this is the report jumping over rule):
 	now the current topic is 15;
