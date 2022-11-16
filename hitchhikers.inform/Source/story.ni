@@ -283,6 +283,8 @@ number	noun	note
 
 Part 5 - Testing - Not for release
 
+[Persuasion rule: persuasion succeeds.]
+
 [Demolish House]
 
 Demolishing is an action applying to nothing. Understand "demolish" as demolishing.
@@ -860,7 +862,7 @@ Instead of enjoying the ground when the player is in the front garden and the pl
 [For some reason we can't say "in the Outdoors, in the bedroom," etc.]
 Your house is a backdrop in the bedroom, in the front porch, in the front garden, in the back garden, and in the country lane. The printed name is "your home". Understand "your", "home" as the house. Your house can be demolished.
 
-Instead of enjoying your house when your house is demolished, say "[zen]. You can't enjoy a [rubble] properly till it's at least a hundred years old. Also, you are haunted by the tragic vision of your favourite teapot lying shattered among the dust.[line break]There is also the matter of all your clothes."
+Instead of enjoying your house when your house is demolished, say "[zen]You can't enjoy a [rubble] properly till it's at least a hundred years old. Also, you are haunted by the tragic vision of your favourite teapot lying shattered among the dust.[line break]There is also the matter of all your clothes."
 
 Instead of examining your house when your house is demolished, say "It is now [a rubble]."
 
@@ -959,6 +961,12 @@ Book 2 - Everywhere
 
 The air is a backdrop. It is everywhere.
 
+[Frustration]
+
+A backdrop called frustration is everywhere. Understand "problem", "puzzle" as frustration.
+
+Instead of enjoying frustration, say "[zen]".
+
 [Hangover] [so player can inspect hangover, which is in inventory]
 
 The hangover is a backdrop. The printed name is "splitting headache". Understand "splitting", "big", "blinding", "throbber", "headache" as the hangover. It is everywhere.
@@ -1001,6 +1009,8 @@ Part 1 - Ford
 
 Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]." Understand "ford", "prefect" as Ford.
 
+Rule for printing the name of Ford: say "Ford Prefect".
+
 The towel is held by Ford. Understand "towels" as the towel. The towel can be muddy. The towel is wearable.
 
 Instead of looking when the player is wearing the towel, say "You see a towel."
@@ -1025,19 +1035,15 @@ Part 2 - Arthur
 
 Arthur Dent is a man in the bed. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
 
-Carry out taking inventory when the player is Arthur (this is the print arthur inventory rule):
-	say "[We] have:[line break]";
-	if the player is hungover:
-		say "		[a hangover][line break]";
-	[TODO: check if player is holding no-tea, etc]
-	unless the player is carrying the tea:
-		say "		no tea[line break]";
-	unless the first thing held by the player is nothing:
-		list the contents of the player, with newlines, indented, including contents, giving inventory information, with extra indentation.
+Rule for printing the name of Arthur: say "Arthur Dent".
 
-The print arthur inventory rule substitutes for the print hitchhikers inventory rule when the player is Arthur.
+[No Tea]
 
-[TODO Arthur]
+The no-tea is held by Arthur. The printed name is "no tea". Understand "no", "tea" as the no-tea. It is proper-named.
+
+Instead of taking or dropping the no-tea, say "Your common sense tells you that you can't do that."
+
+Instead of doing anything to the no-tea, say "You're talking complete nonsense; pull yourself together."
 
 [--------------------------------------]
 

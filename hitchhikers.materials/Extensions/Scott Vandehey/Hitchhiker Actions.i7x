@@ -263,13 +263,7 @@ The stand up before going rule does nothing.
 
 Book 34 - Telling Yourself
 
-Check an actor telling something about (this is the asking what instead rule):
-	if the actor is the noun:
-		if the actor is the player:
-			try the actor asking what the topic understood;
-		stop the action.
-
-The asking what instead rule substitutes for the telling yourself rule.
+The telling yourself rule response (A) is "[talking-to-yourself]".
 
 Book 35 - Throwing It At
 
@@ -284,6 +278,12 @@ Book 1 - Asking It About
 
 Understand "ask [someone] [text]" as asking it about.
 
+Check an actor asking something about (this is the block asking yourself rule):
+	if the noun is the player:
+		if the actor is the player:
+			say "[talking-to-yourself]" (A);
+		stop the action.
+
 Book 2 - Answering It That
 
 Understand "answer [someone] [text]" as answering it that.
@@ -293,30 +293,36 @@ Understand the command "reply" as "answer".
 Check answering something that "hello" when the noun is a person:
 	try saying hello to the noun instead.
 
-Book 3 - Buying
+Book 3 - Attacking
+
+Check the player attacking the player (this is the attacking yourself rule):
+	say "Done.";
+	end the story instead.
+
+Book 4 - Buying
 
 Understand the command "order" as "buy". Understand "pay for [something]" as buying.
 
-Book 4 - Dropping
+Book 5 - Dropping
 
 Understand the command "hurl" and "toss" as "drop".
 
-Book 5 - Entering
+Book 6 - Entering
 
 Understand "go to [something]" and "jump in [something]" as entering.
 
-Book 6 - Examining
+Book 7 - Examining
 
 Understand the command "inspect" or "study" or "observe" or "see" or "scour" as "examine".
 
-Book 7 - Going
+Book 8 - Going
 
 Check an actor going while the actor is prone (this is the block going while prone rule):
 	if the actor is the player:
 		say "[while-lying]" (A);
 	stop the action.
 
-Book 8 - Jumping
+Book 9 - Jumping
 
 Understand the command "leap" and "dive" as "jump".
 
@@ -325,7 +331,15 @@ Check an actor jumping while the actor is prone (this is the block jumping while
 		say "[while-lying]" (A);
 	stop the action.
 
-Book 9 - Looking Under
+Book 10 - Listening To
+
+Check an actor listening to (this is the block listening to yourself rule):
+	if the noun is the player:
+		if the actor is the player:
+			say "Yes?" (A);
+		stop the action.
+
+Book 11 - Looking Under
 
 Carry out the player looking under:
 	if the noun is worn by the player:
@@ -335,31 +349,37 @@ Carry out the player looking under:
 	else:
 		say "There is nothing but dust there." instead;
 
-Book 10 - Putting
+Book 12 - Putting
 
 Understand the command "stuff", "place", and "lay" as "put".
 
-Book 11 - Quitting
+Book 13 - Quitting
 
 Understand "give up" and "throw in the towel" as quitting the game.
 
-Book 12 - Rubbing
+Book 14 - Rubbing
 
 Check the player rubbing:
 	try touching the noun instead.
 
-Book 13 - Saying Yes
+Book 15 - Saying Yes
 
 Understand the command "ok" or "okay" or "sure" as "yes".
 
-Book 14 - Searching
+Book 16 - Searching
 
 Understand "look down [something]" and "look up [something]" as searching.
 
-Check the player searching a person:
-	say "That wouldn't be polite." instead.
+Check an actor searching a person (this is the searching yourself rule):
+	if the actor is the noun and the actor is the player:
+		try taking inventory instead.
 
-Book 15 - Standing
+Check an actor searching a person (this is the block searching people rule):
+	if the actor is the player:
+		say "That wouldn't be polite." (A);
+	stop the action.
+
+Book 17 - Standing
 
 Understand the command "stand" as something new.
 
@@ -374,43 +394,48 @@ Carry out the player standing:
 	else:
 		say "You are already standing."
 
-Book 16 - Taking
+Book 18 - Taking
 
 Check the player taking anything that is fixed in place:
 	say "[yuks]" instead.
 
-Book 17 - Tasting
+Book 19 - Tasting
 
 Understand the command "lick" as "taste".
 
-Book 18 - Telling It About
+Book 20 - Telling It About
 
 Understand "tell [someone] [text]" as telling it about.
 
-Book 19 - Throwing It At
+Book 21 - Throwing It At
 
 Check an actor throwing something at:
 	now the noun is in the location;
 	say "You missed.";
 	stop the action.
 
-Book 20 - Touching
+Book 22 - Touching
 
 Understand the command "pat" and "pet" as "touch".
 
-Book 21 - Turning
+Book 23 - Turning
 
 Understand the command "spin", and "whirl" as "turn".
 
-Book 22 - Tying It To
+Book 24 - Tying It To
 
 Understand the command "connect" as "tie".
 
-Book 23 - Waking
+Book 25 - Waking
 
 Understand the command "alarm" and "rouse" as "wake".
 
-Book 24 - Your Things
+Check an actor waking the player (this is the block waking yourself rule):
+	if the actor is the player:
+		say "You already are!" (A);
+	stop the action.
+
+Book 26 - Your Things
 
 Understand "your" as a thing when the item described is held by the person asked.
 
@@ -578,7 +603,6 @@ Check an actor brushing something with (this is the block brushing it with rule)
 	if the actor is the player:
 		say "With [the second noun]!" (A);
 	stop the action.
-
 
 Book 18 - Calling
 
@@ -831,12 +855,14 @@ A rule for reaching inside a room when following:
 
 Check an actor following (this is the block following rule):
 	if the actor is the player:
-		if the noun is in the location:
-			say "But [the noun] is right here!" (A);
+		if the actor is the noun:
+			say "I'd like to, but like most computers I don't have legs." (A);
+		else if the noun is in the location:
+			say "But [the noun] is right here!" (B);
 		else if the noun is not a person:
-			say "[impossibles]" (B);
+			say "[impossibles]" (C);
 		else:
-			say "[We] have no idea where [the noun] is." (C);
+			say "[We] have no idea where [the noun] is." (D);
 	stop the action.
 
 Book 39 - Fripping
@@ -1160,7 +1186,11 @@ Check an actor protesting (this is the block protesting rule):
 
 Book 69 - Pulling Together
 
-Pulling together is an action applying to one thing. Understand "pull together [something]" and "move together [something]" as pulling together.
+Pulling together is an action applying to one thing. Understand "pull together [something]" and "move together [something]" and "pull [something] together" as pulling together.
+
+Check an actor pulling together (this is the pulling yourself together rule):
+	if the actor is the noun and the actor is the player:
+		say "[zen]" instead.
 
 Check an actor pulling together (this is the block pulling together rule):
 	if the actor is the player:
@@ -1409,6 +1439,12 @@ Check an actor steering something to (this is the block steering rule):
 Book 94 - Telling
 
 Telling is an action applying to one thing. Understand "tell [something]" and "say to [something]" as telling. Understand the command "address" as "tell".
+
+Check an actor telling (this is the can't tell yourself rule):
+	if the noun is the actor:
+		if the actor is the player:
+			say "[talking-to-yourself]" (A);
+			stop the action.
 
 Check an actor telling (this is the can't tell other people rule):
 	if the noun is a person who is not the actor:
