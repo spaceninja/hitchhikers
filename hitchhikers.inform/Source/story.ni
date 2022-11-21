@@ -57,11 +57,6 @@ At the time when the house is wrecked:
 		say "Astoundingly, [a bulldozer] pokes through your wall. However, you have no time for surprise because the ceiling is collapsing on you as [better-luck]";
 		end the story;
 
-[Reset wreck-the-house timer if player re-enters the house]
-After going north from the front garden:
-	the house is wrecked in 5 turns from now;
-	continue the action;
-
 [--------------------------------------]
 
 Book 3 - New Kinds of Things
@@ -178,8 +173,15 @@ To say cant-reach-from-bed:
 To say dialling-tone:
 	say "A moment later, the dialing tone is suddenly cut off. Glancing through the window you can't help but notice the large old oak tree of which you are particularly fond crashing down through the phone cable".
 
+To say fine-product:
+	say " It bears a small label which reads 'Another fine product
+of the [SCC].'[run paragraph on with special look spacing]";
+
 To say get-rid:
 	say "you've been trying to get rid of it for years".
+
+To say getting-close:
+	say "You're getting close, though."
 
 To say good-for-you:
 	say "Well, good for you!"
@@ -203,11 +205,17 @@ To say private:
 To say rehetorical-question:
 	say "That was just a rhetorical question."
 
+To say SCC:
+	say "Sirius Cybernetics Corporation".
+
 To say should-think-not:
 	say "I should think not."
 
 To say tough:
 	say "Well, tough."
+
+To say union-rules:
+	say ", perusing a booklet of union rules, ignores you."
 
 To say with-towel:
 	say "With a towel wrapped around your head!?!"
@@ -315,7 +323,7 @@ Carry out transforming:
 	now your head is part of the noun;
 	now your hand is part of the noun;
 	now your teeth are part of the noun;
-	say "You are now [the printed name of the noun]!";
+	say "You are now [the noun]!";
 	try looking;
 
 [Walkthrough Tests]
@@ -334,7 +342,7 @@ test hangover with "take phone / turn on light / open curtains / stand up / take
 
 test phone with "call ford with screwdriver / call ford with phone / call home / call police / take phone".
 
-test exit-bedroom with "turn on light / stand up / south / test start / south / north / open curtains / south".
+test exit-bedroom with "turn on light / stand up / south / test init / south / north / open curtains / south".
 
 test sleeves with "tie sleeves / remove gown / tie together sleeves / wear gown / untie sleeves / wear gown".
 
@@ -501,7 +509,6 @@ Chapter 2 - Items
 
 [Gown]
 
-[TODO gown-hung description]
 Your gown is in the bedroom. It is a wearable closed openable undescribed container. The description is "The dressing gown is faded and battered, and is clearly a garment which has seen better decades. It has a pocket which is [if gown is open]open[else]closed[end if], and a small loop at the back of the collar[if the sleeves are tied]. The sleeves are tied closed[end if]." Understand "your", "dressing", "tatty", "faded", "battered", "pocket", "loop", "robe" as your gown. The carrying capacity is 14.
 
 After taking your gown when the player is hungover, say "Luckily, this is large enough for you to get hold of. You notice something in the pocket."
@@ -663,6 +670,23 @@ Part 3 - Front of House
 
 The Front Garden is south of the Front Porch and outside from the Front Porch and in the Outdoors. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House".
 
+Instead of going inside from the front garden, try going north. [reroute through north for exit condition]
+
+[Before going north from the front garden:
+	unless the player is wearing something:
+		now the current topic is 10;
+		the current topic resets in one turn from now;
+		say "Do you want to get arrested for indecent exposure?" instead.
+]
+Instead of going north from the front garden when your house is demolished, say "You can't enter a [a rubble]."
+
+Instead of going north from the front garden when the player is Ford, say "Enter the house? You can't. It's not yours. It's Arthur's and it's private."
+
+[Reset wreck-the-house timer if player re-enters the house]
+After going north from the front garden:
+	the house is wrecked in 5 turns from now;
+	continue the action;
+
 Chapter 1 - Scenery
 
 [Roses]
@@ -677,28 +701,13 @@ Chapter 2 - Items
 
 The bulldozer is a backdrop in the Outdoors. Understand "large", "huge", "yellow", "bull", "dozer" as the bulldozer. The bulldozer can be observed or unobserved. It is unobserved.
 
-Instead of doing anything other than examining to the bulldozer when the player is not in the front garden, say "[The bulldozer] isn't here.";
+Before doing anything other than examining to the bulldozer when the player is not in the front garden, say "[The bulldozer] isn't here." instead.
 
-[TODO: Clarify the player means the bulldozer without (the bulldozer)]
+Instead of standing before the bulldozer when the player is Arthur, say "[The bulldozer] could easily maneuver around you. [getting-close]".
 
-[Digital Watch]
+Instead of standing before your house when the player is Arthur, say "[The bulldozer] could easily maneuver around you. [getting-close]".
 
-The digital watch is an owned thing. Understand "watches" as the digital watch. The owner of the digital watch is "Mr. Prosser".
-
-Instead of taking or examining the digital watch:
-	say "[private]";
-
-Chapter 3 - Actors
-
-[Bulldozer Driver]
-
-The bulldozer driver is a man in the front garden. He is undescribed.
-
-[Mr Prosser]
-
-Mr Prosser is a man in the front garden. The printed name is "Mr. Prosser". Understand "foreman", "wrecking", "crew", "mister", "mr" as Mr Prosser. He is undescribed.
-
-The digital watch is held by Mr Prosser.
+Rule for clarifying the parser's choice of the bulldozer: stop the action. [don't print the name of the bulldozer]
 
 [--------------------------------------]
 
@@ -719,10 +728,6 @@ Instead of doing anything to some birds, say "[unimportant-thing]".
 Part 5 - Country Lane
 
 The Country Lane is south of the Front Garden and in the Outdoors. "The road runs from your home, to the north, toward the village Pub, to the west."
-
-[TODO dog]
-
-The dog is an animal in the country lane.
 
 [--------------------------------------]
 
@@ -932,7 +937,7 @@ Chapter 3 - Space Stuff
 
 [Fleet]
 
-The fleet is scenery. The printed name is "fleet of Vogon Constructor ships". Understand "vogon", "constructor", "huge", "ugly", "yellow", "ship", "ships", "spaceship", "spaceships" as the fleet.
+The fleet is a backdrop [in the Outdoors]. The printed name is "fleet of Vogon Constructor ships". Understand "vogon", "constructor", "huge", "ugly", "yellow", "ship", "ships", "spaceship", "spaceships" as the fleet.
 
 [Star]
 
@@ -1005,11 +1010,67 @@ Definition: a person is another if it is not the player.
 
 [--------------------------------------]
 
-Part 1 - Ford
+Part 1 - Arthur
+
+Arthur Dent is a man in the bed. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
+
+Rule for printing the name of Arthur: say "Arthur Dent".
+
+Chapter 1 - Items
+
+[No Tea]
+
+The no-tea is held by Arthur. The printed name is "no tea". Understand "no", "tea" as the no-tea. It is proper-named.
+
+Instead of taking or dropping the no-tea, say "Your common sense tells you that you can't do that."
+
+Instead of doing anything to the no-tea, say "You're talking complete nonsense; pull yourself together."
+
+[--------------------------------------]
+
+Part 2 - Ford
 
 Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]." Understand "ford", "prefect" as Ford.
 
 Rule for printing the name of Ford: say "Ford Prefect".
+
+Chapter 1 - Items
+
+[Satchel]
+
+The satchel is a container held by Ford. Understand "battered", "leather", "bulky" as the satchel.
+
+[Guide]
+
+The guide is in the satchel. "There is a copy of [the guide] here." The printed name is "The Hitchhiker's Guide". It is proper-named. Understand "hitchhiker's", "sub-etha", "copy" as the guide. The description is "Try: CONSULT GUIDE ABOUT (something).".
+
+[Satchel Fluff]
+
+The satchel fluff is in the satchel. Understand "lint" as the satchel fluff.
+
+[Thumb]
+
+The thumb is in the satchel. The printed name is "electronic Sub-Etha signaling device". Understand "small", "black", "little", "blinking", "electronic", "sub-etha", "signaling", "device", "sensor" as the thumb. The thumb can be broken. The description is "[The thumb] is shaped like a small fist with an extended thumb. Various lights along its 'knuckles' are currently [if the fleet is visible]blinking wildly, indicating a spaceship in the vicinity[else]dark[end if]. It has two small buttons, a red one labelled 'Call Engineer' and a green one labelled 'Hitchhike.' [fine-product] Affixed to the Thumb is a lifetime guarantee.".
+
+Instead of opening, closing, or searching the thumb, say "[impossibles]".
+
+Instead of repairing the thumb when the thumb is broken, say "You have neither the tools nor the expertise."
+
+[Guarantee]
+
+The guarantee is part of the thumb. Understand "lifetime", "warranty", "plaque" as the guarantee. The description is "The lifetime guarantee states that the Thumb will be repaired on site by trained [SCC] Field Engineers."
+
+[Green Button]
+
+The green button is part of the thumb. Understand "small", "hitchhike" as the green button.
+
+Instead of hitchhiking, try pushing the green button.
+
+[Red Button]
+
+The red button is part of the thumb. Understand "small" as the red button.
+
+[Towel]
 
 The towel is held by Ford. Understand "towels" as the towel. The towel can be muddy. The towel is wearable.
 
@@ -1027,23 +1088,38 @@ Instead of cleaning the towel:
 	now the towel is not muddy;
 	say "It is now much cleaner.";
 
-[TODO Ford, satchel, satchel fluff, towel]
+[--------------------------------------]
+
+Part 3 - Bulldozer Driver
+
+The bulldozer driver is a man in the front garden. He is undescribed.
+
+Instead of saying hello to the bulldozer driver, say "[The bulldozer driver][union-rules]"
+
+Instead of telling the bulldozer driver about, say "[The bulldozer driver][union-rules]"
+
+Does the player mean doing something with the bulldozer driver: it is very unlikely.
 
 [--------------------------------------]
 
-Part 2 - Arthur
+Part 4 - Mr Prosser
 
-Arthur Dent is a man in the bed. "Arthur Dent is here." Understand "arthur", "dent" as Arthur. Arthur is hungover. The player is Arthur.
+Mr Prosser is a man in the front garden. The printed name is "Mr. Prosser". Understand "foreman", "wrecking", "crew", "mister", "mr" as Mr Prosser. He is undescribed.
 
-Rule for printing the name of Arthur: say "Arthur Dent".
+Chapter 1 - Items
 
-[No Tea]
+[Digital Watch]
 
-The no-tea is held by Arthur. The printed name is "no tea". Understand "no", "tea" as the no-tea. It is proper-named.
+The digital watch is an owned thing held by Mr Prosser. Understand "watches" as the digital watch. The owner of the digital watch is "Mr. Prosser".
 
-Instead of taking or dropping the no-tea, say "Your common sense tells you that you can't do that."
+Instead of taking or examining the digital watch:
+	say "[private]";
 
-Instead of doing anything to the no-tea, say "You're talking complete nonsense; pull yourself together."
+[--------------------------------------]
+
+Part 5 - Dog
+
+The dog is an animal in the country lane. Understand "small", "serene", "irritable", "mongrel" as the dog.
 
 [--------------------------------------]
 
