@@ -749,7 +749,7 @@ Check an actor enjoying (this is the block enjoying rule):
 		stop the action.
 
 Report an actor enjoying (this is the report enjoying rule):
-	say "Not difficult at all, considering how enjoyable [the noun] is." (A);
+	say "Not difficult at all, considering how enjoyable [the noun] [are]." (A);
 
 Book 32 - Escaping
 

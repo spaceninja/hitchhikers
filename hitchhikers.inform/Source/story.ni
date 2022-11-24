@@ -39,6 +39,9 @@ Book 1 - When Play Begins
 
 After printing the banner text when not requesting the story file version, say "[paragraph break]You wake up. The room is spinning very gently round your head. Or at least it would be if you could see it which you can't."
 
+When play begins:
+	Try silently switching score notification off.
+
 [Return the Thing]
 When play begins:
 	the gift returns in 21 turns from now.
@@ -63,11 +66,11 @@ Book 3 - New Kinds of Things
 
 A tool is a kind of thing. The description of a tool is usually "It looks like every other [noun] you've ever seen."
 
-An owned thing is a kind of thing. An owned thing has some text called the owner.
-
 A body part is a kind of thing. The description of a body part is usually "That would involve quite a contortion."
 
 Instead of finding a body part, say "Are you sure [the noun] [are] lost?"
+
+A thing has some text called the owner.
 
 [--------------------------------------]
 
@@ -185,6 +188,9 @@ To say getting-close:
 
 To say good-for-you:
 	say "Well, good for you!"
+
+To say hands-off:
+	say "The barman snaps 'Hands off until you pay for it!'"
 
 To say look-around:
 	say "Look around you."
@@ -735,6 +741,13 @@ Part 6 - Pub
 
 The Pub is west of the Country Lane and inside from the Country Lane and in the Indoors. "The Pub is pleasant and cheerful and full of pleasant and cheerful people who don't know they've got about twelve minutes to live and are therefore having a spot of lunch. Some music is playing on an old jukebox. The exit is east."
 
+Every turn:
+	if the player has been in the pub for at least one turn:
+		if Ford is in the pub and the player is not Ford:
+			if the beer is not purchased:
+				now the beer is purchased;
+				say "Ford buys [beer] and offers half to you. 'Muscle relaxant...' he says, impenetrably."
+
 Chapter 1 - Scenery
 
 [Bar]
@@ -755,7 +768,7 @@ Instead of doing anything to the pub furnishings, say "[unimportant-thing]".
 
 [Jukebox]
 
-The jukebox is an owned thing in the pub. It is lit scenery. Understand "old", "juke", "box" as the jukebox. The owner of the jukebox is "the Pub".
+The jukebox is a thing in the pub. It is lit scenery. Understand "old", "juke", "box" as the jukebox. The owner of the jukebox is "the Pub".
 
 Instead of listening to the jukebox:
 	say "The song is ";
@@ -793,21 +806,75 @@ Instead of opening or closing the pub window, say "It won't budge."
 
 Chapter 2 - Items
 
-[Barman]
-
-The barman is a man in the pub. "There is a barman serving at the bar." Understand "bartender" as the barman.
-
 [Beer]
 
-The beer is in the pub. It is edible and undescribed. The beer can be purchased. Understand "lots", "bitter", "pint", "pints" as the beer.
+The beer is in the pub. It is edible and undescribed. The printed name is "lots of beer". The beer can be purchased. Understand "lots", "bitter", "pint", "pints", "beers" as the beer.
+
+Instead of taking, drinking, enjoying, counting, smelling, or touching the beer when the beer is not purchased, say "You'd better buy some first."
+
+Instead of buying the beer when the beer is purchased, say "[Ford] has already bought an enormous quantity for you!"
+
+Instead of buying the beer, try buying some peanuts.
+
+Instead of counting the beer, say "Lots."
+
+Instead of taking the beer, say "Just drink it!"
+
+Instead of drinking or enjoying the beer:
+	increase the score by 5;
+	increase the drunk-value of the player by 1;
+	if the drunk-value of the player is:
+		-- 1:
+			say "It's very good beer, brewed by a small local company. You particularly like its flavour, which is why you woke up feeling so wretched this morning. You were at somebody's birthday party here in the Pub last night.[paragraph break]";
+			say "You begin to relax and enjoy yourself, so when Ford mentions that he's from a small planet in the vicinity of Betelgeuse, not from Guildford as he usually claims, you take it in your stride, and say 'Oh yes, which part?'";
+		-- 2:
+			say "It is really very pleasant stuff, with a very good dry, nutty flavour, some light froth on top, and a deep colour. It is at exactly room temperature. You reflect that the world cannot be all bad when there are such pleasures in it.[paragraph break]";
+			say "Ford mentions that the world is going to end in about twelve minutes.";
+		-- 3:
+			now your house is demolished;
+			say "There is a distant crash which Ford explains is nothing to worry about, probably just your house being knocked down.";
+		-- 4:
+			say "You can hear the muffled noise of your home being demolished, and the taste of the beer sours in your mouth.";
+			try getting drunk;
 
 [Peanuts]
 
 Some peanuts are on the pub shelf. They are edible and undescribed. Some peanuts can be purchased. Understand "packet", "peanut", "nut", "nuts" as some peanuts.
 
+Instead of opening some peanuts, say "Just eat 'em."
+
+Instead of buying some peanuts when the player is in the pub, say "However much you clear your throat, wave your forefinger, or wiggle your eyebrows, the barman pays no attention, but carries on wiping another part of the bar."
+
+Instead of enjoying some peanuts, try eating some peanuts.
+
+Instead of taking or eating some peanuts when the player is in the pub, say "[hands-off]".
+
+After eating some peanuts when the third planet is demolished and the player is groggy:
+	now the player is not groggy;
+	say "You feel stronger as the peanuts replace some of the protein you lost in the matter transference beam."
+
 [Sandwich]
 
 The cheese sandwich is on the pub shelf. It is edible and undescribed. The sandwich can be purchased. Understand "plate", "univiting" as the cheese sandwich.
+
+Instead of buying the sandwich:
+	if the sandwich is purchased:
+		say "You already did.";
+	otherwise:
+		now the sandwich is held by the player;
+		now the sandwich is purchased;
+		say "The barman gives you a [sandwich]. The bread is like the stuff that stereos come packed in, the cheese would be great for rubbing out spelling mistakes, and margarine and pickle have performed an unedifying chemical reaction to produce something that shouldn't be, but is, turquoise. Since it is clearly unfit for human consumption you are grateful to be charged only a pound for it."
+
+Instead of enjoying the sandwich, try eating the sandwich.
+
+Instead of taking or eating the sandwich when the player is in the pub and the sandwich is not purchased, say "[hands-off]".
+
+After eating the sandwich:
+	if the player is Ford:
+		say "You swallow with revulsion, astonished that life forms which have spent 4.6 billion years evolving cannot produce a better [sandwich] than this.";
+	otherwise:
+		say "It is one of the least rewarding taste experiences you can recall.";
+	decrease the score by 30;
 
 [Shelf]
 
@@ -937,7 +1004,14 @@ Chapter 3 - Space Stuff
 
 [Fleet]
 
-The fleet is a backdrop [in the Outdoors]. The printed name is "fleet of Vogon Constructor ships". Understand "vogon", "constructor", "huge", "ugly", "yellow", "ship", "ships", "spaceship", "spaceships" as the fleet.
+The fleet is a backdrop [in the Outdoors]. "The fleet consists of terrifying numbers of huge, ugly, yellow ships, all scarred with the results of many such past demolition jobs. Chicago's John Hancock tower, knocked about a bit and painted yellow, is what they each look like. That is, knocked about a bit, painted yellow, and flying." The printed name is "fleet of Vogon Constructor ships". Understand "vogon", "constructor", "huge", "ugly", "yellow", "ship", "ships", "spaceship", "spaceships" as the fleet.
+
+Instead of enjoying the fleet, say "[zen]".
+
+Instead of entering the fleet: [walk to fleet]
+	now the current topic is 11;
+	the current topic resets in one turn from now;
+	say "From here?" instead.
 
 [Star]
 
@@ -1008,6 +1082,8 @@ Volume 3 - Actors
 
 Definition: a person is another if it is not the player.
 
+A person has a number called drunk-value. The drunk-value of a person is usually 0.
+
 [--------------------------------------]
 
 Part 1 - Arthur
@@ -1038,11 +1114,25 @@ Chapter 1 - Items
 
 [Satchel]
 
-The satchel is a container held by Ford. Understand "battered", "leather", "bulky" as the satchel.
+The satchel is a closed openable container held by Ford. Understand "battered", "leather", "bulky" as the satchel. The description is "The satchel, which is [if the satchel is open]open[else]closed[end if], is fairly bulky." The owner of the satchel is "Ford".
+
+Rule for clarifying the parser's choice of the satchel: stop the action. [don't print the name of the bulldozer]
+
+Rule for writing a paragraph about the satchel:
+	say "There is a satchel here."
+
+Instead of opening the satchel while the player is not Ford:
+	say "[private]";
+
+Instead of taking the satchel while the satchel is held by Ford and the player is Arthur, say "Ford says, 'Hey, Arthur, keep your hands off my satchel!'"
 
 [Guide]
 
-The guide is in the satchel. "There is a copy of [the guide] here." The printed name is "The Hitchhiker's Guide". It is proper-named. Understand "hitchhiker's", "sub-etha", "copy" as the guide. The description is "Try: CONSULT GUIDE ABOUT (something).".
+The guide is in the satchel. The printed name is "The Hitchhiker's Guide". It is proper-named. Understand "hitchhiker's", "sub-etha", "copy" as the guide. The description is "Try: CONSULT GUIDE ABOUT (something).".
+
+
+Rule for writing a paragraph about the guide:
+	say "There is a copy of [the guide] here."
 
 [Satchel Fluff]
 
@@ -1072,7 +1162,16 @@ The red button is part of the thumb. Understand "small" as the red button.
 
 [Towel]
 
-The towel is held by Ford. Understand "towels" as the towel. The towel can be muddy. The towel is wearable.
+The towel is held by Ford. Understand "towels" as the towel. The towel can be muddy. The towel is wearable. The description is "[if the towel is muddy]It is caked with mud[otherwise]It's covered with little pink and blue flowers[end if]."
+
+Instead of putting the towel on your head, try wearing the towel.
+Instead of putting the towel on your eyes, try wearing the towel.
+Instead of tying the towel to your head, try wearing the towel.
+Instead of tying the towel to your eyes, try wearing the towel.
+
+Instead of wearing the towel when the player is wearing the towel, say "It already is."
+
+Instead of wearing the towel, say "There's no need for that. It's not like there's a Ravenous Bugblatter Beast of Traal around, or something."
 
 Instead of looking when the player is wearing the towel, say "You see a towel."
 
@@ -1110,7 +1209,7 @@ Chapter 1 - Items
 
 [Digital Watch]
 
-The digital watch is an owned thing held by Mr Prosser. Understand "watches" as the digital watch. The owner of the digital watch is "Mr. Prosser".
+The digital watch is a thing held by Mr Prosser. Understand "watches" as the digital watch. The owner of the digital watch is "Mr. Prosser".
 
 Instead of taking or examining the digital watch:
 	say "[private]";
@@ -1119,7 +1218,44 @@ Instead of taking or examining the digital watch:
 
 Part 5 - Dog
 
-The dog is an animal in the country lane. Understand "small", "serene", "irritable", "mongrel" as the dog.
+The dog is an animal in the country lane. Understand "small", "serene", "irritable", "mongrel" as the dog. The dog can be hungry. The dog is hungry.
+
+Instead of examining the dog when the dog is hungry, say "The mongrel looks hungry."
+
+Instead of touching or pushing the dog, say "The dog tries to bite your hand."
+
+Instead of kicking the dog, say "The dog tries to bite your foot."
+
+Instead of dropping something edible when the dog is visible, try feeding the noun to the dog.
+
+Instead of feeding some peanuts to the dog, say "This is a dog, not an elephant."
+
+Instead of feeding the sandwich to the dog:
+	if the dog is handled: [already swallowed fleet]
+		say "The dog, which seems to have a slight case of indigestion, ignores the [sandwich].";
+	else:
+		now the sandwich is nowhere;
+		now the dog is not hungry;
+		say "The dog is deeply moved. With powerful sweeps of its tail it indicates that it regards this [sandwich] as one of the great [sandwich]es. Nine out of ten pet owners could happen by at this point expressing any preference they pleased, but this dog would spurn both them and all their tins. This is a dog which has met its main sandwich. It eats with passion, and ignores a passing microscopic space fleet.";
+
+[--------------------------------------]
+
+Part 6 - Barman
+
+The barman is a man in the pub. "There is a barman serving at the bar." Understand "bartender" as the barman.
+
+Instead of asking the barman to try saying hello:
+	try saying hello to the barman.
+
+Before asking the barman to try giving something to the player:
+	try buying the noun instead;
+
+Before asking the barman for something:
+	try buying the second noun instead;
+
+Persuasion rule for asking the barman to try doing something:
+	say "The barman ignores you and keeps polishing the other end of the bar.";
+	persuasion fails.
 
 [--------------------------------------]
 
@@ -1127,4 +1263,8 @@ Volume 4 - Other
 
 [TEMP - this should live somewhere, but I needed to check if it was in inventory earlier]
 
-The tea is a thing held by the barman. "There is a nice, hot cup of tea here." Understand "real", "nice", "hot", "cup" as the tea. It is edible.
+The tea is a thing held by the barman. Understand "real", "nice", "hot", "cup" as the tea. It is edible.
+
+
+Rule for writing a paragraph about the tea:
+	say "There is a nice, hot cup of tea here."
