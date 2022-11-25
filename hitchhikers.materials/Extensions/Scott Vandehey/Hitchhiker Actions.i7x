@@ -74,9 +74,6 @@ To say tell-me-how:
 To say unimportant-thing:
 	say "That's not important; leave it alone."
 
-To say while-lying:
-	say "You can't do that while you're lying down!"
-
 [--------------------------------------]
 
 Volume 6 - Modifications to Standard Rules
@@ -309,7 +306,9 @@ Understand the command "hurl" and "toss" as "drop".
 
 Book 6 - Entering
 
-Understand "go to [something]" and "jump in [something]" as entering.
+Understand "climb in [something]", "jump in [something]", "go to [something]", "rest in [something]", "sit in [something]", "sleep in/on [something]", "squat in [something]" as entering.
+
+Understand the command "board" and "embark" as "enter".
 
 Book 7 - Examining
 
@@ -918,6 +917,17 @@ Check an actor getting undressed (this is the block getting undressed rule):
 			say "Do you want to get arrested for indecent exposure?" (B);
 	stop the action.
 
+Book 104 - Going Around
+
+Going around is an action applying to one thing. Understand "go on/around/behind [something]" as going around.
+
+Check an actor going around (this is the block going around rule):
+	if the actor is the player:
+		now the current topic is 16;
+		the current topic resets in one turn from now;
+		say "Did you have any particular direction in mind?" (A);
+	stop the action.
+
 Book 44 - Hanging It From
 
 Hanging it from is an action applying to two things. Understand "hang [something] on/from [something]" as hanging it from.
@@ -1046,20 +1056,9 @@ Book 56 - Lying Down
 Lying down is an action applying to nothing. Understand "lie down" and "recline" as lying down.
 
 Check an actor lying down (this is the block lying down rule):
-	unless the actor is the player:
-		stop the action.
-
-Check an actor lying down (this is the can't lie down when already lying down rule):
-	if the actor is prone:
-		say "[We] are already laying down." (A);
-		stop the action.
-
-Carry out an actor lying down (this is the carry out lying down rule):
-	now the actor is prone;
-
-Report an actor lying down (this is the report lying down rule):
 	if the actor is the player:
-		say "[We] are now lying on the ground." (A);
+		say "[wastes]" (A);
+	stop the action.
 
 Book 57 - Lying Down On
 
@@ -1071,10 +1070,8 @@ Check an actor lying down on (this is the can't lie down on other people rule):
 			try kissing the noun instead;
 		stop the action.
 
-Check an actor lying down on (this is the block lying down on rule):
-	if the actor is the player:
-		say "[wastes]" (A);
-	stop the action.
+Check an actor lying down on (this is the try entering instead rule):
+	try the actor entering the noun instead.
 
 Book 58 - Making
 
@@ -1547,7 +1544,7 @@ Check an actor waiting for (this is the block waiting for rule):
 		say "[We] may be waiting quite a while." (A);
 	stop the action.
 
-Book 104 - Watering It With
+Book 105 - Watering It With
 
 Watering it with is an action applying to two things. Understand "water [something] with [something]" as watering it with.
 
@@ -1556,7 +1553,7 @@ Check an actor watering something with (this is the block watering rule):
 		say "It doesn't need watering." (A);
 	stop the action.
 
-Book 105 - Waving At
+Book 106 - Waving At
 
 Waving at is an action applying to one thing. Understand "wave at/to [something]" as waving at.
 
@@ -1566,7 +1563,7 @@ Report an actor waving at (this is the report waving at rule):
 	otherwise:
 		say "[The actor] [wave] at [the noun]." (B).
 
-Book 106 - Yelling
+Book 107 - Yelling
 
 Understand the command "shout" as something new.
 
@@ -1578,7 +1575,7 @@ Report an actor yelling (this is the report yelling rule):
 	otherwise:
 		say "[The actor] [yell]." (B).
 
-Book 107 - Yelling At
+Book 108 - Yelling At
 
 Yelling at is an action applying to one thing. Understand "yell at [something]" as yelling at.
 

@@ -139,11 +139,6 @@ To say two-trees:
 	the current topic resets in one turn from now;
 	say "[line break]Shouldn't you be taking more interest in events in the world around you? While you've got it...?"
 
-To say walk-around:
-	now the current topic is 16;
-	the current topic resets in one turn from now;
-	say "Did you have any particular direction in mind?"
-
 [--------------------------------------]
 
 Part 2 - Random Responses
@@ -222,6 +217,9 @@ To say tough:
 
 To say union-rules:
 	say ", perusing a booklet of union rules, ignores you."
+
+To say while-lying:
+	say "You can't do that while you're lying down!"
 
 To say with-towel:
 	say "With a towel wrapped around your head!?!"
@@ -397,7 +395,7 @@ Chapter 1 - Scenery
 The bed is an enterable scenery container in the bedroom.
 
 After exiting from the bed when the player is hungover:
-		say "Very difficult, but you manage it. The room is still spinning. It dips and sways a little."
+	say "Very difficult, but you manage it. The room is still spinning. It dips and sways a little."
 
 Instead of looking under the bed, say "There's nothing there. Well, there are a few soiled handkerchiefs, a book you thought you'd lost, a couple of foreign coins, and something else which can't be fully described in a family game, but nothing you'd actually want."
 
@@ -409,9 +407,9 @@ Instead of opening or closing the bed, say "[tell-me-how]".
 
 Instead of lying down in the bedroom, try entering the bed.
 
-Instead of lying down on the bed, try entering the bed.
-
 Instead of standing when the player is in the bed, try exiting instead.
+
+Instead of lying down on the ground when the player is in the bed, say "You'll have to get out of the bed first."
 
 [Curtains]
 
@@ -686,7 +684,13 @@ Instead of going inside from the front garden, try going north. [reroute through
 ]
 Instead of going north from the front garden when your house is demolished, say "You can't enter a [a rubble]."
 
+Instead of lying down on the ground when the player is in the front garden:
+	try blocking the bulldozer instead;
+
 Instead of going north from the front garden when the player is Ford, say "Enter the house? You can't. It's not yours. It's Arthur's and it's private."
+
+Instead of enjoying the ground when the player is in the front garden and the player is prone:
+	say "It occurs to you that you've never deliberately lain in any mud before and that it's actually a pleasant sort of squishy sensation. You let the mud ooze between your toes. You may be here for some time, so you may as well make the most of it."
 
 [Reset wreck-the-house timer if player re-enters the house]
 After going north from the front garden:
@@ -705,13 +709,26 @@ Chapter 2 - Items
 
 [Bulldozer]
 
-The bulldozer is a backdrop in the Outdoors. Understand "large", "huge", "yellow", "bull", "dozer" as the bulldozer. The bulldozer can be observed or unobserved. It is unobserved.
+The bulldozer is a backdrop in the Outdoors. "It's one of those really big [bulldozer]s that can actually crush other [bulldozer]s, let alone houses." Understand "large", "huge", "yellow", "bull", "dozer" as the bulldozer. The bulldozer can be observed or unobserved. It is unobserved.
 
 Before doing anything other than examining to the bulldozer when the player is not in the front garden, say "[The bulldozer] isn't here." instead.
 
 Instead of standing before the bulldozer when the player is Arthur, say "[The bulldozer] could easily maneuver around you. [getting-close]".
 
-Instead of standing before your house when the player is Arthur, say "[The bulldozer] could easily maneuver around you. [getting-close]".
+Instead of going around the bulldozer when the player is Arthur, say "[wastes]".
+
+Mr Prosser is prone.
+
+Instead of blocking the bulldozer when the player is Arthur:
+	if your house is demolished:
+		say "Too late now.";
+	else if the player is prone:
+		say "You already are!";
+	else if Mr Prosser is prone:
+		say "[Mr Prosser]'s doing that for you.";
+	else:
+		now the player is prone;
+		say "You lie down in the path of the advancing [bulldozer]. [Mr Prosser] yells at you to for crissake move!!!"
 
 Rule for clarifying the parser's choice of the bulldozer: stop the action. [don't print the name of the bulldozer]
 
@@ -912,23 +929,6 @@ Instead of cleaning the chamber:
 
 Chapter 2 - Outdoors
 
-[Ground]
-
-The ground is a backdrop in the Outdoors. Understand "floor", "mud" as the ground.
-
-Instead of climbing or climbing down or entering the ground, say "[wastes]".
-
-Instead of looking under the ground, say "[impossibles]" instead.
-
-Instead of getting out of the ground, try going up instead.
-
-Instead of lying down on the ground when the player is in the front garden:
-		[try blocking the bulldozer instead;]
-		say "TODO: BLOCK BULLDOZER";
-
-Instead of enjoying the ground when the player is in the front garden and the player is prone:
-	say "It occurs to you that you've never deliberately lain in any mud before and that it's actually a pleasant sort of squishy sensation. You let the mud ooze between your toes. You may be here for some time, so you may as well make the most of it."
-
 [Home]
 
 [For some reason we can't say "in the Outdoors, in the bedroom," etc.]
@@ -938,6 +938,8 @@ Instead of enjoying your house when your house is demolished, say "[zen]You can'
 
 Instead of examining your house when your house is demolished, say "It is now [a rubble]."
 
+Instead of standing before your house when the player is Arthur, say "[The bulldozer] could easily maneuver around you. [getting-close]".
+
 Instead of doing anything to your house when the player is Ford, say "[unimportant-thing]".
 
 Instead of entering your house: ["walk through home"]
@@ -946,13 +948,13 @@ Instead of entering your house: ["walk through home"]
 	else if the player is in the bedroom:
 		say "[look-around]";
 	else:
-		say "[walk-around]";
+		try going around your house;
 
 Instead of getting out of your house: ["leave home"]
 	if the player is in the front porch:
 		try going south;
 	else if the player is in the bedroom:
-		say "[walk-around]";
+		try going around your house;
 	else:
 		say "[look-around]";
 
@@ -1045,6 +1047,27 @@ The air is a backdrop. It is everywhere.
 A backdrop called frustration is everywhere. Understand "problem", "puzzle" as frustration.
 
 Instead of enjoying frustration, say "[zen]".
+
+[Ground]
+
+The ground is a backdrop. It is everywhere. Understand "floor", "mud" as the ground.
+
+Instead of climbing or climbing down or entering the ground, say "[wastes]".
+
+Instead of looking under the ground, say "[impossibles]" instead.
+
+Instead of getting out of the ground, try going up instead.
+
+The block lying down rule does nothing.
+
+Check an actor lying down (this is the try lying down on the ground instead rule):
+	try the actor lying down on the ground instead.
+
+Instead of lying down on the ground when the player is prone, say "You already are!"
+
+Instead of lying down on the ground:
+	now the player is prone;
+	say "You are now lying on the ground."
 
 [Hangover] [so player can inspect hangover, which is in inventory]
 
