@@ -694,8 +694,13 @@ Instead of enjoying the ground when the player is in the front garden and the pl
 
 [Reset wreck-the-house timer if player re-enters the house]
 After going north from the front garden:
-	the house is wrecked in 5 turns from now;
-	continue the action;
+	unless Mr Prosser is prone:
+		say "[The bulldozer], which you may have noticed outside, just pushed your home down on top of you.";
+		say "[jigs-up]";
+		end the story;
+	else:
+		the house is wrecked in 5 turns from now;
+		continue the action;
 
 Chapter 1 - Scenery
 
@@ -716,8 +721,6 @@ Before doing anything other than examining to the bulldozer when the player is n
 Instead of standing before the bulldozer when the player is Arthur, say "[The bulldozer] could easily maneuver around you. [getting-close]".
 
 Instead of going around the bulldozer when the player is Arthur, say "[wastes]".
-
-Mr Prosser is prone.
 
 Instead of blocking the bulldozer when the player is Arthur:
 	if your house is demolished:

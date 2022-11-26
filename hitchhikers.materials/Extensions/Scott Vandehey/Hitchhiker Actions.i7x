@@ -74,6 +74,9 @@ To say tell-me-how:
 To say unimportant-thing:
 	say "That's not important; leave it alone."
 
+To say jigs-up:
+	say "[line break][line break]    ****  You have died  ****[line break][line break]"
+
 [--------------------------------------]
 
 Volume 6 - Modifications to Standard Rules
@@ -293,7 +296,8 @@ Check answering something that "hello" when the noun is a person:
 Book 3 - Attacking
 
 Check the player attacking the player (this is the attacking yourself rule):
-	say "Done.";
+	say "Done." (A);
+	say "[jigs-up]" (B);
 	end the story instead.
 
 Book 4 - Buying
@@ -760,7 +764,8 @@ Check an actor escaping (this is the block escaping rule):
 
 Report an actor escaping (this is the report escaping rule):
 	say "You are so keen on escape that you literally leap through the fabric of the space-time continuum. You wake up in a shack on tenth-century Earth. A dressing gown, a toothbrush, and a flathead axe lie by your bed. Before you have a chance to move, Mongol hordes sweep magnificently across the plains of central Asia. They knock down your shack and burn the remains with you inside. You lose interest in the rest of the game." (A);
-	end the story instead;
+	say "[jigs-up]" (B);
+	end the story;
 
 Book 33 - Escaping From
 
