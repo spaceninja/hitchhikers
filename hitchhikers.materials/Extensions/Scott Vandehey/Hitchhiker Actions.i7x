@@ -238,7 +238,11 @@ Book 30 - Requested Actions Require Persuasion
 
 The requested actions require persuasion rule response (A) is "Unsurprisingly, [the noun] doesn't oblige."
 
-Book 31 - Saying No
+Book 31 - Room Description Body Text
+
+The room description body text rule response (A) is "It is pitch black."
+
+Book 32 - Saying No
 
 Check an actor saying no (this is the saying no to a topic rule):
 	if the actor is the player:
@@ -247,7 +251,7 @@ Check an actor saying no (this is the saying no to a topic rule):
 
 The saying no to a topic rule substitutes for the block saying no rule.
 
-Book 32 - Saying Yes
+Book 33 - Saying Yes
 
 Check an actor saying yes (this is the saying yes to a topic rule):
 	if the actor is the player:
@@ -256,16 +260,16 @@ Check an actor saying yes (this is the saying yes to a topic rule):
 
 The saying yes to a topic rule substitutes for the block saying yes rule.
 
-Book 33 - Stand Up Before Going
+Book 34 - Stand Up Before Going
 
 [Don't get out of bed for the player]
 The stand up before going rule does nothing.
 
-Book 34 - Telling Yourself
+Book 35 - Telling Yourself
 
 The telling yourself rule response (A) is "[talking-to-yourself]".
 
-Book 35 - Throwing It At
+Book 36 - Throwing It At
 
 The futile to throw things at inanimate objects rule does nothing.
 The block throwing at rule does nothing.
@@ -382,7 +386,11 @@ Check an actor searching a person (this is the block searching people rule):
 		say "That wouldn't be polite." (A);
 	stop the action.
 
-Book 17 - Standing
+Book 17 - Sleeping
+
+Understand "go to sleep" as sleeping.
+
+Book 18 - Standing
 
 Understand the command "stand" as something new.
 
@@ -397,39 +405,39 @@ Carry out the player standing:
 	else:
 		say "You are already standing."
 
-Book 18 - Taking
+Book 19 - Taking
 
 Check the player taking anything that is fixed in place:
 	say "[yuks]" instead.
 
-Book 19 - Tasting
+Book 20 - Tasting
 
 Understand the command "lick" as "taste".
 
-Book 20 - Telling It About
+Book 21 - Telling It About
 
 Understand "tell [someone] [text]" as telling it about.
 
-Book 21 - Throwing It At
+Book 22 - Throwing It At
 
 Check an actor throwing something at:
 	now the noun is in the location;
 	say "You missed.";
 	stop the action.
 
-Book 22 - Touching
+Book 23 - Touching
 
 Understand the command "pat" and "pet" as "touch".
 
-Book 23 - Turning
+Book 24 - Turning
 
 Understand the command "spin", and "whirl" as "turn".
 
-Book 24 - Tying It To
+Book 25 - Tying It To
 
 Understand the command "connect" as "tie".
 
-Book 25 - Waking
+Book 26 - Waking
 
 Understand the command "alarm" and "rouse" as "wake".
 
@@ -438,7 +446,7 @@ Check an actor waking the player (this is the block waking yourself rule):
 		say "You already are!" (A);
 	stop the action.
 
-Book 26 - Your Things
+Book 27 - Your Things
 
 Understand "your" as a thing when the item described is held by the person asked.
 
@@ -508,6 +516,9 @@ Asking where is an action applying to one thing. Understand "where is/am [anythi
 
 A rule for reaching inside a room when asking where:
 	allow access.
+
+After reading a command when the player's command matches "where am i" (this is the where am I rule):
+	try finding the player instead.
 
 Check an actor asking where (this is the try finding instead rule):
 	try the actor finding the noun instead.

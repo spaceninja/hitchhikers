@@ -6,12 +6,12 @@ The story creation year is 1984.
 
 [
 TODO:
-- [ ] where am i
 - [ ] Add I-VOGONS queue in 50 turns
-- [ ] Is "GENERIC POCKET-FLUFF" same as "does player mean pocket fluff?"
 - [ ] Address carrying capacity & size (see gown)
 - [ ] Fix linebreaks following footnotes and current topic replies.
 			See footnote 12 vs footnote 15 for example
+- [ ] Stop using undescribed
+			See https://bit.ly/3VzhsvE
 
 [How to disable a timer:]
 $timer in -1 turns from now;
@@ -29,7 +29,9 @@ Before examining the house:
 
 Volume 1 - Setup
 
-Use American dialect and the serial comma and scoring.
+Use American dialect and the serial comma.
+Use BRIEF room descriptions.
+Use scoring.
 The maximum score is 400.
 Include Hitchhiker Actions by Scott Vandehey.
 
@@ -41,6 +43,8 @@ After printing the banner text when not requesting the story file version, say "
 
 When play begins:
 	Try silently switching score notification off.
+
+[TODO queue i-vogons in 50 turns]
 
 [Return the Thing]
 When play begins:
@@ -332,11 +336,15 @@ Carry out transforming:
 
 [Walkthrough Tests]
 
-test house with "stand up / turn on light / get gown / wear gown / look in pocket / get all from gown / get screwdriver / get toothbrush / put screwdriver and toothbrush in thing".
+test house with "stand up / turn on light / get gown / wear gown / look in pocket / get all from gown / get screwdriver / get toothbrush / put screwdriver and toothbrush in thing / south / get mail / read mail".
 
-test bulldozer with "south / get mail / read mail / south / lie down / wait / wait / wait / wait / wait / wait".
+test bulldozer with "south / lie down / wait / wait / wait / wait / wait / wait / south / west".
 
-test pub with "south / west / examine shelf / buy sandwich / drink beer / drink beer / drink beer / east / give sandwich to dog / north / wait / wait / get device / examine device / press green button".
+test pub with "examine shelf / buy sandwich / drink beer / drink beer / drink beer".
+
+test hitch with "east / give sandwich to dog / north / wait / wait / get device / examine device / press green button".
+
+test earth with "test house / test bulldozer / test pub / test hitch".
 
 [Other Tests]
 
@@ -372,6 +380,10 @@ Before going from the bedroom when the player is hungover, say "You miss the doo
 
 Instead of going down from the Bedroom, try going south. Instead of going outside from the Bedroom, try going south. [reroute through door]
 
+Instead of sleeping in the bedroom:
+	say "You nod off and are wakened briefly a few hours later as [better-luck]";
+	end the story;
+
 Report going from the bedroom:
 	if the bulldozer is observed:
 		say "You rush down the stairs in panic.";
@@ -383,10 +395,6 @@ After deciding the scope of the player when the location is the bedroom:
 		place the light in scope;
 	if the bulldozer is observed:
 		place the bulldozer in scope;
-
-Instead of sleeping in the bedroom:
-	say "You nod off and are wakened briefly a few hours later as [better-luck]";
-	end the story;
 
 Chapter 1 - Scenery
 
@@ -630,11 +638,23 @@ Instead of going up from the Front Porch, try going north. Instead of going insi
 
 Instead of going outside from the front porch, try going south. [reroute through south for exit condition]
 
-Before going south from the front porch:
+Before going to the front garden from the front porch:
 	unless the player is wearing something:
 		now the current topic is 10;
 		the current topic resets in one turn from now;
 		say "Do you want to get arrested for indecent exposure?" instead.
+
+Instead of going to the front porch when the player is Ford, say "Enter the house? You can't. It's not yours. It's Arthur's and it's private."
+
+[Reset wreck-the-house timer if player re-enters the house]
+After going to the front porch from the front garden:
+	unless Mr Prosser is prone:
+		say "[The bulldozer], which you may have noticed outside, just pushed your home down on top of you.";
+		say "[jigs-up]";
+		end the story;
+	else:
+		the house is wrecked in 5 turns from now;
+		continue the action;
 
 Chapter 1 - Scenery
 
@@ -672,9 +692,18 @@ Instead of opening the mail, try examining the mail.
 
 Part 3 - Front of House
 
-The Front Garden is south of the Front Porch and outside from the Front Porch and in the Outdoors. "You can enter your home to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south." The printed name is "Front of House".
+The Front Garden is south of the Front Porch and outside from the Front Porch and in the Outdoors. The printed name is "Front of House". The description is "[front-garden-description]."
 
-Instead of going inside from the front garden, try going north. [reroute through north for exit condition]
+To say front-garden-description:
+	if your house is demolished:
+		say "There is a huge [rubble]";
+	else if the player is Ford:
+		say "Arthur's house is";
+	else:
+		say "You can enter your home";
+	say " to the north. A path leads around it to the northeast and northwest, and a country lane is visible to the south";
+	if unvisited:
+		say ". All that lies between your home and the huge yellow [bulldozer] bearing down on it is a few yards of mud";
 
 [Before going north from the front garden:
 	unless the player is wearing something:
@@ -682,25 +711,26 @@ Instead of going inside from the front garden, try going north. [reroute through
 		the current topic resets in one turn from now;
 		say "Do you want to get arrested for indecent exposure?" instead.
 ]
+
+Instead of going inside from the front garden, try going north. [reroute through north for exit condition]
+
 Instead of going north from the front garden when your house is demolished, say "You can't enter a [a rubble]."
 
 Instead of lying down on the ground when the player is in the front garden:
 	try blocking the bulldozer instead;
 
-Instead of going north from the front garden when the player is Ford, say "Enter the house? You can't. It's not yours. It's Arthur's and it's private."
-
 Instead of enjoying the ground when the player is in the front garden and the player is prone:
 	say "It occurs to you that you've never deliberately lain in any mud before and that it's actually a pleasant sort of squishy sensation. You let the mud ooze between your toes. You may be here for some time, so you may as well make the most of it."
 
-[Reset wreck-the-house timer if player re-enters the house]
-After going north from the front garden:
-	unless Mr Prosser is prone:
-		say "[The bulldozer], which you may have noticed outside, just pushed your home down on top of you.";
-		say "[jigs-up]";
-		end the story;
-	else:
-		the house is wrecked in 5 turns from now;
-		continue the action;
+After going to the front garden:
+	if the dog is in the country lane:
+		say "TODO: run i-vogons in 3 turns.";
+		if the dog is hungry:
+			the dog interrupts in 0 turns from now;
+		say "You reach the site of what was [if the player is Arthur]your[else]Arthur's[end if] home. It is now a [rubble]. [Mr Prosser] looks sheepishly triumphant, a trick few people can do, as it requires a lot of technically complex deltoid muscle work.";
+	else if the player is Arthur and Mr Prosser is not prone:
+		say "TODO: Player is Arthur and Prosser is not prone, run i-bulldozer every turn.";
+	continue the action;
 
 Chapter 1 - Scenery
 
@@ -753,7 +783,20 @@ Instead of doing anything to some birds, say "[unimportant-thing]".
 
 Part 5 - Country Lane
 
-The Country Lane is south of the Front Garden and in the Outdoors. "The road runs from your home, to the north, toward the village Pub, to the west."
+The Country Lane is south of the Front Garden and in the Outdoors. "The road runs from [if the player is Arthur]your[else]Arthur's[end if] home, to the north, toward the village Pub, to the west."
+
+After going to the country lane:
+	if the player is Arthur and the drunk-value of the player is 3:
+		the dog interrupts in 0 turns from now;
+	continue the action;
+
+Chapter 1 - Scenery
+
+[Conversation]
+
+The conversation is scenery in the country lane.
+
+Instead of listening to the conversation, say "You can't hear anything from here."
 
 [--------------------------------------]
 
@@ -761,7 +804,7 @@ Part 6 - Pub
 
 The Pub is west of the Country Lane and inside from the Country Lane and in the Indoors. "The Pub is pleasant and cheerful and full of pleasant and cheerful people who don't know they've got about twelve minutes to live and are therefore having a spot of lunch. Some music is playing on an old jukebox. The exit is east."
 
-Every turn:
+Every turn when the player is in the pub:
 	if the player has been in the pub for at least one turn:
 		if Ford is in the pub and the player is not Ford:
 			if the beer is not purchased:
@@ -1132,7 +1175,7 @@ Instead of doing anything to the no-tea, say "You're talking complete nonsense; 
 
 Part 2 - Ford
 
-Ford Prefect is a man in the back garden. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]." Understand "ford", "prefect" as Ford.
+Ford Prefect is a man in the pub. "[if Ford is asleep]Ford is in the corner, snoring loudly[else]Ford Prefect is here[end if]." Understand "ford", "prefect" as Ford.
 
 Rule for printing the name of Ford: say "Ford Prefect".
 
@@ -1155,7 +1198,6 @@ Instead of taking the satchel while the satchel is held by Ford and the player i
 [Guide]
 
 The guide is in the satchel. The printed name is "The Hitchhiker's Guide". It is proper-named. Understand "hitchhiker's", "sub-etha", "copy" as the guide. The description is "Try: CONSULT GUIDE ABOUT (something).".
-
 
 Rule for writing a paragraph about the guide:
 	say "There is a copy of [the guide] here."
@@ -1244,7 +1286,7 @@ Instead of taking or examining the digital watch:
 
 Part 5 - Dog
 
-The dog is an animal in the country lane. Understand "small", "serene", "irritable", "mongrel" as the dog. The dog can be hungry. The dog is hungry.
+The dog is an animal. Understand "small", "serene", "irritable", "mongrel" as the dog. The dog can be hungry. The dog is hungry.
 
 Instead of examining the dog when the dog is hungry, say "The mongrel looks hungry."
 
@@ -1256,13 +1298,23 @@ Instead of dropping something edible when the dog is visible, try feeding the no
 
 Instead of feeding some peanuts to the dog, say "This is a dog, not an elephant."
 
-Instead of feeding the sandwich to the dog:
+Instead of giving or feeding the sandwich to the dog:
 	if the dog is handled: [already swallowed fleet]
 		say "The dog, which seems to have a slight case of indigestion, ignores the [sandwich].";
 	else:
 		now the sandwich is nowhere;
 		now the dog is not hungry;
 		say "The dog is deeply moved. With powerful sweeps of its tail it indicates that it regards this [sandwich] as one of the great [sandwich]es. Nine out of ten pet owners could happen by at this point expressing any preference they pleased, but this dog would spurn both them and all their tins. This is a dog which has met its main sandwich. It eats with passion, and ignores a passing microscopic space fleet.";
+
+At the time when the dog interrupts:
+	if the player is in the country lane:
+		if the dog is not in the location and the fleet is not in the location:
+			now the dog is in the country lane;
+			the dog interrupts in 0 turns from now;
+			say "You see the huge [bulldozer] heaving itself among the cloud of brick dust which is all that remains of [your house]. As you start up the lane, a small dog runs up to you, yapping.";
+		else if the dog is in the location and the dog is hungry and the dog is not handled:
+			now the dog is handled;
+			say "The dog carries on yapping for a moment and then gulps uncomfortably.";
 
 [--------------------------------------]
 
@@ -1283,14 +1335,65 @@ Persuasion rule for asking the barman to try doing something:
 	say "The barman ignores you and keeps polishing the other end of the bar.";
 	persuasion fails.
 
+[======================================]
+
+Volume 5 - Scenes
+
 [--------------------------------------]
 
-Volume 4 - Other
+Book 1 - Bulldozer Advancing
 
-[TEMP - this should live somewhere, but I needed to check if it was in inventory earlier]
+Bulldozer Advancing is a scene.
+Bulldozer Advancing begins when the player is in the front garden for the first time.
+Bulldozer Advancing ends when your house is demolished.
+Bulldozer Advancing ends happily when Arthur is prone in the front garden.
+Bulldozer Advancing ends poorly when the time since Bulldozer Advancing began is 5 minutes.
 
-The tea is a thing held by the barman. Understand "real", "nice", "hot", "cup" as the tea. It is edible.
+Every turn during Bulldozer Advancing:
+	if the player is in the front garden:
+		if the time since Bulldozer Advancing began is 4 minutes:
+			say "[The bulldozer] piles into the side of your home.";
+		else:
+			say "The [bulldozer] rumbles slowly toward your home.";
 
+Book 2 - Brick Death
 
-Rule for writing a paragraph about the tea:
-	say "There is a nice, hot cup of tea here."
+Brick Death is a scene. "Your home collapses in a cloud of dust, and a stray flying brick hits you squarely on the back of the head. You try to think of some suitable last words, but what with the confusion of the moment and the spinning of your head, you are unable to compose anything pithy and expire in silence."
+
+Brick Death begins when Bulldozer Advancing ends poorly.
+
+Before doing anything during Brick Death:
+	stop the action instead.
+
+Every turn during Brick Death:
+	if the time since Brick Death began is 2 minute:
+		say "For a dead person you are talking too much. As the ambulance reaches the mortuary [make-way-for].";
+		end the story;
+	else:
+		say "You keep out of this, you're dead";
+		if the time since Brick Death began is 0 minutes:
+			say ". An ambulance arrives.";
+		if the time since Brick Death began is 1 minute:
+			say " and should be concentrating on developing a good firm rigor mortis. You are put in the ambulance, which drives away.";
+
+test brick-death with "test init / s / s / z / z / z / z".
+
+Book 3 - Prosser Showdown
+
+Prosser Showdown is a scene.
+
+Prosser Showdown begins when Arthur is prone in the front garden.
+
+Prosser Showdown ends when the time since Prosser Showdown began is 4 minutes.
+
+Every turn during Prosser Showdown:
+	if the time since Prosser Showdown began is 1 minutes:
+		say "The [bulldozer] thunders toward you. The ground is shaking beneath you as you lie in the mud.";
+	if the time since Prosser Showdown began is 2 minutes:
+		say "The noise of the giant [bulldozer] is now so violently loud that you can't even hear Prosser yelling to warn you that you will be killed if you don't get the hell out of the way. You just see him gesticulating wildly.";
+	if the time since Prosser Showdown began is 3 minutes:
+		now Ford is in the front garden;
+		set pronouns from the towel; [so "take it" refers to the towel]
+		say "With a terrible grinding of gears the [bulldozer] comes to an abrupt halt just in front of you. It shakes, shudders, and emits noxious substances all over your rose bed. Prosser is incoherent with rage.[paragraph break]Moments later, your friend [Ford] arrives. He hardly seems to notice your predicament, but keeps glancing nervously at the sky. He says 'Hello, Arthur,' takes a towel from his battered leather satchel, and offers it to you.";
+
+test prosser-showdown with "test init / s / s / lie down / z / z / z".
